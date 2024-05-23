@@ -28,10 +28,10 @@ public class RecipeModelServiceTests
     }
 
     [TestMethod]
-    public void RecipeModelService_GetRecipes()
+    public void RecipeModelService_GetMainRecipes()
     {
         RecipeModelService recipeService = new();
-        ICollection<RecipeModel> results = recipeService.GetRecipes(Items.IronIngot);
+        ICollection<RecipeModel> results = recipeService.GetMainRecipes(Items.IronIngot);
 
         bool containsIronIngot = results.Contains(Recipes.IronIngot);
         bool containsIronAlloyIngot = results.Contains(Recipes.IronAlloyIngot);

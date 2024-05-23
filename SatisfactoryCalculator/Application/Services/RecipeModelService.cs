@@ -20,7 +20,7 @@ internal class RecipeModelService
         return  Math.Round(result,4);
     }
      
-    public ICollection<RecipeModel> GetRecipes(ItemModel model)
+    public ICollection<RecipeModel> GetMainRecipes(ItemModel model)
     {
         ICollection<RecipeModel> recipes = Recipes.RecipeList;
         return recipes.Where(x => x.MainProduct.Item.Name == model.Name).ToList();
