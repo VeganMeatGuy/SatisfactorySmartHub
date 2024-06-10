@@ -25,5 +25,7 @@ internal static class Items
     public static ItemModel Screw => new() { Name = "Screw" };
     public static ItemModel SteelIngot => new() { Name = "Steel Ingot" };
     public static ItemModel SteelBeam => new() { Name = "Steel Beam" };
-    
+    public static ItemModel HeavyOilResidue => new() { Name = "Heavy Oil Residue" };
+    public static ItemModel PolymerResin => new() { Name = "Polymer Resin" };
+
 }
