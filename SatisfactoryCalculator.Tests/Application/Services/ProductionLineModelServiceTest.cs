@@ -1,4 +1,5 @@
-﻿using SatisfactoryCalculator.Application.Services;
+﻿using Newtonsoft.Json;
+using SatisfactoryCalculator.Application.Services;
 using SatisfactoryCalculator.Domain.Models;
 using SatisfactoryCalculator.Infrastructure.Persistence.StaticDataModel;
 
@@ -29,7 +30,7 @@ public class ProductionLineModelServiceTest
 
         ICollection<RecipeModel> usedRecipes = new HashSet<RecipeModel>();
 
-        usedRecipes.Add(Recipes.Screw); 
+        usedRecipes.Add(Recipes.Screw);
         usedRecipes.Add(Recipes.IronRod);
         usedRecipes.Add(Recipes.IronIngot);
         usedRecipes.Add(Recipes.HeavyOilResidue);
@@ -81,7 +82,6 @@ public class ProductionLineModelServiceTest
         recipeModelService.UsedRecipes = usedRecipes;
 
         ProductionLineModelService prodLineService = new ProductionLineModelService(recipeModelService);
-
         ProductionLineModel productionLine = new ProductionLineModel();
 
         List<ProcessStepModel> processSteps = new List<ProcessStepModel>()
@@ -91,16 +91,36 @@ public class ProductionLineModelServiceTest
 
         productionLine.ProcessSteps = processSteps;
 
+        ProductionLineModel ExpectedResult1 = new ProductionLineModel();
+        ExpectedResult1.ProcessSteps.Add(new() { Recipe = Recipes.Screw });
+        ExpectedResult1.ProcessSteps.Add(new() { Recipe = Recipes.IronRod });
+
         //act
         ICollection<ProductionLineModel> result1 = prodLineService.CalcOneStep(productionLine);
 
+        var QueryWantedProductionLine =
+            from prod in result1
+            from step in prod.ProcessSteps
+            where step.Recipe == Recipes.IronRod
+            select prod;
 
-        // was ausdenken für assert
-        ProductionLineModel prductionLine2 = result1.First();
-        ICollection<ProductionLineModel> result2 = prodLineService.CalcOneStep(prductionLine2);
+        ICollection<ProductionLineModel> resultQueryWantedProductionLine = QueryWantedProductionLine.ToList();
+
+        ICollection<ProductionLineModel> result2 = prodLineService.CalcOneStep(resultQueryWantedProductionLine.First());
+
+        var object1json = JsonConvert.SerializeObject(resultQueryWantedProductionLine.First());
+        var object2json = JsonConvert.SerializeObject(ExpectedResult1);
 
         //assert
+
+        Assert.AreEqual(object1json, object2json);
+
+        Assert.IsTrue(resultQueryWantedProductionLine.Count() == 1);
+
         Assert.IsTrue(result1.Count() == 2);
+
+
+
         Assert.IsTrue(result2.Count() == 3);
 
     }
