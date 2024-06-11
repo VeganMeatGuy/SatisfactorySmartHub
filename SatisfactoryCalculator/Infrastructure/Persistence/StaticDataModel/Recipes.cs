@@ -139,6 +139,18 @@ internal static class Recipes
         },
         MainProduct = new() { Item = Items.SteelIngot, Amount = 45m }
     };
+
+    internal static RecipeModel CokeSteelIngot = new()
+    {
+        Name = "Coke Steel Ingot",
+        Machine = Machines.Foundry,
+        Ingredients = new List<ItemWithAmount>()
+        {
+            new() { Item = Items.IronOre, Amount = 75m },
+            new() { Item = Items.PetroleumCoke, Amount = 75m }
+        },
+        MainProduct = new() { Item = Items.SteelIngot, Amount = 100m }
+    };
     #endregion
 
     #region SteelBeam

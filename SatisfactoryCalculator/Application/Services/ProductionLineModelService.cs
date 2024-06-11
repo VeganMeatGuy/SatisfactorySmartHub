@@ -18,7 +18,7 @@ internal class ProductionLineModelService(RecipeModelService recipeModelService)
         ICollection<ProductionLineModel> openProductionLines = new HashSet<ProductionLineModel>();
         ICollection<ProductionLineModel> finishedProductionLines = new HashSet<ProductionLineModel>();
 
-        // suche die Rezepte für das gegebene Model
+        //// suche die Rezepte für das gegebene Model
         ICollection<RecipeModel> recipes = recipeModelService.GetMainRecipes(model);
 
         //je Rezept wird ein ProductionLineModel & das finale ProcessStepModel angelegt

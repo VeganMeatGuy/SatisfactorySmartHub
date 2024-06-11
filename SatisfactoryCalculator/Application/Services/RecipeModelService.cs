@@ -10,6 +10,8 @@ namespace SatisfactoryCalculator.Application.Services;
 
 internal class RecipeModelService
 {
+    private ICollection<RecipeModel> _recipes = Recipes.RecipeList;
+
     public decimal GetNormalizedPowerConsumtion(RecipeModel recipe)
     {
         decimal productAmount = recipe.MainProduct.Amount;
@@ -22,7 +24,12 @@ internal class RecipeModelService
      
     public ICollection<RecipeModel> GetMainRecipes(ItemModel model)
     {
-        ICollection<RecipeModel> recipes = Recipes.RecipeList;
-        return recipes.Where(x => x.MainProduct.Item.Name == model.Name).ToList();
+        return _recipes.Where(x => x.MainProduct.Item.Name == model.Name).ToList();
+    }
+
+    public ICollection<RecipeModel> UsedRecipes
+    {
+        get => _recipes;
+        set => _recipes = value;
     }
 }
