@@ -22,8 +22,8 @@ public class RecipeModelServiceTests
             [
                 new(Recipes.IronIngot, 13.3333m),
                 new(Recipes.IronAlloyIngot, 32),
-                new(Recipes.PureIronIngot, 46.1538m)
-                new(Recipes.CokeS 46.1538m)
+                new(Recipes.PureIronIngot, 46.1538m),
+                new(Recipes.CokeSteelIngot, 16m)
             ];
 
         foreach (Tuple<RecipeModel, decimal> DataSet in TestData)
