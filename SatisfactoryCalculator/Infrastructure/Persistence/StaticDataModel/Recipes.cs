@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,7 +26,9 @@ internal static class Recipes
         //Steel
         SteelIngot,
         //SteelBeam
-        SteelBeam
+        SteelBeam,
+        //HeavyOil
+        HeavyOilResidue
     };
 
     #region IronIngot
@@ -151,4 +154,20 @@ internal static class Recipes
     };
     #endregion
 
+    #region HeavyOil
+    internal static RecipeModel HeavyOilResidue = new ()
+    {
+        Name = "Heavy Oil Residue",
+        Machine = Machines.Refinery,
+        Ingredients = new List<ItemWithAmount>()
+        {
+            new() { Item = Items.Oil, Amount = 60m },
+        },
+        MainProduct = new() { Item = Items.HeavyOilResidue, Amount = 40m },
+        Byproducts = new List<ItemWithAmount>() 
+        {
+            new() { Item = Items.PolymerResin, Amount = 20m },
+        }
+    };
+    #endregion
 }
