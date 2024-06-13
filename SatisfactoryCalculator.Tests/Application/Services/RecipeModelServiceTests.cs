@@ -55,4 +55,16 @@ public class RecipeModelServiceTests
         Assert.IsTrue(containsIronAlloyIngot);
         Assert.IsFalse(containsOtherRecipes);
     }
+    [TestMethod]
+    public void RecipeModelService_GetMainRecipes_ReturnsEmtyListWhenNoneRecipeIsAvailable()
+    {
+        //arrange
+        RecipeModelService recipeService = new();
+
+        //act
+        ICollection<RecipeModel> results = recipeService.GetMainRecipes(Items.IronOre);
+
+        //assert
+        Assert.IsTrue(results.Count == 0);
+    }
 }
