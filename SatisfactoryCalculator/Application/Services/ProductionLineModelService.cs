@@ -59,13 +59,18 @@ internal class ProductionLineModelService(RecipeModelService recipeModelService)
     {
         ICollection<ProductionLineModel> result = new HashSet<ProductionLineModel>();
 
-
         ICollection<ItemBalanceModel> Itembalance = GetProductionLineBalanceItemOnly(productionLineModel);
 
         ItemBalanceModel? itemBalance = Itembalance.First(x => x.InAmount > x.OutAmount) ?? throw new Exception();
 
         ICollection<RecipeModel> recipes = recipeModelService.GetMainRecipes(itemBalance.Item);
 
+        if (recipes.Count == 0)
+        {
+            productionLineModel.CalculationIsDone = true;
+            result.Add(productionLineModel);
+            return result;
+        }
 
         foreach (RecipeModel recipe in recipes)
         {
