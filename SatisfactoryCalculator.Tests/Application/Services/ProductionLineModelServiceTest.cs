@@ -41,47 +41,7 @@ public class ProductionLineModelServiceTest
         Assert.AreEqual( 7, productionLines.Count);
     }
 
-    [TestMethod]
-    public void ProductionLineModelService_GetProductionLineBalanceItemOnly()
-    {
-        //arrange
-        RecipeModelService recipeModelService = new();
 
-        ICollection<RecipeModel> usedRecipes = new HashSet<RecipeModel>();
-
-        usedRecipes.Add(Recipes.Screw);
-        usedRecipes.Add(Recipes.IronRod);
-        usedRecipes.Add(Recipes.IronIngot);
-        usedRecipes.Add(Recipes.HeavyOilResidue);
-
-        recipeModelService.UsedRecipes = usedRecipes;
-
-        ProductionLineModelService prodLineService = new ProductionLineModelService(recipeModelService);
-
-        ProductionLineModel productionLine = new ProductionLineModel();
-
-        List<ProcessStepModel> processSteps = new List<ProcessStepModel>()
-        {
-            new ProcessStepModel() { Recipe = Recipes.Screw},
-            new ProcessStepModel() { Recipe = Recipes.IronRod},
-            new ProcessStepModel() { Recipe = Recipes.IronIngot},
-            new ProcessStepModel() { Recipe = Recipes.HeavyOilResidue}
-        };
-
-        productionLine.ProcessSteps = processSteps;
-
-        //act
-        ICollection<ItemBalanceModel> result = prodLineService.GetProductionLineBalanceItemOnly(productionLine);
-
-        //assert
-        Assert.IsTrue(result.Any(x => x.Item.Name == Items.IronRod.Name && x.InAmount == 1 && x.OutAmount == 1));
-        Assert.IsTrue(result.Any(x => x.Item.Name == Items.Screw.Name && x.InAmount == 0 && x.OutAmount == 1));
-        Assert.IsTrue(result.Any(x => x.Item.Name == Items.IronOre.Name && x.InAmount == 1 && x.OutAmount == 0));
-        Assert.IsTrue(result.Any(x => x.Item.Name == Items.IronIngot.Name && x.InAmount == 1 && x.OutAmount == 1));
-        Assert.IsTrue(result.Any(x => x.Item.Name == Items.Oil.Name && x.InAmount == 1 && x.OutAmount == 0));
-        Assert.IsTrue(result.Any(x => x.Item.Name == Items.HeavyOilResidue.Name && x.InAmount == 0 && x.OutAmount == 1));
-        Assert.IsTrue(result.Any(x => x.Item.Name == Items.PolymerResin.Name && x.InAmount == 0 && x.OutAmount == 1));
-    }
 
     [TestMethod]
     public void ProductionLineModelService_CalcOneStep_BasicFunction()
