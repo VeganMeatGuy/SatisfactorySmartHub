@@ -12,14 +12,33 @@ public class ProductionLineModelServiceTest
     public void ProductionLineModelService_GetProductionLinesForItem()
     {
         //arrange
-        ProductionLineModelService prodLineService = new ProductionLineModelService(new RecipeModelService());
+        RecipeModelService recipeModelService = new();
+        ICollection<RecipeModel> usedRecipes = new HashSet<RecipeModel>();
 
+        usedRecipes.Add(Recipes.Screw);
+        usedRecipes.Add(Recipes.SteelScrew);
+
+        usedRecipes.Add(Recipes.SteelBeam);
+
+        usedRecipes.Add(Recipes.IronRod);
+        usedRecipes.Add(Recipes.IronIngot);
+        usedRecipes.Add(Recipes.PureIronIngot);
+        usedRecipes.Add(Recipes.IronAlloyIngot);
+
+        usedRecipes.Add(Recipes.SteelRod);
+        usedRecipes.Add(Recipes.SteelIngot);
+        usedRecipes.Add(Recipes.CokeSteelIngot);
+
+
+        recipeModelService.UsedRecipes = usedRecipes;
+
+        ProductionLineModelService prodLineService = new ProductionLineModelService(recipeModelService);
 
         //act
-        List<ProductionLineModel> productionLines = prodLineService.GetProductionLinesForItem(Items.IronRod);
+        List<ProductionLineModel> productionLines = prodLineService.GetProductionLinesForItem(Items.Screw);
 
         //assert
-        Assert.AreEqual(productionLines.Count, 5);
+        Assert.AreEqual( 7, productionLines.Count);
     }
 
     [TestMethod]

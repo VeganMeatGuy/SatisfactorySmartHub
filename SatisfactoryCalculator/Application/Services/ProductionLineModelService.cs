@@ -33,7 +33,6 @@ internal class ProductionLineModelService(RecipeModelService recipeModelService)
 
         while (openProductionLines.Count > 0)
         {
-
             ICollection<ProductionLineModel> newOpenProductionLines = new HashSet<ProductionLineModel>();
 
             foreach (var productionLine in openProductionLines)
