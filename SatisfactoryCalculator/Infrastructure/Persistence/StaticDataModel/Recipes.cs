@@ -31,7 +31,9 @@ internal static class Recipes
         //HeavyModularFrames
         HeavyEncasedFrame,
         //HeavyOil
-        HeavyOilResidue
+        HeavyOilResidue,
+        //AluminumScrap
+        AluminumScrap
     };
 
     #region IronIngot
@@ -198,6 +200,24 @@ internal static class Recipes
         Byproducts = new List<ItemWithAmount>() 
         {
             new() { Item = Items.PolymerResin, Amount = 20m },
+        }
+    };
+    #endregion
+
+    #region AluminumScrap
+    internal static RecipeModel AluminumScrap = new ()
+    {
+        Name = "Aluminum Scrap",
+        Machine = Machines.Refinery,
+        Ingredients = new List<ItemWithAmount>()
+        {
+            new() { Item = Items.AluminiaSolution, Amount = 240m },
+            new() { Item = Items.Coal, Amount = 120m },
+        },
+        MainProduct = new() { Item = Items.AluminiumScrap, Amount = 360m },
+        Byproducts = new List<ItemWithAmount>()
+        {
+            new() { Item = Items.Water, Amount = 120m },
         }
     };
     #endregion

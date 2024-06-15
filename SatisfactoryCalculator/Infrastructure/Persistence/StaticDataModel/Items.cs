@@ -34,5 +34,7 @@ internal static class Items
     public static ItemModel HeavyOilResidue => new() { Name = "Heavy Oil Residue" };
     public static ItemModel PolymerResin => new() { Name = "Polymer Resin" };
     public static ItemModel PetroleumCoke => new () { Name = "Petroleum Coke" };
+    public static ItemModel AluminiaSolution => new() { Name = "Aluminia Solution" };
+    public static ItemModel AluminiumScrap => new() { Name = "Aluminium Scrap" };
 
 }
