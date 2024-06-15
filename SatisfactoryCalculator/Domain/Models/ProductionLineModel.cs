@@ -23,38 +23,21 @@ namespace SatisfactoryCalculator.Domain.Models
             set => _CalculationIsDone = value;
         }
 
-        public ICollection<ItemBalanceModel> GetBalanceItemOnly()
+        public ICollection<ItemBalanceModel> GetBalance()
         {
             ICollection<ItemBalanceModel> result = new HashSet<ItemBalanceModel>();
 
             foreach (ProcessStepModel processStep in this.ProcessSteps)
             {
-                //hier weiter
 
-                //ItemWithAmount pro = processStep.Recipe.MainProduct;
-                //ICollection<ItemWithAmount> byp = processStep.Recipe.Byproducts;
-                //ICollection<ItemWithAmount> ing = processStep.Recipe.Ingredients;
-
-                //if (result.Any(x => x.Item.Name == pro.Item.Name))
-                //    result.First(x => x.Item.Name == pro.Item.Name).OutAmount += 1;
-                //else
-                //    result.Add(new() { Item = pro.Item, OutAmount = 1 });
-
-                //foreach (ItemWithAmount bypitem in byp)
-                //{
-                //    if (result.Any(x => x.Item.Name == bypitem.Item.Name))
-                //        result.First(x => x.Item.Name == bypitem.Item.Name).OutAmount += 1;
-                //    else
-                //        result.Add(new() { Item = bypitem.Item, OutAmount = 1 });
-                //}
-
-                //foreach (ItemWithAmount ingitem in ing)
-                //{
-                //    if (result.Any(x => x.Item.Name == ingitem.Item.Name))
-                //        result.First(x => x.Item.Name == ingitem.Item.Name).InAmount += 1;
-                //    else
-                //        result.Add(new() { Item = ingitem.Item, InAmount = 1 });
-                //}
+                foreach(ItemBalanceModel item in processStep.GetBalance())
+                    if(result.Any(x => x.Item.Name == item.Item.Name))
+                    { 
+                        result.First(x => x.Item.Name == item.Item.Name).ProducedAmount += item.ProducedAmount;
+                        result.First(x => x.Item.Name == item.Item.Name).ProducedAmount += item.NeededAmount;
+                    }
+                else
+                        result.Add(item);
             }
             return result;
         }

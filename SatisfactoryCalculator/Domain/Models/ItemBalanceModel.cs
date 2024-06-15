@@ -18,13 +18,13 @@ internal class ItemBalanceModel
         set => _item = value;
     }
 
-    public decimal InAmount
+    public decimal NeededAmount
     {
         get => _inAmount;
         set => _inAmount = value;
     }
 
-    public decimal OutAmount
+    public decimal ProducedAmount
     {
         get => _outAmount;
         set => _outAmount = value;

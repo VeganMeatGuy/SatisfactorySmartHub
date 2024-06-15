@@ -12,34 +12,51 @@ namespace SatisfactoryCalculator.Tests.Domain.Models;
 public class ProcessStepModelTest
 {
     [TestMethod]
-    public void ProcessStepModel_GetBalanceItemOnly()
+    public void ProcessStepModel_SetProducedAmount_ExampleHeavyEncasedFrame()
     {
-        //arrange
+        ProcessStepModel processStep1 = new ProcessStepModel() { Recipe = Recipes.HeavyEncasedFrame };
 
-        ProcessStepModel processStep1 = new ProcessStepModel() { Recipe = Recipes.Screw };
-        ProcessStepModel processStep2 = new ProcessStepModel() { Recipe = Recipes.IronRod };
-        ProcessStepModel processStep3 = new ProcessStepModel() { Recipe = Recipes.IronIngot };
-        ProcessStepModel processStep4 = new ProcessStepModel() { Recipe = Recipes.HeavyOilResidue };
+        processStep1.SetProductionTarget(new ItemWithAmount() { Amount = 2.15m, Item = Items.HeavyModularFrame });
 
+        ICollection<ItemBalanceModel> result1 = processStep1.GetBalance();
 
-        //act
-        ICollection<ItemBalanceModel> result1 = processStep1.GetBalanceItemOnly();
-        ICollection<ItemBalanceModel> result2 = processStep2.GetBalanceItemOnly();
-        ICollection<ItemBalanceModel> result3 = processStep3.GetBalanceItemOnly();
-        ICollection<ItemBalanceModel> result4 = processStep4.GetBalanceItemOnly();
+        Assert.IsTrue(result1.Any(x => x.Item.Name == Items.ModularFrame.Name && x.NeededAmount == 5.74m && x.ProducedAmount == 0));
+        Assert.IsTrue(result1.Any(x => x.Item.Name == Items.EncasedIndustrialBeam.Name && x.NeededAmount == 7.17m && x.ProducedAmount == 0));
+        Assert.IsTrue(result1.Any(x => x.Item.Name == Items.SteelPipe.Name && x.NeededAmount == 25.8m && x.ProducedAmount == 0));
+        Assert.IsTrue(result1.Any(x => x.Item.Name == Items.Concrete.Name && x.NeededAmount == 15.77m && x.ProducedAmount == 0));
+        Assert.IsTrue(result1.Any(x => x.Item.Name == Items.HeavyModularFrame.Name && x.NeededAmount == 0 && x.ProducedAmount == 2.15m));
+    }
 
-        //assert
-        Assert.IsTrue(result1.Any(x => x.Item.Name == Items.IronRod.Name && x.InAmount == 1 && x.OutAmount == 0));
-        Assert.IsTrue(result1.Any(x => x.Item.Name == Items.Screw.Name && x.InAmount == 0 && x.OutAmount == 1));
+    [TestMethod]
+    public void ProcessStepModel_SetProducedAmount_ExampleAluminumScrap()
+    {
+        ProcessStepModel processStep1 = new ProcessStepModel() { Recipe = Recipes.AluminumScrap };
 
-        Assert.IsTrue(result2.Any(x => x.Item.Name == Items.IronRod.Name && x.InAmount == 0 && x.OutAmount == 1));
-        Assert.IsTrue(result2.Any(x => x.Item.Name == Items.IronIngot.Name && x.InAmount == 1 && x.OutAmount == 0));
+        processStep1.SetProductionTarget(new ItemWithAmount() { Amount = 272.26m, Item = Items.AluminiumScrap });
 
-        Assert.IsTrue(result3.Any(x => x.Item.Name == Items.IronIngot.Name && x.InAmount == 0 && x.OutAmount == 1));
-        Assert.IsTrue(result3.Any(x => x.Item.Name == Items.IronOre.Name && x.InAmount == 1 && x.OutAmount == 0));
+        ICollection<ItemBalanceModel> result1 = processStep1.GetBalance();
 
-        Assert.IsTrue(result4.Any(x => x.Item.Name == Items.Oil.Name && x.InAmount == 1 && x.OutAmount == 0));
-        Assert.IsTrue(result4.Any(x => x.Item.Name == Items.HeavyOilResidue.Name && x.InAmount == 0 && x.OutAmount == 1));
-        Assert.IsTrue(result4.Any(x => x.Item.Name == Items.PolymerResin.Name && x.InAmount == 0 && x.OutAmount == 1));
+        Assert.IsTrue(result1.Any(x => x.Item.Name == Items.AluminiaSolution.Name && x.NeededAmount == 181.51m && x.ProducedAmount == 0));
+        Assert.IsTrue(result1.Any(x => x.Item.Name == Items.Coal.Name && x.NeededAmount == 90.76m && x.ProducedAmount == 0));
+        Assert.IsTrue(result1.Any(x => x.Item.Name == Items.AluminiumScrap.Name && x.NeededAmount == 0 && x.ProducedAmount == 272.26m));
+        Assert.IsTrue(result1.Any(x => x.Item.Name == Items.Water.Name && x.NeededAmount == 0 && x.ProducedAmount == 90.75m));
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(Exception))]
+    public void ProcessStepModel_SetProducedAmount_ThrowsExceptionWhenMoreThen3Decimals()
+    {
+        ProcessStepModel processStep1 = new ProcessStepModel() { Recipe = Recipes.AluminumScrap };
+
+        processStep1.SetProductionTarget(new ItemWithAmount() { Amount = 272.265m, Item = Items.AluminiumScrap });
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(Exception))]
+    public void ProcessStepModel_SetProducedAmount_ThrowsExceptionWhenProcessIstNotProducingWantedItem()
+    {
+        ProcessStepModel processStep1 = new ProcessStepModel() { Recipe = Recipes.AluminumScrap };
+
+        processStep1.SetProductionTarget(new ItemWithAmount() { Amount = 272.265m, Item = Items.Screw });
     }
 }

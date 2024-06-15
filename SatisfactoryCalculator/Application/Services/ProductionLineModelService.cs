@@ -58,9 +58,9 @@ internal class ProductionLineModelService(RecipeModelService recipeModelService)
     {
         ICollection<ProductionLineModel> result = new HashSet<ProductionLineModel>();
 
-        ICollection<ItemBalanceModel> Itembalance = productionLineModel.GetBalanceItemOnly();
+        ICollection<ItemBalanceModel> Itembalance = productionLineModel.GetBalance();
 
-        ItemBalanceModel? itemBalance = Itembalance.First(x => x.InAmount > x.OutAmount) ?? throw new Exception();
+        ItemBalanceModel? itemBalance = Itembalance.First(x => x.NeededAmount > x.ProducedAmount) ?? throw new Exception();
 
         ICollection<RecipeModel> recipes = recipeModelService.GetMainRecipes(itemBalance.Item);
 
