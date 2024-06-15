@@ -181,7 +181,7 @@ internal static class Recipes
             new() { Item = Items.SteelPipe, Amount = 33.75m },
             new() { Item = Items.Concrete, Amount = 20.625m },
         },
-        MainProduct = new() { Item = Items.HeavyOilResidue, Amount = 2.8125m },
+        MainProduct = new() { Item = Items.HeavyModularFrame, Amount = 2.8125m },
     };
     #endregion
 
