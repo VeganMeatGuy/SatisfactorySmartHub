@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ internal static class Recipes
         SteelIngot,
         //SteelBeam
         SteelBeam,
+        //HeavyModularFrames
+        HeavyEncasedFrame,
         //HeavyOil
         HeavyOilResidue
     };
@@ -163,6 +166,22 @@ internal static class Recipes
             new() { Item = Items.SteelIngot, Amount = 60m },
         },
         MainProduct = new() { Item = Items.SteelBeam, Amount = 45m }
+    };
+    #endregion
+
+    #region Heavy Modular Frame
+    internal static RecipeModel HeavyEncasedFrame = new()
+    {
+        Name = "Heavy Encased Frame",
+        Machine = Machines.Manufacturer,
+        Ingredients = new List<ItemWithAmount>()
+        {
+            new() { Item = Items.ModularFrame, Amount = 7.5m },
+            new() { Item = Items.EncasedIndustrialBeam, Amount = 9.375m },
+            new() { Item = Items.SteelPipe, Amount = 33.75m },
+            new() { Item = Items.Concrete, Amount = 20.625m },
+        },
+        MainProduct = new() { Item = Items.HeavyOilResidue, Amount = 2.8125m },
     };
     #endregion
 
