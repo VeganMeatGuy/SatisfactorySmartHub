@@ -173,7 +173,7 @@ internal static class Recipes
         Machine = Machines.Refinery,
         Ingredients = new List<ItemWithAmount>()
         {
-            new() { Item = Items.Oil, Amount = 60m },
+            new() { Item = Items.Oil, Amount = 30m },
         },
         MainProduct = new() { Item = Items.HeavyOilResidue, Amount = 40m },
         Byproducts = new List<ItemWithAmount>() 
