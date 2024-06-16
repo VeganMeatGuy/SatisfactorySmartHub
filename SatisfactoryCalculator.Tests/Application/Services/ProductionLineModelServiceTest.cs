@@ -35,15 +35,30 @@ public class ProductionLineModelServiceTest
         ProductionLineModelService prodLineService = new ProductionLineModelService(recipeModelService);
 
         //act
-        List<ProductionLineModel> productionLines = prodLineService.GetProductionLinesForItem(Items.Screw);
+        List<ProductionLineModel> productionLines = 
+            prodLineService.GetProductionLinesForItem(new ItemWithAmount() { Item = Items.Screw, Amount = 300 });
 
         //assert
         Assert.AreEqual( 7, productionLines.Count);
     }
 
 
-
     [TestMethod]
+    [ExpectedException(typeof(Exception))]
+    public void ProductionLineModelService_CalcOneStep_ThrowsExceptionWhenNoTarget()
+    {
+        //arrange
+        RecipeModelService recipeModelService = new();
+        ProductionLineModelService prodLineService = new ProductionLineModelService(recipeModelService);
+        ProductionLineModel productionLine = new ProductionLineModel();
+        ProcessStepModel process1 = new ProcessStepModel() { Recipe = Recipes.Screw };
+        productionLine.ProcessSteps.Add(process1);
+
+        var result = prodLineService.CalcOneStep(productionLine);
+    }
+
+
+        [TestMethod]
     public void ProductionLineModelService_CalcOneStep_BasicFunction()
     {
         //arrange
@@ -77,22 +92,30 @@ public class ProductionLineModelServiceTest
         //act
         ICollection<ProductionLineModel> result1 = prodLineService.CalcOneStep(productionLine);
 
-        var QueryWantedProductionLine =
-            from prod in result1
+        ICollection<ProductionLineModel> QueryResultWantedProductionLine =
+            (from prod in result1
             from step in prod.ProcessSteps
             where step.Recipe == Recipes.IronRod
-            select prod;
+            select prod).ToList();
 
-        ICollection<ProductionLineModel> resultQueryWantedProductionLine = QueryWantedProductionLine.ToList();
-        if (resultQueryWantedProductionLine.Count() != 1)
+        if (QueryResultWantedProductionLine.Count() != 1)
             throw new AssertFailedException("Es darf nur eine derartige Liste geben!");
 
-        ICollection<ProductionLineModel> result2 = prodLineService.CalcOneStep(resultQueryWantedProductionLine.First());
+        ProductionLineModel Result1ExampleProductionLine = QueryResultWantedProductionLine.First();
+
+        ICollection<ProductionLineModel> result2 = prodLineService.CalcOneStep(Result1ExampleProductionLine);
 
 
         //assert
 
         Assert.IsTrue(result1.Count() == 2);
+
+        var balanceResult1ExampleProductionLine = Result1ExampleProductionLine.GetBalance();
+
+        Assert.IsTrue(balanceResult1ExampleProductionLine.Any(x => x.Item.Name == Items.IronIngot.Name && x.NeededAmount == 75m && x.ProducedAmount == 0));
+        Assert.IsTrue(balanceResult1ExampleProductionLine.Any(x => x.Item.Name == Items.IronRod.Name && x.NeededAmount == 75m && x.ProducedAmount == 75m));
+        Assert.IsTrue(balanceResult1ExampleProductionLine.Any(x => x.Item.Name == Items.Screw.Name && x.NeededAmount == 0 && x.ProducedAmount == 300));
+
         List<bool[]> testDataSet1 = new List<bool[]>();
         foreach (ProductionLineModel prod in result1)
         {
