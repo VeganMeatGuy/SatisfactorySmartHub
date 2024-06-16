@@ -1,7 +1,10 @@
 ﻿using SatisfactoryCalculator.Domain.Models;
+using SatisfactoryCalculator.Infrastructure.Persistence.StaticDataModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,19 +13,20 @@ namespace SatisfactoryCalculator.Application.Services;
 
 internal class ProductionLineModelService(RecipeModelService recipeModelService)
 {
-    public List<ProductionLineModel> GetProductionLinesForItem(ItemModel model)
+    public List<ProductionLineModel> GetProductionLinesForItem(ItemWithAmount model)
     {
         ICollection<ProductionLineModel> openProductionLines = new HashSet<ProductionLineModel>();
         ICollection<ProductionLineModel> finishedProductionLines = new HashSet<ProductionLineModel>();
 
-        // suche die Rezepte für das gegebene Model
-        ICollection<RecipeModel> recipes = recipeModelService.GetMainRecipes(model);
+        //// suche die Rezepte für das gegebene Model
+        ICollection<RecipeModel> recipes = recipeModelService.GetMainRecipes(model.Item);
 
-        //je Rezept wird ein ProductionLineModel & ein ProcessStepModel angelegt
+        //je Rezept wird ein ProductionLineModel & das finale ProcessStepModel angelegt
         foreach (RecipeModel recipe in recipes)
         {
             ProcessStepModel processStepModel = new();
             processStepModel.Recipe = recipe;
+            processStepModel.SetProcessStepTarget(model);
             ProductionLineModel productionLine = new();
             productionLine.ProcessSteps.Add(processStepModel);
             openProductionLines.Add(productionLine);
@@ -30,35 +34,76 @@ internal class ProductionLineModelService(RecipeModelService recipeModelService)
 
         while (openProductionLines.Count > 0)
         {
-            ProductionLineModel activeProdLine = openProductionLines.First();
+            ICollection<ProductionLineModel> newOpenProductionLines = new HashSet<ProductionLineModel>();
 
-            var possipleLastSteps = activeProdLine.ProcessSteps.Where(x => x.PostStep == null);
-
-            if (possipleLastSteps.Count() > 1)
-                throw new Exception();
-
-            ProcessStepModel lastStep = possipleLastSteps.First();
-
-            //finde die Zutaten für den letzten Schritt ein ProcessStep
-
-            foreach (ItemWithAmount Zutat in lastStep.Recipe.Ingredients)
+            foreach (var productionLine in openProductionLines)
             {
+                ICollection<ProductionLineModel> calculatedProductionLines = CalcOneStep(productionLine);
 
+                foreach (var calculatedProductionLine in calculatedProductionLines)
+                    if (calculatedProductionLine.CalculationIsDone)
+                        finishedProductionLines.Add(calculatedProductionLine);
+                    else
+                        newOpenProductionLines.Add(calculatedProductionLine);
             }
+
+            openProductionLines = newOpenProductionLines;
+
+        }
+
+        return finishedProductionLines.ToList();
+    }
+
+
+    public ICollection<ProductionLineModel> CalcOneStep(ProductionLineModel productionLineModel)
+    {
+        //wenn es keinen ProcessStep mit einem Target gibt, kann ich auch nichts kalkulieren
+        var calculableProzessSteps =
+            from step in productionLineModel.ProcessSteps
+            where step.ProcessStepTarget != null
+            select step;
+
+        if(calculableProzessSteps.ToList().Count < 1) 
+        {
+            throw new Exception("Calc nur möglich, wenn mindestens ein Prozesschritt mit Ziel vorhanden ist.");
         }
 
 
+        ICollection < ProductionLineModel > result = new HashSet<ProductionLineModel>();
 
-            //jetzt habe ich eine production Line mit einem Prozessschritt
-            //nun muss ich der produktionslinie noch die restlichen Prozessschritte hinzufügen
+        ICollection<ItemBalanceModel> Itembalance = productionLineModel.GetBalance();
 
-            
-        // für jedes ProcessStepModel wird in den Zutaten geschaut, und je zutat nach dem rezept gesucht
+        ItemBalanceModel? itemBalance = Itembalance.FirstOrDefault(x => x.NeededAmount > x.ProducedAmount);
+        if(itemBalance == null)
+        {
+            productionLineModel.CalculationIsDone = true;
+            result.Add(productionLineModel);
+            return result;
+        }
 
+        ICollection<RecipeModel> recipes = recipeModelService.GetMainRecipes(itemBalance.Item);
 
+        if (recipes.Count == 0)
+        {
+            productionLineModel.CalculationIsDone = true;
+            result.Add(productionLineModel);
+            return result;
+        }
 
+        foreach (RecipeModel recipe in recipes)
+        {
+            ProductionLineModel newProductionLine = new();
+            newProductionLine.ProcessSteps = productionLineModel.ProcessSteps.ToList();
 
-        return productionLines.ToList();
+            ProcessStepModel processStepModel = new();
+            processStepModel.Recipe = recipe;
+            processStepModel.SetProcessStepTarget(new ItemWithAmount() { Item = recipe.MainProduct.Item, Amount = itemBalance.NeededAmount });
+
+            newProductionLine.ProcessSteps.Add(processStepModel);
+            result.Add(newProductionLine);
+        }
+
+        return result;
     }
 
 }
