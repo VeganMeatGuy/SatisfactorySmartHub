@@ -1,4 +1,6 @@
-﻿using System.Reflection.PortableExecutable;
+﻿using SatisfactoryCalculator.Domain.Enums;
+using SatisfactoryCalculator.Infrastructure.Persistence.StaticDataModel;
+using System.Reflection.PortableExecutable;
 
 namespace SatisfactoryCalculator.Domain.Models;
 
@@ -34,5 +36,19 @@ internal class RecipeModel
     {
         get => _byproducts;
         set => _byproducts = value;
+    }
+
+    public RecipeComponentType GetItemUsageInRecipe(ItemModel item)
+    {
+        if (Ingredients.Any(x => x.Item.Name == item.Name))
+            return RecipeComponentType.Ingredient;
+
+        if (MainProduct.Item.Name == item.Name)
+            return RecipeComponentType.MainProduct ;
+
+        if (Byproducts.Any(x => x.Item.Name == item.Name))
+            return RecipeComponentType.ByProduct;
+
+        return RecipeComponentType.NotIncluded;
     }
 }

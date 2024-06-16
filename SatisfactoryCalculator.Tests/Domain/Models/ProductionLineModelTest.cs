@@ -19,16 +19,16 @@ public class ProductionLineModelTest
         ProductionLineModel productionLine = new ProductionLineModel();
 
         ProcessStepModel process1 = new ProcessStepModel() { Recipe = Recipes.Screw };
-        process1.SetProductionTarget(new ItemWithAmount() { Amount = 300, Item = Items.Screw });
+        process1.SetProcessStepTarget(new ItemWithAmount() { Amount = 300, Item = Items.Screw });
 
         ProcessStepModel process2 = new ProcessStepModel() { Recipe = Recipes.IronRod };
-        process2.SetProductionTarget(new ItemWithAmount() { Amount = 100, Item = Items.IronRod });
+        process2.SetProcessStepTarget(new ItemWithAmount() { Amount = 100, Item = Items.IronRod });
 
         ProcessStepModel process3 = new ProcessStepModel() { Recipe = Recipes.IronIngot };
-        process3.SetProductionTarget(new ItemWithAmount() { Amount = 110, Item = Items.IronIngot });
+        process3.SetProcessStepTarget(new ItemWithAmount() { Amount = 110, Item = Items.IronIngot });
 
         ProcessStepModel process4 = new ProcessStepModel() { Recipe = Recipes.HeavyOilResidue };
-        process4.SetProductionTarget(new ItemWithAmount() { Amount = 25.67m, Item = Items.HeavyOilResidue });
+        process4.SetProcessStepTarget(new ItemWithAmount() { Amount = 25.67m, Item = Items.HeavyOilResidue });
 
         List<ProcessStepModel> processSteps = new List<ProcessStepModel>()
         {

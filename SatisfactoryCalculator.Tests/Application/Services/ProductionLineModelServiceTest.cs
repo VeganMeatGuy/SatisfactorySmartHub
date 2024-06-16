@@ -64,7 +64,7 @@ public class ProductionLineModelServiceTest
         ProductionLineModel productionLine = new ProductionLineModel();
 
         ProcessStepModel process1 = new ProcessStepModel() { Recipe = Recipes.Screw };
-        process1.SetProductionTarget(new ItemWithAmount() { Item = Items.Screw, Amount = 300 });
+        process1.SetProcessStepTarget(new ItemWithAmount() { Item = Items.Screw, Amount = 300 });
 
 
         List<ProcessStepModel> processSteps = new List<ProcessStepModel>()
