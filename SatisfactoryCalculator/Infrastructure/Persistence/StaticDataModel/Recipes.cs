@@ -32,6 +32,8 @@ internal static class Recipes
         HeavyEncasedFrame,
         //HeavyOil
         HeavyOilResidue,
+        //Fuel
+        Fuel,
         //AluminumScrap
         AluminumScrap
     };
@@ -200,6 +202,23 @@ internal static class Recipes
         Byproducts = new List<ItemWithAmount>() 
         {
             new() { Item = Items.PolymerResin, Amount = 20m },
+        }
+    };
+    #endregion
+
+    #region Fuel
+    internal static RecipeModel Fuel = new()
+    {
+        Name = "Fuel",
+        Machine = Machines.Refinery,
+        Ingredients = new List<ItemWithAmount>()
+        {
+            new() { Item = Items.Oil, Amount = 60m },
+        },
+        MainProduct = new() { Item = Items.Fuel, Amount = 40m },
+        Byproducts = new List<ItemWithAmount>()
+        {
+            new() { Item = Items.PolymerResin, Amount = 30m },
         }
     };
     #endregion

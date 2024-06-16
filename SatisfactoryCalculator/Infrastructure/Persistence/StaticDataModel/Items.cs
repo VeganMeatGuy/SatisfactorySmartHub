@@ -32,6 +32,7 @@ internal static class Items
     public static ItemModel EncasedIndustrialBeam => new() { Name = "Encased Industrial Beam" };
     public static ItemModel HeavyModularFrame => new() { Name = "Heavy Modular Frame" };
     public static ItemModel HeavyOilResidue => new() { Name = "Heavy Oil Residue" };
+    public static ItemModel Fuel => new() { Name = "Fuel" };
     public static ItemModel PolymerResin => new() { Name = "Polymer Resin" };
     public static ItemModel PetroleumCoke => new () { Name = "Petroleum Coke" };
     public static ItemModel AluminiaSolution => new() { Name = "Aluminia Solution" };
