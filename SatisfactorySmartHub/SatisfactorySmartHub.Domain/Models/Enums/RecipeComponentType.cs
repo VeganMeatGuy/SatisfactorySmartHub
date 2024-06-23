@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Domain.Models.Enums;
 
-internal enum RecipeComponentType
+public enum RecipeComponentType
 {
     MainProduct,
     ByProduct,

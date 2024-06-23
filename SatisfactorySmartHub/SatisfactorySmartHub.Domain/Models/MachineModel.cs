@@ -1,6 +1,6 @@
 ﻿namespace SatisfactorySmartHub.Domain.Models;
 
-internal class MachineModel
+public sealed class MachineModel
 {
     private string _name = string.Empty;
     private int _powerConsuption = 0;

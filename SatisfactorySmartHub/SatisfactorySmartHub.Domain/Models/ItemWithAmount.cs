@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿namespace SatisfactorySmartHub.Domain.Models;
 
-namespace SatisfactorySmartHub.Domain.Models
+public sealed class ItemWithAmount
 {
-    internal class ItemWithAmount
+    private ItemModel _item = new();
+    private decimal _amount = 0;
+
+    public ItemModel Item
     {
-        private ItemModel _item = new();
-        private decimal _amount = 0;
+        get => _item;
+        set => _item = value;
+    }
 
-        public ItemModel Item
-        {
-            get => _item;
-            set => _item = value;
-        }
-
-        public decimal Amount
-        {
-            get => _amount;
-            set => _amount = value;
-        }
+    public decimal Amount
+    {
+        get => _amount;
+        set => _amount = value;
     }
 }

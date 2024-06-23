@@ -1,4 +1,6 @@
-﻿namespace SatisfactorySmartHub.Application.Services;
+﻿using SatisfactorySmartHub.Domain.Models;
+
+namespace SatisfactorySmartHub.Application.Services;
 
 internal class ProductionLineModelService(RecipeModelService recipeModelService)
 {

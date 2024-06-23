@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace SatisfactorySmartHub.Domain.Models;
 
-internal class ProcessStepModel
+public sealed class ProcessStepModel
 {
     private RecipeModel _recipe = new();
     private ItemWithAmount? _processStepTarget;

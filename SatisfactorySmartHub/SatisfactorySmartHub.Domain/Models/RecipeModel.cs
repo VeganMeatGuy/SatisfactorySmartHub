@@ -1,10 +1,8 @@
-﻿using SatisfactoryCalculator.Infrastructure.Persistence.StaticDataModel;
-using SatisfactorySmartHub.Domain.Models.Enums;
-using System.Reflection.PortableExecutable;
+﻿using SatisfactorySmartHub.Domain.Models.Enums;
 
 namespace SatisfactorySmartHub.Domain.Models;
 
-internal class RecipeModel
+public sealed class RecipeModel
 {
     private string _name = string.Empty;
     private MachineModel _machine = new();

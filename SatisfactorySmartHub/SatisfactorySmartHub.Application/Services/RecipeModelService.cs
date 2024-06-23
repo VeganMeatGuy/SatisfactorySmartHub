@@ -1,8 +1,11 @@
-﻿namespace SatisfactorySmartHub.Application.Services;
+﻿using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
+using SatisfactorySmartHub.Domain.Models;
 
-internal class RecipeModelService
+namespace SatisfactorySmartHub.Application.Services;
+
+internal class RecipeModelService(IRepositoryService repositoryService)
 {
-    private ICollection<RecipeModel> _recipes = Recipes.RecipeList;
+    //private ICollection<RecipeModel> _recipes = repositoryService.RecipeList;
 
     public decimal GetNormalizedPowerConsumtion(RecipeModel recipe)
     {
@@ -16,12 +19,13 @@ internal class RecipeModelService
 
     public ICollection<RecipeModel> GetMainRecipes(ItemModel model)
     {
-        return _recipes.Where(x => x.MainProduct.Item.Name == model.Name).ToList();
+        return repositoryService.RecipeModelRepository.GetAll().Where(x => x.MainProduct.Item.Name == model.Name).ToList();
     }
 
-    public ICollection<RecipeModel> UsedRecipes
-    {
-        get => _recipes;
-        set => _recipes = value;
-    }
+    //public ICollection<RecipeModel> UsedRecipes
+    //{
+    //    get => _recipes;
+    //    set => _recipes = value;
+    //}
+
 }

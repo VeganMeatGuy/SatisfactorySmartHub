@@ -1,11 +1,6 @@
-﻿using SatisfactoryCalculator.Domain.Enums;
-using SatisfactoryCalculator.Domain.Models;
-using SatisfactoryCalculator.Infrastructure.Persistence.StaticDataModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SatisfactorySmartHub.Domain.Models;
+using SatisfactorySmartHub.Domain.Models.Enums;
+using SatisfactorySmartHub.Infrastructure.Persistance.Repositories.StaticRepository;
 
 namespace SatisfactorySmartHub.Domain.Tests.Models;
 

@@ -1,6 +1,6 @@
 ﻿namespace SatisfactorySmartHub.Domain.Models;
 
-internal class ItemModel
+public sealed class ItemModel
 {
     private string _name = string.Empty;
 

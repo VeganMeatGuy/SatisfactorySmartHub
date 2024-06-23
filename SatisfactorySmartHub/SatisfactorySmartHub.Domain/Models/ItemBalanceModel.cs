@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SatisfactorySmartHub.Domain.Models;
 
-namespace SatisfactorySmartHub.Domain.Models;
-
-internal class ItemBalanceModel
+public sealed class ItemBalanceModel
 {
     private ItemModel _item = new();
     private decimal _inAmount = 0;
