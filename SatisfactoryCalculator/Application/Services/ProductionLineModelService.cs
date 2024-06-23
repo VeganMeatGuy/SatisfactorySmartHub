@@ -1,5 +1,5 @@
-﻿using SatisfactoryCalculator.Domain.Models;
-using SatisfactoryCalculator.Infrastructure.Persistence.StaticDataModel;
+﻿using SatisfactorySmartHub.Domain.Models;
+using SatisfactorySmartHub.Infrastructure.Persistence.StaticDataModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SatisfactoryCalculator.Application.Services;
+namespace SatisfactorySmartHub.Application.Services;
 
 internal class ProductionLineModelService(RecipeModelService recipeModelService)
 {

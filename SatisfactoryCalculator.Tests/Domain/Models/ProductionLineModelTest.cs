@@ -1,13 +1,13 @@
-﻿using SatisfactoryCalculator.Application.Services;
-using SatisfactoryCalculator.Domain.Models;
-using SatisfactoryCalculator.Infrastructure.Persistence.StaticDataModel;
+﻿using SatisfactorySmartHub.Application.Services;
+using SatisfactorySmartHub.Domain.Models;
+using SatisfactorySmartHub.Infrastructure.Persistence.StaticDataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SatisfactoryCalculator.Tests.Domain.Models;
+namespace SatisfactorySmartHub.Tests.Domain.Models;
 
 [TestClass]
 public class ProductionLineModelTest

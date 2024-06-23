@@ -1,4 +1,4 @@
-﻿namespace SatisfactoryCalculator.Domain.Models;
+﻿namespace SatisfactorySmartHub.Domain.Models;
 
 internal class ItemModel
 {

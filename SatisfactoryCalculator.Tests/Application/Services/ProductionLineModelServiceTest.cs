@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
-using SatisfactoryCalculator.Application.Services;
-using SatisfactoryCalculator.Domain.Models;
-using SatisfactoryCalculator.Infrastructure.Persistence.StaticDataModel;
+using SatisfactorySmartHub.Application.Services;
+using SatisfactorySmartHub.Domain.Models;
+using SatisfactorySmartHub.Infrastructure.Persistence.StaticDataModel;
 
-namespace SatisfactoryCalculator.Tests.Application.Services;
+namespace SatisfactorySmartHub.Tests.Application.Services;
 
 [TestClass]
 public class ProductionLineModelServiceTest

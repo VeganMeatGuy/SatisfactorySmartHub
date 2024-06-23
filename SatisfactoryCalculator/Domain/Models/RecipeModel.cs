@@ -1,8 +1,8 @@
-﻿using SatisfactoryCalculator.Domain.Enums;
-using SatisfactoryCalculator.Infrastructure.Persistence.StaticDataModel;
+﻿using SatisfactorySmartHub.Domain.Enums;
+using SatisfactorySmartHub.Infrastructure.Persistence.StaticDataModel;
 using System.Reflection.PortableExecutable;
 
-namespace SatisfactoryCalculator.Domain.Models;
+namespace SatisfactorySmartHub.Domain.Models;
 
 internal class RecipeModel
 {

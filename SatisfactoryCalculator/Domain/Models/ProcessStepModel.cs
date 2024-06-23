@@ -1,7 +1,7 @@
-﻿using SatisfactoryCalculator.Domain.Enums;
+﻿using SatisfactorySmartHub.Domain.Enums;
 using System.ComponentModel;
 
-namespace SatisfactoryCalculator.Domain.Models;
+namespace SatisfactorySmartHub.Domain.Models;
 
 internal class ProcessStepModel
 {

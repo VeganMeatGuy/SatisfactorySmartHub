@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SatisfactoryCalculator.Domain.Enums;
+namespace SatisfactorySmartHub.Domain.Enums;
 
 internal enum RecipeComponentType
 {

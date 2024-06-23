@@ -1,4 +1,4 @@
-﻿using SatisfactoryCalculator.Domain.Models;
+﻿using SatisfactorySmartHub.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SatisfactoryCalculator.Infrastructure.Persistence.StaticDataModel;
+namespace SatisfactorySmartHub.Infrastructure.Persistence.StaticDataModel;
 
 internal static class Recipes
 {

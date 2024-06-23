@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace SatisfactoryCalculator.Domain.Models
+namespace SatisfactorySmartHub.Domain.Models
 {
     internal class ItemWithAmount
     {

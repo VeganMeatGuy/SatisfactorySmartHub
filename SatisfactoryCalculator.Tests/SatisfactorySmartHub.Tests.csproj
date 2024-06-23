@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SatisfactoryCalculator\SatisfactoryCalculator.csproj" />
+    <ProjectReference Include="..\SatisfactoryCalculator\SatisfactorySmartHub.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SatisfactoryCalculator", "SatisfactoryCalculator\SatisfactoryCalculator.csproj", "{F92C3757-5583-4C72-98C6-283883174A41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SatisfactorySmartHub", "SatisfactoryCalculator\SatisfactorySmartHub.csproj", "{F92C3757-5583-4C72-98C6-283883174A41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatisfactoryCalculator.Tests", "SatisfactoryCalculator.Tests\SatisfactoryCalculator.Tests.csproj", "{9CE5824A-C551-4DED-82FC-24E34AD088C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SatisfactorySmartHub.Tests", "SatisfactoryCalculator.Tests\SatisfactorySmartHub.Tests.csproj", "{9CE5824A-C551-4DED-82FC-24E34AD088C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
