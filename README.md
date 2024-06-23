@@ -1,4 +1,4 @@
-# SatisfactoryCalculator
+# SatisfactorySmartHub
 
 Calculator for game Satisfactory.
 In my first playtrought i have used an excel-sheet.
