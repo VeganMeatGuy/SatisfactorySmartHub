@@ -1,13 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SatisfactorySmartHub.Application\SatisfactorySmartHub.Application.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <None Remove="App.xaml" />
+	  <None Remove="Windows\MainWindow.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SatisfactorySmartHub.Application\SatisfactorySmartHub.Application.csproj" />
+	</ItemGroup>
 
 </Project>
