@@ -11,6 +11,10 @@
 
 	<ItemGroup>
 	  <None Remove="App.xaml" />
+	  <None Remove="Controls\MenueButton.xaml" />
+	  <None Remove="Styles\MenueStyle.xaml" />
+	  <None Remove="Styles\UiColors.xaml" />
+	  <None Remove="Utilities\ViewDataTemplates.xaml" />
 	  <None Remove="Windows\MainWindow.xaml" />
 	</ItemGroup>
 
