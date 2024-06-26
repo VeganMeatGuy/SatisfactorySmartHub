@@ -11,19 +11,31 @@
 
 	<ItemGroup>
 	  <None Remove="App.xaml" />
-	  <None Remove="Controls\MenueButton.xaml" />
+	  <None Remove="Assets\DefaultIcon.png" />
+	  <None Remove="Assets\HomeIcon.png" />
 	  <None Remove="Styles\MenueStyle.xaml" />
 	  <None Remove="Styles\UiColors.xaml" />
 	  <None Remove="Utilities\ViewDataTemplates.xaml" />
+	  <None Remove="Views\HomeView.xaml" />
 	  <None Remove="Windows\MainWindow.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\SatisfactorySmartHub.Application\SatisfactorySmartHub.Application.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Assets\DefaultIcon.png" />
+		<Resource Include="Assets\HomeIcon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Controls\" />
 	</ItemGroup>
 
 </Project>

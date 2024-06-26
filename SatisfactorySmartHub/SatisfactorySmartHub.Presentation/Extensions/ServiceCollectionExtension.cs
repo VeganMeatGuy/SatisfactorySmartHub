@@ -2,7 +2,9 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SatisfactorySmartHub.Presentation.Common;
 using SatisfactorySmartHub.Presentation.Common.Interfaces;
+using SatisfactorySmartHub.Presentation.ViewModels;
 using SatisfactorySmartHub.Presentation.ViewModels.Base;
+using SatisfactorySmartHub.Presentation.WindowModels;
 using SatisfactorySmartHub.Presentation.Windows;
 
 namespace SatisfactorySmartHub.Presentation.Extensions;
@@ -39,7 +41,7 @@ internal static class ServiceCollectionExtension
     /// <returns>The enriched service collection.</returns>
     internal static IServiceCollection AddWindowModels(this IServiceCollection services)
     {
-        //services.TryAddTransient<MainWindowModel>();
+        services.TryAddTransient<MainWindowModel>();
         return services;
     }
 
@@ -50,7 +52,7 @@ internal static class ServiceCollectionExtension
     /// <returns>The enriched service collection.</returns>
     internal static IServiceCollection AddViewModels(this IServiceCollection services)
     {
-        //services.TryAddTransient<HomeViewModel>();
+        services.TryAddTransient<HomeViewModel>();
         //services.TryAddTransient<AccountViewModel>();
         //services.TryAddTransient<BookingGeneralViewModel>();
         //services.TryAddSingleton<BookingFastInputViewModel>();
