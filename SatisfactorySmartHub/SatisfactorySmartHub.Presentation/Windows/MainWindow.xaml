@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Satisfactory Smart Hub"
 
-    Width="874"
-    Height="450"
+    Width="1440"
+    Height="1256"
     mc:Ignorable="d">
 
     <Window.Resources>
