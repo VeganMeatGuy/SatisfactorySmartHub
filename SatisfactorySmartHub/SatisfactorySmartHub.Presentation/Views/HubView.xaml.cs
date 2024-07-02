@@ -19,9 +19,9 @@ namespace SatisfactorySmartHub.Presentation.Views;
 /// <summary>
 /// Interaction logic for HomeView.xaml
 /// </summary>
-public partial class HomeView : UserControl
+public partial class HubView : UserControl
 {
-    public HomeView()
+    public HubView()
     {
         InitializeComponent();
     }

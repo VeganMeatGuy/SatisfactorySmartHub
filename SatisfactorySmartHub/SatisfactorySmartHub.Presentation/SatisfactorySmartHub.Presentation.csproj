@@ -16,7 +16,7 @@
 	  <None Remove="Styles\MenueStyle.xaml" />
 	  <None Remove="Styles\UiColors.xaml" />
 	  <None Remove="Utilities\ViewDataTemplates.xaml" />
-	  <None Remove="Views\HomeView.xaml" />
+	  <None Remove="Views\HubView.xaml" />
 	  <None Remove="Windows\MainWindow.xaml" />
 	</ItemGroup>
 

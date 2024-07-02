@@ -32,7 +32,7 @@
                 <RadioButton
                     Style="{StaticResource HomeButton}"
                     Command="{Binding HomeCommand}"
-                    Content="Home" IsChecked="True"/>
+                    Content="Hub" IsChecked="True"/>
                 <RadioButton 
                     Style="{StaticResource MenueButton}"
                     Content="Verwaltung"/>

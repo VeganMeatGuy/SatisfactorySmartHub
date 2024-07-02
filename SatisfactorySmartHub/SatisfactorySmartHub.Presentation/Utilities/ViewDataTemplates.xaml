@@ -3,8 +3,8 @@
                     xmlns:v="clr-namespace:SatisfactorySmartHub.Presentation.Views"
                     xmlns:vm="clr-namespace:SatisfactorySmartHub.Presentation.ViewModels">
 
-    <DataTemplate DataType="{x:Type TypeName=vm:HomeViewModel}">
-        <v:HomeView />
+    <DataTemplate DataType="{x:Type TypeName=vm:HubViewModel}">
+        <v:HubView />
     </DataTemplate>
 
 </ResourceDictionary>

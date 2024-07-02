@@ -16,5 +16,5 @@ public sealed class MainWindowModel(INavigationHelper navigationHelper)
 
     public INavigationHelper NavigationHelper => navigationHelper;
 
-    public IRelayCommand HomeCommand => _homeCommand ??= new RelayCommand(NavigationHelper.NavigateTo<HomeViewModel>);
+    public IRelayCommand HomeCommand => _homeCommand ??= new RelayCommand(NavigationHelper.NavigateTo<HubViewModel>);
 }

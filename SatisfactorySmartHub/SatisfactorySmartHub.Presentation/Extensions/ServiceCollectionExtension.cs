@@ -52,7 +52,7 @@ internal static class ServiceCollectionExtension
     /// <returns>The enriched service collection.</returns>
     internal static IServiceCollection AddViewModels(this IServiceCollection services)
     {
-        services.TryAddTransient<HomeViewModel>();
+        services.TryAddTransient<HubViewModel>();
         //services.TryAddTransient<AccountViewModel>();
         //services.TryAddTransient<BookingGeneralViewModel>();
         //services.TryAddSingleton<BookingFastInputViewModel>();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Presentation.ViewModels;
 
-public sealed class HomeViewModel : ViewModelBase
+public sealed class HubViewModel : ViewModelBase
 {
-    public HomeViewModel() { }
+    public HubViewModel() { }
 }
