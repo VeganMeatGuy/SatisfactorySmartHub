@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SatisfactorySmartHub.Presentation.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SatisfactorySmartHub.Presentation.ViewModels;assembly=SatisfactorySmartHub.Presentation"
+    d:DataContext="{d:DesignInstance Type=vm:HubViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -58,18 +60,27 @@
                     Background="{StaticResource grey4}"
                     BorderThickness="0"
                     Content="Neu"
-                    Foreground="{StaticResource FontWhite}" />
-
-                <TextBox
+                    Foreground="{StaticResource FontWhite}"
+                    Command="{Binding CreateCompanyCommand}"/>
+                <StackPanel
                     Grid.Row="0"
                     Grid.Column="1"
-                    Width="250"
-                    Margin="7,0,5,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Background="{StaticResource grey5}"
-                    MaxLines="1" />
-
+                    Orientation="Horizontal">
+                    <TextBox
+                        Width="250"
+                        Margin="7,0,5,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource grey5}"
+                        MaxLines="1" 
+                        Text="{Binding CompanyName}"/>
+                    <TextBlock
+                        Margin="7,0,5,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Foreground="{StaticResource FontWhite}"
+                        Text="{Binding CreateHint}" />
+                </StackPanel>
                 <Button
                     Grid.Row="1"
                     Grid.Column="0"
@@ -78,7 +89,8 @@
                     Background="{StaticResource grey4}"
                     BorderThickness="0"
                     Content="Laden"
-                    Foreground="{StaticResource FontWhite}" />
+                    Foreground="{StaticResource FontWhite}" 
+                    Command="{Binding LoadCompanyCommand}"/>
 
                 <TextBlock
                     Grid.Row="1"
@@ -115,18 +127,21 @@
                 Text="Rezepte" />
         </Border>
         <Border Grid.Row="5" Background="{StaticResource backgroundBlack}">
-            <ListBox Background="Transparent" HorizontalAlignment="Left" BorderThickness="0">
+            <ListBox
+                HorizontalAlignment="Left"
+                Background="Transparent"
+                BorderThickness="0">
                 <ListBoxItem>
-                    <CheckBox Content="Rezept 1" Foreground="{StaticResource FontWhite}"/>
+                    <CheckBox Content="Rezept 1" Foreground="{StaticResource FontWhite}" />
                 </ListBoxItem>
                 <ListBoxItem>
-                    <CheckBox Content="Rezept 2" Foreground="{StaticResource FontWhite}"/>
+                    <CheckBox Content="Rezept 2" Foreground="{StaticResource FontWhite}" />
                 </ListBoxItem>
                 <ListBoxItem>
-                    <CheckBox Content="Rezept 3" Foreground="{StaticResource FontWhite}"/>
+                    <CheckBox Content="Rezept 3" Foreground="{StaticResource FontWhite}" />
                 </ListBoxItem>
                 <ListBoxItem>
-                    <CheckBox Content="Rezept 4" Foreground="{StaticResource FontWhite}"/>
+                    <CheckBox Content="Rezept 4" Foreground="{StaticResource FontWhite}" />
                 </ListBoxItem>
             </ListBox>
         </Border>
