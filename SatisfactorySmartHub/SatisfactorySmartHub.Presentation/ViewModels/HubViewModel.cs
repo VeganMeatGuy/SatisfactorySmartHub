@@ -1,10 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
 using SatisfactorySmartHub.Presentation.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace SatisfactorySmartHub.Presentation.ViewModels;
 
@@ -41,9 +43,20 @@ public sealed class HubViewModel : ViewModelBase
     }
 
     private void CreateCompany()
-    { 
+    {
+        if (CompanyName == string.Empty)
+        {
+            CreateHint = "Vergebe bitte einen Namen für deinen Konzern.";
+            return;
+        }
+
 
     }
+
+
+
+
+
     private void LoadCompany()
     {
 
