@@ -9,8 +9,8 @@ namespace SatisfactorySmartHub.Domain.Models;
 public sealed class CorporationModel
 {
     private string _name = string.Empty;
-    private BranchModel _branch = new BranchModel();
-    private PowerPlantModel _powerPlant = new PowerPlantModel();
+    private ICollection<BranchModel> _branch = new HashSet<BranchModel>();
+    private ICollection<PowerPlantModel> _powerPlant = new HashSet<PowerPlantModel>();
     private LogisticsModel _logistics = new LogisticsModel();
 
 
@@ -20,13 +20,14 @@ public sealed class CorporationModel
         set => _name = value;
     }
 
-    public BranchModel Branch
+    public ICollection<BranchModel> Branches
     {
         get => _branch;
         set => _branch = value;
     }
 
-    public PowerPlantModel PowerPlant
+
+    public ICollection<PowerPlantModel> PowerPlants
     {
         get => _powerPlant;
         set => _powerPlant = value;

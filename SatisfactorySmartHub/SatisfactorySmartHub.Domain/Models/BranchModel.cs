@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace SatisfactorySmartHub.Domain.Models;
+﻿namespace SatisfactorySmartHub.Domain.Models;
 
 public sealed class BranchModel
 {
@@ -14,7 +12,7 @@ public sealed class BranchModel
         set => _name = value;
     }
 
-    public ExtractionSiteModel PowerPlant
+    public ExtractionSiteModel ExtractionSite
     {
         get => _extractionSite;
         set => _extractionSite = value;
