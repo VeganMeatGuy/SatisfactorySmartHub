@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Domain.Models;
+using SatisfactorySmartHub.Presentation.Interfaces.Services;
 using SatisfactorySmartHub.Presentation.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Windows.Controls;
 
 namespace SatisfactorySmartHub.Presentation.ViewModels;
 
-public sealed class HubViewModel(ICorporationService corporationService) : ViewModelBase
+public sealed class HubViewModel(ICorporationService corporationService, ICachingService cachingService) : ViewModelBase
 {
 
     private IRelayCommand? _loadCompanyCommand;
@@ -20,8 +21,6 @@ public sealed class HubViewModel(ICorporationService corporationService) : ViewM
     private string _corporationName = string.Empty;
     private string _createHint = string.Empty;
     private string _loadHint = string.Empty;
-
-    //public HubViewModel() { }
 
     public IRelayCommand CreateCompanyCommand => _createCompanyCommand ?? new RelayCommand(new Action(CreateCompany));
     public IRelayCommand LoadCompanyCommand => _loadCompanyCommand ?? new RelayCommand(new Action(LoadCompany));
@@ -52,7 +51,11 @@ public sealed class HubViewModel(ICorporationService corporationService) : ViewM
             return;
         }
 
-        CorporationModel activeCorporation = corporationService.GetNewCorporation(CorporationName);
+        cachingService.ActiveCorporation = corporationService.GetNewCorporation(CorporationName);
+
+        CreateHint = $"{cachingService.ActiveCorporation.Name} wurde erfolgreich erstellt.";
+
+        LoadHint = $"{cachingService.ActiveCorporation.Name} ist aktuell geladen.";
     }
 
 

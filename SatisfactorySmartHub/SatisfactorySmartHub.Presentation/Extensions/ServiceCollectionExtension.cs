@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SatisfactorySmartHub.Presentation.Common;
 using SatisfactorySmartHub.Presentation.Common.Interfaces;
+using SatisfactorySmartHub.Presentation.Interfaces.Services;
+using SatisfactorySmartHub.Presentation.Services;
 using SatisfactorySmartHub.Presentation.ViewModels;
 using SatisfactorySmartHub.Presentation.ViewModels.Base;
 using SatisfactorySmartHub.Presentation.WindowModels;
@@ -69,6 +71,17 @@ internal static class ServiceCollectionExtension
     {
         services.TryAddSingleton<INavigationHelper, NavigationHelper>();
         services.TryAddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));
+        return services;
+    }
+
+    /// <summary>
+    /// Adds utilities to the service collection.
+    /// </summary>
+    /// <param name="services">The service collection to enrich.</param>
+    /// <returns>The enriched service collection.</returns>
+    internal static IServiceCollection AddUtilities(this IServiceCollection services)
+    {
+        services.TryAddSingleton<ICachingService, CachingService>();
         return services;
     }
 }

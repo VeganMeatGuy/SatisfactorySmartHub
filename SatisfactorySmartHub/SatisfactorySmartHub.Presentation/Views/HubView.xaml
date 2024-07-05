@@ -98,7 +98,7 @@
                     Padding="7,0,0,0"
                     VerticalAlignment="Center"
                     Foreground="{StaticResource FontWhite}"
-                    Text="...keinen Konzern geladen..." />
+                    Text="{Binding LoadHint}" />
 
 
             </Grid>
