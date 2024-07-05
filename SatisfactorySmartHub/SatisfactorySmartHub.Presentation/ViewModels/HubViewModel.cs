@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Presentation.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Windows.Controls;
 
 namespace SatisfactorySmartHub.Presentation.ViewModels;
 
-public sealed class HubViewModel : ViewModelBase
+public sealed class HubViewModel(ICorporationService corporationService) : ViewModelBase
 {
 
     private IRelayCommand? _loadCompanyCommand;
@@ -19,7 +20,7 @@ public sealed class HubViewModel : ViewModelBase
     private string _createHint = string.Empty;
     private string _loadHint = string.Empty;
 
-    public HubViewModel() { }
+    //public HubViewModel() { }
 
     public IRelayCommand CreateCompanyCommand => _createCompanyCommand ?? new RelayCommand(new Action(CreateCompany));
     public IRelayCommand LoadCompanyCommand => _loadCompanyCommand ?? new RelayCommand(new Action(LoadCompany));

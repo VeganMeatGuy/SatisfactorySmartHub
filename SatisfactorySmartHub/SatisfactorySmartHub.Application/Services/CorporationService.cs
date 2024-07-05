@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SatisfactorySmartHub.Application.Services
+namespace SatisfactorySmartHub.Application.Services;
+
+internal sealed class CorporationService : ICorporationService
 {
-    internal class CorporationService : ICorporationService
-    {
-    }
 }
