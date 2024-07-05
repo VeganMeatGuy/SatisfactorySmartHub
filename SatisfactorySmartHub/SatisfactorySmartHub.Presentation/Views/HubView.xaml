@@ -73,7 +73,7 @@
                         VerticalAlignment="Center"
                         Background="{StaticResource grey5}"
                         MaxLines="1" 
-                        Text="{Binding CompanyName}"/>
+                        Text="{Binding CorporationName}"/>
                     <TextBlock
                         Margin="7,0,5,0"
                         HorizontalAlignment="Left"
@@ -98,7 +98,7 @@
                     Padding="7,0,0,0"
                     VerticalAlignment="Center"
                     Foreground="{StaticResource FontWhite}"
-                    Text="...keinen Konzern geladen..." />
+                    Text="{Binding LoadHint}" />
 
 
             </Grid>

@@ -1,5 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
+using SatisfactorySmartHub.Domain.Models;
+using SatisfactorySmartHub.Presentation.Interfaces.Services;
 using SatisfactorySmartHub.Presentation.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -10,24 +13,22 @@ using System.Windows.Controls;
 
 namespace SatisfactorySmartHub.Presentation.ViewModels;
 
-public sealed class HubViewModel : ViewModelBase
+public sealed class HubViewModel(ICorporationService corporationService, ICachingService cachingService) : ViewModelBase
 {
 
     private IRelayCommand? _loadCompanyCommand;
     private IRelayCommand? _createCompanyCommand;
-    private string _companyName = string.Empty;
+    private string _corporationName = string.Empty;
     private string _createHint = string.Empty;
     private string _loadHint = string.Empty;
-
-    public HubViewModel() { }
 
     public IRelayCommand CreateCompanyCommand => _createCompanyCommand ?? new RelayCommand(new Action(CreateCompany));
     public IRelayCommand LoadCompanyCommand => _loadCompanyCommand ?? new RelayCommand(new Action(LoadCompany));
 
-    public string CompanyName
+    public string CorporationName
     {
-        get => _companyName;
-        set => SetProperty(ref _companyName, value);
+        get => _corporationName;
+        set => SetProperty(ref _corporationName, value);
     }
 
     public string CreateHint
@@ -43,14 +44,18 @@ public sealed class HubViewModel : ViewModelBase
     }
 
     private void CreateCompany()
-    {
-        if (CompanyName == string.Empty)
+    { 
+        if (CorporationName == string.Empty)
         {
             CreateHint = "Vergebe bitte einen Namen für deinen Konzern.";
             return;
         }
 
+        cachingService.ActiveCorporation = corporationService.GetNewCorporation(CorporationName);
 
+        CreateHint = $"{cachingService.ActiveCorporation.Name} wurde erfolgreich erstellt.";
+
+        LoadHint = $"{cachingService.ActiveCorporation.Name} ist aktuell geladen.";
     }
 
 

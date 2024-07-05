@@ -31,10 +31,11 @@
             <StackPanel Orientation="Horizontal" >
                 <RadioButton
                     Style="{StaticResource HomeButton}"
-                    Command="{Binding HomeCommand}"
+                    Command="{Binding HubCommand}"
                     Content="Hub" IsChecked="True"/>
                 <RadioButton 
                     Style="{StaticResource MenueButton}"
+                    Command="{Binding AdminCommand}"
                     Content="Verwaltung"/>
                 <RadioButton 
                     Style="{StaticResource MenueButton}"

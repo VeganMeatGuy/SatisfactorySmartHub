@@ -18,6 +18,6 @@ namespace SatisfactorySmartHub.Presentation.Common.Interfaces
         /// Navigates to the provided view model.
         /// </summary>
         /// <typeparam name="T">The view model to navigate to.</typeparam>
-        void NavigateTo<T>() where T : ViewModelBase;
+        void NavigateMainWindowTo<T>() where T : ViewModelBase;
     }
 }
