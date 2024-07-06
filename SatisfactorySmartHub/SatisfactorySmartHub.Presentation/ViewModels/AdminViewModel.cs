@@ -10,11 +10,20 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace SatisfactorySmartHub.Presentation.ViewModels;
 
-public sealed class AdminViewModel(AdminNavigationHelper navigationHelper) : ViewModelBase
+public sealed class AdminViewModel : ViewModelBase
 {
+    private readonly AdminNavigationHelper _navigationHelper;
+
     private IRelayCommand? _corporationCommand;
 
-    public INavigationHelper NavigationHelper => navigationHelper;
+    public AdminViewModel(AdminNavigationHelper navigationHelper)
+    {
+        _navigationHelper = navigationHelper;
+
+        CorporationCommand.Execute(this);
+    }
+
+    public INavigationHelper NavigationHelper => _navigationHelper;
 
     public IRelayCommand CorporationCommand => _corporationCommand ??= new RelayCommand(NavigationHelper.NavigateMainWindowTo<CorporationViewModel>);
 
