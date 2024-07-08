@@ -26,10 +26,6 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <Button HorizontalAlignment="Left" Content="Speichern" />
-        </StackPanel>
-
-        <StackPanel Grid.Row="1">
             <TextBlock Foreground="{StaticResource FontWhite}" Text="Konzern:" />
             <TextBox
                 Background="{StaticResource backgroundBlack}"

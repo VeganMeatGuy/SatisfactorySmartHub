@@ -1,5 +1,8 @@
-﻿using SatisfactorySmartHub.Application.Services;
+﻿using Moq;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
+using SatisfactorySmartHub.Application.Services;
 using SatisfactorySmartHub.Domain.Models;
+using System.IO.Enumeration;
 
 namespace SatisfactorySmartHub.Application.Tests.Services;
 
@@ -10,7 +13,9 @@ public class CorporationServiceTest
     public void CorporationService_GetNewCorporation_returnsNewCorporationWithRightName()
     {
         //arrange
-        CorporationService service = new CorporationService();
+        var repoServiceMock = new Mock<IRepositoryService>();
+
+        CorporationService service = new CorporationService(repoServiceMock.Object);
         string testCorporationName = "TestCorp";
 
         //act
@@ -20,7 +25,5 @@ public class CorporationServiceTest
         Assert.IsNotNull(newCorporation);
         Assert.IsInstanceOfType(newCorporation, typeof(CorporationModel));
         Assert.AreEqual(testCorporationName, newCorporation.Name);
-    
     }
-
 }
