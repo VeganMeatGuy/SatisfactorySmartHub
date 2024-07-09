@@ -59,9 +59,9 @@
                     Height="25"
                     Background="{StaticResource grey4}"
                     BorderThickness="0"
+                    Command="{Binding CreateCompanyCommand}"
                     Content="Neu"
-                    Foreground="{StaticResource FontWhite}"
-                    Command="{Binding CreateCompanyCommand}"/>
+                    Foreground="{StaticResource FontWhite}" />
                 <StackPanel
                     Grid.Row="0"
                     Grid.Column="1"
@@ -72,8 +72,8 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Background="{StaticResource grey5}"
-                        MaxLines="1" 
-                        Text="{Binding CorporationName}"/>
+                        MaxLines="1"
+                        Text="{Binding CorporationName}" />
                     <TextBlock
                         Margin="7,0,5,0"
                         HorizontalAlignment="Left"
@@ -88,9 +88,9 @@
                     Height="25"
                     Background="{StaticResource grey4}"
                     BorderThickness="0"
+                    Command="{Binding LoadCompanyCommand}"
                     Content="Laden"
-                    Foreground="{StaticResource FontWhite}" 
-                    Command="{Binding LoadCompanyCommand}"/>
+                    Foreground="{StaticResource FontWhite}" />
 
                 <TextBlock
                     Grid.Row="1"
@@ -116,8 +116,10 @@
             Background="{StaticResource backgroundBlack}">
             <CheckBox
                 Margin="7,0,0,0"
-                Content="enable history saving"
-                Foreground="{StaticResource FontWhite}" />
+                Command="{Binding OverWriteSaveFileCommand}"
+                Content="Überschreiben bei Speichern"
+                Foreground="{StaticResource FontWhite}"
+                IsChecked="{Binding OverWriteSaveFile}" />
         </Border>
         <Border Grid.Row="4" Background="{StaticResource grey3}">
             <TextBlock

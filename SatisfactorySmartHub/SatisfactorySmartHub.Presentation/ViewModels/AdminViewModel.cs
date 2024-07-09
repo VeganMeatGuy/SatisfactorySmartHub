@@ -22,17 +22,23 @@ public sealed class AdminViewModel : ViewModelBase
     private readonly AdminNavigationHelper _navigationHelper;
     private readonly ICorporationService _corporationService;
     private readonly ICachingService _cachingService;
+    private readonly IUserOptionsHelper _userOptionsHelper;
 
     private IRelayCommand? _corporationCommand;
     private IRelayCommand? _saveCommand;
     private IRelayCommand? _exportCommand;
     private string _saveHint = string.Empty;
 
-    public AdminViewModel(AdminNavigationHelper navigationHelper, ICorporationService corporationService, ICachingService cachingService)
+    public AdminViewModel(
+        AdminNavigationHelper navigationHelper, 
+        ICorporationService corporationService, 
+        ICachingService cachingService,
+        IUserOptionsHelper userOptionsHelper)
     {
         _navigationHelper = navigationHelper;
         _corporationService = corporationService;
         _cachingService = cachingService;
+        _userOptionsHelper = userOptionsHelper;
 
         CorporationCommand.Execute(this);
     }
@@ -56,7 +62,9 @@ public sealed class AdminViewModel : ViewModelBase
             return;
         }
 
-        _corporationService.SaveCorporation(_cachingService.ActiveCorporation, true);
+        bool overWrite = _userOptionsHelper.GetUserOptions().OverWriteSaveFile;
+
+        _corporationService.SaveCorporation(_cachingService.ActiveCorporation, overWrite);
         SaveHint = "Speichern erfolgreich.";
     }
 

@@ -81,6 +81,7 @@ internal static class ServiceCollectionExtension
     internal static IServiceCollection AddUtilities(this IServiceCollection services)
     {
         services.TryAddSingleton<ICachingService, CachingService>();
+        services.TryAddTransient<IUserOptionsHelper, UserOptionsHelper>();
         return services;
     }
 }
