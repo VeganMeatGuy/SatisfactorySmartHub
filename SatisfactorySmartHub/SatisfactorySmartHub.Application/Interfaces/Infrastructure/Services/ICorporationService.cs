@@ -10,7 +10,8 @@ namespace SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 public interface ICorporationService
 {
     CorporationModel GetNewCorporation(string corporationName);
-
+    CorporationModel GetCorporationFromFile(string filePath);
     void SaveCorporation(CorporationModel corporation, bool overrideFile);
     void ExportCorporation(CorporationModel corporation, string filePath);
+    ICollection<FileInfo> GetSaveFiles();
 }

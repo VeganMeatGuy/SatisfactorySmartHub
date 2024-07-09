@@ -13,6 +13,23 @@ namespace SatisfactorySmartHub.Infrastructure.Persistance.Repositories.FileRepos
 
 internal class CorporationModelFileRepository : ICorporationModelFileRepository
 {
+    private readonly string _defaultFolderPath = Path.Combine(Environment.CurrentDirectory, "SaveFiles");
+
+    public string DefaultFolderPath => _defaultFolderPath;
+
+    public ICollection<FileInfo> GetSaveFiles()
+    {
+
+        if (Directory.Exists(_defaultFolderPath))
+        {
+            DirectoryInfo di = new DirectoryInfo(_defaultFolderPath);
+            return di.EnumerateFiles().ToList<FileInfo>();
+        }
+        else
+            return new List<FileInfo>();
+    }
+
+
     public void ExportCorporation(CorporationModel corporation, string filePath)
     {
         string jsonData = JsonSerializer.Serialize(corporation);
@@ -21,14 +38,23 @@ internal class CorporationModelFileRepository : ICorporationModelFileRepository
 
     public CorporationModel GetCorporation(string filePath)
     {
-        throw new NotImplementedException();
+        if (Path.Exists(filePath) == false)
+            throw new Exception();
+
+        string json = File.ReadAllText(filePath);
+
+        CorporationModel? result = JsonSerializer.Deserialize<CorporationModel>(json);
+
+        if (result == null)
+            throw new Exception();
+        else 
+            return result;
     }
 
     public void SaveCorporation(CorporationModel corporation, bool overrideFile)
     {
-        string folderPath = Path.Combine(Environment.CurrentDirectory, "SaveFiles");
-        if (Directory.Exists(folderPath) == false)
-            Directory.CreateDirectory(folderPath);
+        if (Directory.Exists(_defaultFolderPath) == false)
+            Directory.CreateDirectory(_defaultFolderPath);
 
         string jsonData = JsonSerializer.Serialize(corporation);
 
@@ -39,7 +65,7 @@ internal class CorporationModelFileRepository : ICorporationModelFileRepository
         else
             fileName = $"{corporation.Name}_{DateTime.Now:yyyy-dd-M--HH-mm-ss}_{Guid.NewGuid()}.json";
 
-        string savingPath = Path.Combine(folderPath, fileName);
+        string savingPath = Path.Combine(_defaultFolderPath, fileName);
         File.WriteAllText(savingPath, jsonData);
 
     }

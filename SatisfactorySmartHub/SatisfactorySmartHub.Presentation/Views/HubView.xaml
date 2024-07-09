@@ -49,7 +49,8 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
-                    <RowDefinition />
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <Button
@@ -59,8 +60,8 @@
                     Height="25"
                     Background="{StaticResource grey4}"
                     BorderThickness="0"
-                    Command="{Binding CreateCompanyCommand}"
-                    Content="Neu"
+                    Command="{Binding CreateCorporationCommand}"
+                    Content="neu"
                     Foreground="{StaticResource FontWhite}" />
                 <StackPanel
                     Grid.Row="0"
@@ -81,15 +82,29 @@
                         Foreground="{StaticResource FontWhite}"
                         Text="{Binding CreateHint}" />
                 </StackPanel>
+
                 <Button
                     Grid.Row="1"
                     Grid.Column="0"
                     Width="50"
                     Height="25"
+                    VerticalAlignment="Top"
                     Background="{StaticResource grey4}"
                     BorderThickness="0"
-                    Command="{Binding LoadCompanyCommand}"
-                    Content="Laden"
+                    Command="{Binding ImportCorporationCommand}"
+                    Content="import"
+                    Foreground="{StaticResource FontWhite}" />
+
+                <Button
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Width="50"
+                    Height="25"
+                    VerticalAlignment="Top"
+                    Background="{StaticResource grey4}"
+                    BorderThickness="0"
+                    Command="{Binding LoadCorporationCommand}"
+                    Content="laden"
                     Foreground="{StaticResource FontWhite}" />
 
                 <TextBlock
@@ -100,6 +115,28 @@
                     Foreground="{StaticResource FontWhite}"
                     Text="{Binding LoadHint}" />
 
+                <Expander
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Foreground="{StaticResource FontWhite}"
+                    Header="klicke für Übersicht der Speicherdaten">
+                    <StackPanel>
+                        <ListView
+                            Name="SaveFilesListView"
+                            ItemsSource="{Binding SaveFiles}"
+                            SelectedItem="{Binding SelectedSaveFile}"
+                            Height="150"
+                            HorizontalAlignment="Left">
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.Columns>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Datei-Name" />
+                                    </GridView.Columns>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                </Expander>
 
             </Grid>
         </Border>

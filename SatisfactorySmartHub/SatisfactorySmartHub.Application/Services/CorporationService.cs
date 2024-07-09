@@ -17,10 +17,18 @@ internal sealed class CorporationService(IRepositoryService repositoryService) :
         repo.ExportCorporation(corporation, filePath);
     }
 
+    public CorporationModel GetCorporationFromFile(string filePath)
+    {
+        ICorporationModelFileRepository repo = repositoryService.CorporationModelFileRepository;
+        return repo.GetCorporation(filePath);
+    }
+
     public CorporationModel GetNewCorporation(string corporationName)
     {
         return new CorporationModel() { Name = corporationName };
     }
+
+    public ICollection<FileInfo> GetSaveFiles() => repositoryService.CorporationModelFileRepository.GetSaveFiles();
 
     public void SaveCorporation(CorporationModel corporation, bool overrideFile)
     {

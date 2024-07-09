@@ -82,4 +82,39 @@ public class CorporationModelFileRepositoryTest
         Assert.AreEqual(JsonSerializer.Serialize(testCorporation), textFromFile);
         Assert.AreEqual(3, docs);
     }
+
+    [TestMethod]
+    public void CorporationModelFileRepository_GetSaveFiles()
+    {
+        //arrange
+        CorporationModelFileRepository service = new CorporationModelFileRepository();
+        string folderPath = service.DefaultFolderPath;
+
+        if (Directory.Exists(folderPath))
+        {
+            DirectoryInfo di = new DirectoryInfo(folderPath);
+            foreach (FileInfo file in di.EnumerateFiles())
+                file.Delete();
+            Directory.Delete(folderPath, true);
+        }
+
+        string testCorporationName = "TestCorporation1";
+        CorporationModel testCorporation = new CorporationModel();
+        testCorporation.Name = testCorporationName;
+        string path = Path.Combine(folderPath, $"{testCorporationName}.json");
+
+        //act
+        service.SaveCorporation(testCorporation, true);
+        service.SaveCorporation(testCorporation, true);
+        service.SaveCorporation(testCorporation, false);
+        service.SaveCorporation(testCorporation, false);
+
+        //assert
+
+        ICollection<FileInfo> saveFiles = service.GetSaveFiles();
+        int testCorporationCount = saveFiles.Count(x => x.Name.Contains(testCorporationName));
+
+        Assert.AreEqual(3, saveFiles.Count);
+        Assert.AreEqual(3, testCorporationCount);
+    }
 }
