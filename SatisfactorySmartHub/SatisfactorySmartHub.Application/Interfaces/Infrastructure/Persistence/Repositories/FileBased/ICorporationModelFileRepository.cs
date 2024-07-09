@@ -10,7 +10,7 @@ namespace SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence
 
 public interface ICorporationModelFileRepository
 {
-    void ExportCorporation(CorporationModel corporation, string folderPath);
+    void ExportCorporation(CorporationModel corporation, string filePath);
     CorporationModel GetCorporation(string filePath);
     void SaveCorporation(CorporationModel corporation, bool overrideFile);
 }

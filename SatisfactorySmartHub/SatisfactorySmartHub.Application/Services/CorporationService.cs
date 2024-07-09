@@ -11,10 +11,10 @@ namespace SatisfactorySmartHub.Application.Services;
 
 internal sealed class CorporationService(IRepositoryService repositoryService) : ICorporationService
 {
-    public void ExportCorporation(CorporationModel corporation, string folderPath)
+    public void ExportCorporation(CorporationModel corporation, string filePath)
     {
         ICorporationModelFileRepository repo = repositoryService.CorporationModelFileRepository;
-        repo.ExportCorporation(corporation, folderPath);
+        repo.ExportCorporation(corporation, filePath);
     }
 
     public CorporationModel GetNewCorporation(string corporationName)

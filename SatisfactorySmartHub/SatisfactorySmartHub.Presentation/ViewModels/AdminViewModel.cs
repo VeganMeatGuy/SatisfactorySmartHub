@@ -13,6 +13,7 @@ using SatisfactorySmartHub.Presentation.Interfaces.Services;
 using SatisfactorySmartHub.Presentation.Services;
 using SatisfactorySmartHub.Domain.Models;
 using System.IO;
+using System.Configuration;
 
 namespace SatisfactorySmartHub.Presentation.ViewModels;
 
@@ -67,19 +68,24 @@ public sealed class AdminViewModel : ViewModelBase
             return;
         }
 
-        string folderPath;
+        string filepath;
 
-        var openFolderDialog = new OpenFolderDialog();
-
-        if (openFolderDialog.ShowDialog() == true)
+        var saveFileDialog = new SaveFileDialog()
         {
-            folderPath = openFolderDialog.FolderName;
+            Filter = "json-Datei | *.json",
+            DefaultExt = "json",
+            FileName = _cachingService.ActiveCorporation.Name,
+        };
+
+        if (saveFileDialog.ShowDialog() == true)
+        {
+            filepath = saveFileDialog.FileName;
         }
         else
             return;
 
         CorporationModel exportCorporation = _cachingService.ActiveCorporation;
-        _corporationService.ExportCorporation(exportCorporation, folderPath);
+        _corporationService.ExportCorporation(exportCorporation, filepath);
         SaveHint = "Export erfolgreich.";
     }
 

@@ -13,14 +13,10 @@ namespace SatisfactorySmartHub.Infrastructure.Persistance.Repositories.FileRepos
 
 internal class CorporationModelFileRepository : ICorporationModelFileRepository
 {
-    public void ExportCorporation(CorporationModel corporation, string folderPath)
+    public void ExportCorporation(CorporationModel corporation, string filePath)
     {
-        string fileName = $"{corporation.Name}.json";
-        string exportPath = Path.Combine(folderPath, fileName);
-
         string jsonData = JsonSerializer.Serialize(corporation);
-
-        File.WriteAllText(exportPath, jsonData);
+        File.WriteAllText(filePath, jsonData);
     }
 
     public CorporationModel GetCorporation(string filePath)
