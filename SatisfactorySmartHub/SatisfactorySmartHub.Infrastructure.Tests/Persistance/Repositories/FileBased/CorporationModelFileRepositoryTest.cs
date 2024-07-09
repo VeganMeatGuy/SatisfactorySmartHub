@@ -27,7 +27,7 @@ public class CorporationModelFileRepositoryTest
         testCorporation.Name = testCorporationName;
 
         //act
-        service.ExportCorporation(testCorporation, Environment.CurrentDirectory);
+        service.ExportCorporation(testCorporation, path);
 
         //assert
         string textFromFile = File.ReadAllText(path);
