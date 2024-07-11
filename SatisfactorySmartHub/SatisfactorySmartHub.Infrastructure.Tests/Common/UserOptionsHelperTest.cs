@@ -1,7 +1,7 @@
-using SatisfactorySmartHub.Presentation.Common;
-using SatisfactorySmartHub.Presentation.Common.Interfaces;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Common;
+using SatisfactorySmartHub.Infrastructure.Common;
 
-namespace SatisfactorySmartHub.Presentation.Tests.Common;
+namespace SatisfactorySmartHub.Infrastructure.Tests.Common;
 
 [TestClass]
 public class UserOptionsHelperTest
@@ -25,12 +25,12 @@ public class UserOptionsHelperTest
         //arrange
         UserOptionsHelper optionsHelper = new UserOptionsHelper();
         IUserOptions userOptions1 = new UserOptions();
-        
+
         //act
         userOptions1.OverWriteSaveFile = true;
         optionsHelper.SetUserOptions(userOptions1);
         IUserOptions userOptions2 = optionsHelper.GetUserOptions();
-        
+
         //assert
         Assert.IsTrue(userOptions2.OverWriteSaveFile);
 

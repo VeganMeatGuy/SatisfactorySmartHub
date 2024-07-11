@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Common;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
+using SatisfactorySmartHub.Infrastructure.Common;
 using SatisfactorySmartHub.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,17 @@ internal static class ServiceCollectionExtension
     internal static IServiceCollection RegisterRepositoryService(this IServiceCollection services)
     {
         services.TryAddSingleton<IRepositoryService, RepositoryService>();
+        return services;
+    }
 
+    /// <summary>
+    /// Adds utilities to the service collection.
+    /// </summary>
+    /// <param name="services">The service collection to enrich.</param>
+    /// <returns>The enriched service collection.</returns>
+    internal static IServiceCollection AddUtilities(this IServiceCollection services)
+    {
+        services.TryAddTransient<IUserOptionsHelper, UserOptionsHelper>();
         return services;
     }
 }

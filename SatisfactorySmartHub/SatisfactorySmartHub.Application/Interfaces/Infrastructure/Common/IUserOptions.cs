@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SatisfactorySmartHub.Presentation.Common.Interfaces;
+namespace SatisfactorySmartHub.Application.Interfaces.Infrastructure.Common;
 
 public interface IUserOptions
 {

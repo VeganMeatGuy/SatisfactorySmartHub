@@ -1,9 +1,8 @@
-﻿using SatisfactorySmartHub.Presentation.Common.Interfaces;
-using System.IO;
+﻿using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Common;
 using System.Text.Json;
 
 
-namespace SatisfactorySmartHub.Presentation.Common;
+namespace SatisfactorySmartHub.Infrastructure.Common;
 
 public sealed class UserOptionsHelper : IUserOptionsHelper
 {

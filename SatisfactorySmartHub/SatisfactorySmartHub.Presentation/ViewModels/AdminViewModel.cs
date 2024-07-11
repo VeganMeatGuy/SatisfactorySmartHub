@@ -1,19 +1,12 @@
-﻿using SatisfactorySmartHub.Presentation.Common.Interfaces;
-using SatisfactorySmartHub.Presentation.Common;
-using SatisfactorySmartHub.Presentation.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.Input;
-using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
+﻿using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
-using SatisfactorySmartHub.Presentation.Interfaces.Services;
-using SatisfactorySmartHub.Presentation.Services;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Common;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Domain.Models;
-using System.IO;
-using System.Configuration;
+using SatisfactorySmartHub.Presentation.Common;
+using SatisfactorySmartHub.Presentation.Common.Interfaces;
+using SatisfactorySmartHub.Presentation.Interfaces.Services;
+using SatisfactorySmartHub.Presentation.ViewModels.Base;
 
 namespace SatisfactorySmartHub.Presentation.ViewModels;
 
@@ -30,8 +23,8 @@ public sealed class AdminViewModel : ViewModelBase
     private string _saveHint = string.Empty;
 
     public AdminViewModel(
-        AdminNavigationHelper navigationHelper, 
-        ICorporationService corporationService, 
+        AdminNavigationHelper navigationHelper,
+        ICorporationService corporationService,
         ICachingService cachingService,
         IUserOptionsHelper userOptionsHelper)
     {

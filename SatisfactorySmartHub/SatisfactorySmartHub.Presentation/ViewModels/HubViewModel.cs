@@ -1,13 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Common;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
-using SatisfactorySmartHub.Domain.Models;
-using SatisfactorySmartHub.Presentation.Common.Interfaces;
 using SatisfactorySmartHub.Presentation.Interfaces.Services;
-using SatisfactorySmartHub.Presentation.Services;
 using SatisfactorySmartHub.Presentation.ViewModels.Base;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 
 namespace SatisfactorySmartHub.Presentation.ViewModels;
@@ -120,7 +117,7 @@ public sealed class HubViewModel : ViewModelBase
             LoadHint = "Bitte Speicherdatei auswählen.";
             return;
         }
-        
+
         _cachingService.ActiveCorporation = _corporationService.GetCorporationFromFile(SelectedSaveFile.FullName);
         LoadHint = $"{_cachingService.ActiveCorporation.Name} ist aktuell geladen.";
 
