@@ -12,7 +12,7 @@ namespace SatisfactorySmartHub.Presentation.ViewModels;
 
 public sealed class AdminViewModel : ViewModelBase
 {
-    private readonly AdminNavigationHelper _navigationHelper;
+    private readonly INavigationHelper _navigationHelper;
     private readonly ICorporationService _corporationService;
     private readonly ICachingService _cachingService;
     private readonly IUserOptionsHelper _userOptionsHelper;
@@ -23,7 +23,7 @@ public sealed class AdminViewModel : ViewModelBase
     private string _saveHint = string.Empty;
 
     public AdminViewModel(
-        AdminNavigationHelper navigationHelper,
+        INavigationHelper navigationHelper,
         ICorporationService corporationService,
         ICachingService cachingService,
         IUserOptionsHelper userOptionsHelper)
