@@ -8,8 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Presentation.Common;
-
-public sealed class AdminNavigationHelper(Func<Type, ViewModelBase> viewModelFactory) : ObservableObjectBase, INavigationHelper
+public sealed class NavigationHelper(Func<Type, ViewModelBase> viewModelFactory) : ObservableObjectBase, INavigationHelper
 {
     private ViewModelBase _currentView = default!;
 

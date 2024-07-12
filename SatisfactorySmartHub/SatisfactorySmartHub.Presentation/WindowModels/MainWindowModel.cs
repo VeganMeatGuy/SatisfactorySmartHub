@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Presentation.WindowModels;
 
-public sealed class MainWindowModel(MainNavigationHelper navigationHelper)
+public sealed class MainWindowModel(INavigationHelper navigationHelper)
 {
     private IRelayCommand? _hubCommand;
     private IRelayCommand? _adminCommand;

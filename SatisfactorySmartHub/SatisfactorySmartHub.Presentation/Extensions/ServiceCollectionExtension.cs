@@ -67,8 +67,7 @@ internal static class ServiceCollectionExtension
     /// <returns>The enriched service collection.</returns>
     internal static IServiceCollection AddNavigation(this IServiceCollection services)
     {
-        services.TryAddSingleton<MainNavigationHelper>();
-        services.TryAddSingleton<AdminNavigationHelper>();
+        services.TryAddTransient<INavigationHelper, NavigationHelper>();
         services.TryAddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));
         return services;
     }
