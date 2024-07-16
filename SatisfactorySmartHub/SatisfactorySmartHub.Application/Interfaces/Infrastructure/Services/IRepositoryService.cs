@@ -1,5 +1,4 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence.Repositories;
-using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence.Repositories.FileBased;
+﻿using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 
@@ -8,8 +7,4 @@ namespace SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 /// </summary>
 public interface IRepositoryService
 {
-    /// <summary>
-    /// The corporationmodel file repository instance.
-    /// </summary>
-    ICorporationModelFileRepository CorporationModelFileRepository { get; }
 }
