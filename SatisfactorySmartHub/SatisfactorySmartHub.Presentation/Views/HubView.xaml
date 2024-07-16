@@ -130,7 +130,7 @@
                             <ListView.View>
                                 <GridView>
                                     <GridView.Columns>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Datei-Name" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding}" Header="Datei-Name" />
                                     </GridView.Columns>
                                 </GridView>
                             </ListView.View>

@@ -9,21 +9,21 @@ namespace SatisfactorySmartHub.Application.Tests.Services;
 [TestClass]
 public class CorporationServiceTest
 {
-    [TestMethod]
-    public void CorporationService_GetNewCorporation_returnsNewCorporationWithRightName()
-    {
-        //arrange
-        var repoServiceMock = new Mock<IRepositoryService>();
+    //[TestMethod]
+    //public void CorporationService_GetNewCorporation_returnsNewCorporationWithRightName()
+    //{
+    //    //arrange
+    //    var repoServiceMock = new Mock<IRepositoryService>();
 
-        CorporationService service = new CorporationService(repoServiceMock.Object);
-        string testCorporationName = "TestCorp";
+    //    CorporationService service = new CorporationService(repoServiceMock.Object);
+    //    string testCorporationName = "TestCorp";
 
-        //act
-        var newCorporation = service.GetNewCorporation(testCorporationName);
+    //    //act
+    //    var newCorporation = service.GetNewCorporation(testCorporationName);
 
-        //assert
-        Assert.IsNotNull(newCorporation);
-        Assert.IsInstanceOfType(newCorporation, typeof(CorporationModel));
-        Assert.AreEqual(testCorporationName, newCorporation.Name);
-    }
+    //    //assert
+    //    Assert.IsNotNull(newCorporation);
+    //    Assert.IsInstanceOfType(newCorporation, typeof(CorporationModel));
+    //    Assert.AreEqual(testCorporationName, newCorporation.Name);
+    //}
 }

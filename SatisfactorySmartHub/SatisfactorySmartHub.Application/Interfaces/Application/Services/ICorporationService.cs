@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
+namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 
 public interface ICorporationService
 {
@@ -13,5 +13,5 @@ public interface ICorporationService
     CorporationModel GetCorporationFromFile(string filePath);
     void SaveCorporation(CorporationModel corporation, bool overrideFile);
     void ExportCorporation(CorporationModel corporation, string filePath);
-    ICollection<FileInfo> GetSaveFiles();
+    ICollection<string> GetSaveFiles();
 }

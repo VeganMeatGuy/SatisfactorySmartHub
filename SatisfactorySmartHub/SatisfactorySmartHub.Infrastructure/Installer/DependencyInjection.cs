@@ -19,6 +19,8 @@ public static class DependencyInjection
         /// <returns>The enriched service collection.</returns>
         services.RegisterRepositoryService();
         services.AddUtilities();  
+        services.AddProviders();
+        services.AddServices();
 
         return services;
     }

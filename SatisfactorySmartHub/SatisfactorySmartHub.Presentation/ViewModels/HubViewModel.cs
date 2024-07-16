@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
+using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Common;
-using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Presentation.Interfaces.Services;
 using SatisfactorySmartHub.Presentation.ViewModels.Base;
 using System.Collections.ObjectModel;
@@ -23,8 +23,8 @@ public sealed class HubViewModel : ViewModelBase
     private string _createHint = string.Empty;
     private string _loadHint = string.Empty;
     private bool _overWriteSaveFile;
-    private ObservableCollection<FileInfo> _saveFiles = new();
-    private FileInfo? _selectedSaveFile;
+    private ObservableCollection<string> _saveFiles = new();
+    private string? _selectedSaveFile;
 
     public HubViewModel(
         ICorporationService corporationService,
@@ -76,13 +76,13 @@ public sealed class HubViewModel : ViewModelBase
         set => SetProperty(ref _overWriteSaveFile, value);
     }
 
-    public ObservableCollection<FileInfo> SaveFiles
+    public ObservableCollection<string> SaveFiles
     {
         get => _saveFiles;
         set => SetProperty(ref _saveFiles, value);
     }
 
-    public FileInfo? SelectedSaveFile
+    public string? SelectedSaveFile
     {
         get => _selectedSaveFile;
         set => SetProperty(ref _selectedSaveFile, value);
@@ -118,7 +118,7 @@ public sealed class HubViewModel : ViewModelBase
             return;
         }
 
-        _cachingService.ActiveCorporation = _corporationService.GetCorporationFromFile(SelectedSaveFile.FullName);
+        _cachingService.ActiveCorporation = _corporationService.GetCorporationFromFile(SelectedSaveFile);
         LoadHint = $"{_cachingService.ActiveCorporation.Name} ist aktuell geladen.";
 
     }
