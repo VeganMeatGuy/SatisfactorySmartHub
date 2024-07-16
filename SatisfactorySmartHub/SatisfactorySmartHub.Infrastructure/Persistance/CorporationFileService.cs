@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace SatisfactorySmartHub.Infrastructure.Persistance;
 
-internal class CorporationFileService(IFileProvider fileProvider, IDirectoryProvider directoryProvider) : ICorporationFileService
+internal class CorporationFileService(IFileProvider fileProvider, IDirectoryProvider directoryProvider, IDateTimeProvider dateTimeProvider) : ICorporationFileService
 {
     private readonly string _defaultFolderPath = Path.Combine(Environment.CurrentDirectory, "SaveFiles");
 
@@ -40,22 +40,22 @@ internal class CorporationFileService(IFileProvider fileProvider, IDirectoryProv
     public bool SaveCorporation(CorporationModel corporation, bool overwriteFile)
     {
         try
-        { 
-        directoryProvider.CreateDirectory(_defaultFolderPath);
+        {
+            directoryProvider.CreateDirectory(_defaultFolderPath);
 
-        string jsonData = JsonSerializer.Serialize(corporation);
+            string jsonData = JsonSerializer.Serialize(corporation);
 
-        string fileName;
+            string fileName;
 
-        if (overwriteFile)
-            fileName = $"{corporation.Name}.json";
-        else
-            fileName = $"{corporation.Name}_{DateTime.Now:yyyy-dd-M--HH-mm-ss-fff}.json";
+            if (overwriteFile)
+                fileName = $"{corporation.Name}.json";
+            else
+                fileName = $"{corporation.Name}_{dateTimeProvider.Now:yyyy-MM-dd_HH-mm-ss-ff}.json";
 
-        string savingPath = Path.Combine(_defaultFolderPath, fileName);
-        fileProvider.WriteAllText(savingPath, jsonData);
+            string savingPath = Path.Combine(_defaultFolderPath, fileName);
+            fileProvider.WriteAllText(savingPath, jsonData);
 
-        return true;
+            return true;
         }
         catch (Exception ex)
         {

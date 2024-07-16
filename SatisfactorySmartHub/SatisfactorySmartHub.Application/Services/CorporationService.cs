@@ -1,5 +1,5 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
-using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
+﻿using SatisfactorySmartHub.Application.Interfaces.Application.Services;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
 using SatisfactorySmartHub.Domain.Models;
 using System;
 using System.Collections.Generic;

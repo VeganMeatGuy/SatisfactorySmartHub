@@ -52,9 +52,9 @@ internal static class ServiceCollectionExtension
     {
         services.TryAddSingleton<IFileProvider, FileProvider>();
         services.TryAddSingleton<IDirectoryProvider, DirectoryProvider>();
+        services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
         return services;
     }
-
 
     /// <summary>
     /// Adds providers to the service collection.
