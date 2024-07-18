@@ -11,6 +11,7 @@ public sealed partial class CorporationFileServiceTests
     private Mock<IFileProvider> _fileProviderMock = new();
     private Mock<IDirectoryProvider> _directoryProviderMock = new();
     private Mock<IDateTimeProvider> _dateTimeProviderMock = new();
+    private Mock<IJsonSerializer> _jsonSerializerMock = new();
 
     [TestMethod]
     [TestCategory("Constructor")]
@@ -33,6 +34,13 @@ public sealed partial class CorporationFileServiceTests
         _fileProviderMock = new();
         _directoryProviderMock = new();
         _dateTimeProviderMock = new();
-        return new CorporationFileService(_fileProviderMock.Object, _directoryProviderMock.Object, _dateTimeProviderMock.Object);
+        _jsonSerializerMock = new();
+
+
+        return new CorporationFileService(
+            _fileProviderMock.Object, 
+            _directoryProviderMock.Object, 
+            _dateTimeProviderMock.Object,
+            _jsonSerializerMock.Object);
     }
 }

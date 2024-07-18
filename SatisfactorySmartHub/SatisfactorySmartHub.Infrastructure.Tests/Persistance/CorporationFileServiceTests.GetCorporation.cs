@@ -1,40 +1,85 @@
-﻿namespace SatisfactorySmartHub.Infrastructure.Tests.Persistance;
+﻿using Moq;
+using SatisfactorySmartHub.Domain.Models;
+using SatisfactorySmartHub.Infrastructure.Persistance;
+using System.Text.Json;
+
+namespace SatisfactorySmartHub.Infrastructure.Tests.Persistance;
 
 public sealed partial class CorporationFileServiceTests
 {
     [TestMethod]
-    public void CorporationModelFileRepository_GetCorporation()
+    [TestCategory("Method")]
+    public void GetCorporation_ShouldReturnCorporationModel_WhenFunctionSuccessfull()
     {
-        ////arrange
-        //CorporationFileService service = new CorporationModelFileRepository();
-        //string folderPath = service.DefaultFolderPath;
+        //arrange
+        CorporationFileService service = CreateMockedInstance();
 
-        //string testCorporation1Name = "TestCorporation1";
-        //CorporationModel testCorporation1 = new CorporationModel();
-        //testCorporation1.Name = testCorporation1Name;
-        //service.SaveCorporation(testCorporation1, true);
+        CorporationModel corporation = new CorporationModel();
 
+        _fileProviderMock.Setup(x => x.Exists(It.IsAny<string>())).Returns(true);
+        _jsonSerializerMock.Setup(x => x.Deserialize<CorporationModel>(It.IsAny<string>())).Returns(corporation);
 
-        //string testCorporation2Name = "TestCorporation2";
-        //CorporationModel testCorporation2 = new CorporationModel();
-        //testCorporation2.Name = testCorporation2Name;
-        //service.SaveCorporation(testCorporation2, true);
+        //act
+        CorporationModel result = service.GetCorporation("");
 
+        //assert
+        Assert.AreEqual(result, corporation);
+        _fileProviderMock.Verify(x => x.ReadAllText(It.IsAny<string>()),Times.Once());
+        _jsonSerializerMock.Verify(x => x.Deserialize<CorporationModel>(It.IsAny<string>()), Times.Once());
+    }
 
+    [TestMethod]
+    [TestCategory("Method")]
+    [ExpectedException (typeof(ArgumentNullException))]
+    public void GetCorporation_ShouldThrowArgumentNullException_WhenParameterFilePathIsNull()
+    {
+        //arrange
+        CorporationFileService service = CreateMockedInstance();
 
+        string? nullFilePath = null;
+        var result = service.GetCorporation(nullFilePath);
+        //act
+    }
 
-        ////act
-        //service.SaveCorporation(testCorporation, true);
-        //service.SaveCorporation(testCorporation, true);
-        //service.SaveCorporation(testCorporation, false);
-        //service.SaveCorporation(testCorporation, false);
+    [TestMethod]
+    [TestCategory("Method")]
+    [ExpectedException(typeof(FileNotFoundException))]
+    public void GetCorporation_ShouldThrowFileNotFoundException_WhenFilePathIsNotFound()
+    {
+        //arrange
+        CorporationFileService service = CreateMockedInstance();
+        _fileProviderMock.Setup(x => x.Exists(It.IsAny<string>())).Returns(false);
 
-        ////assert
+        var result = service.GetCorporation("");
+        //act
+    }
 
-        //ICollection<FileInfo> saveFiles = service.GetSaveFiles();
-        //int testCorporationCount = saveFiles.Count(x => x.Name.Contains(testCorporation1Name));
+    [TestMethod]
+    [TestCategory("Method")]
+    [ExpectedException(typeof(JsonException))]
+    public void GetCorporation_ShouldThrowJsonException_WhenStringIsNotDeserializeable()
+    {
+        //arrange
+        CorporationFileService service = CreateMockedInstance();
+        _fileProviderMock.Setup(x => x.Exists(It.IsAny<string>())).Returns(true);
+        _fileProviderMock.Setup(x => x.ReadAllText(It.IsAny<string>())).Returns("unittest");
 
-        //Assert.AreEqual(3, saveFiles.Count);
-        //Assert.AreEqual(3, testCorporationCount);
+        var result = service.GetCorporation("unittest");
+        //act
+    }
+
+    [TestMethod]
+    [TestCategory("Method")]
+    [ExpectedException(typeof(IOException))]
+    public void GetCorporation_ShouldThrowJsonException_WhenFileIsNotReadable()
+    {
+        //arrange
+        CorporationFileService service = CreateMockedInstance();
+        _fileProviderMock.Setup(x => x.Exists(It.IsAny<string>())).Returns(true);
+        _fileProviderMock.Setup(x => x.ReadAllText(It.IsAny<string>())).Throws(new IOException());
+
+        //act
+        var result = service.GetCorporation("unittest");
+        
     }
 }

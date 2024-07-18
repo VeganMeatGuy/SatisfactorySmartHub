@@ -2,6 +2,7 @@
 
 /// <summary>
 /// The date time provider interface.
+/// Serves for the abstraction of <see cref="DateTime"/> methods.
 /// </summary>
 public interface IDateTimeProvider
 {

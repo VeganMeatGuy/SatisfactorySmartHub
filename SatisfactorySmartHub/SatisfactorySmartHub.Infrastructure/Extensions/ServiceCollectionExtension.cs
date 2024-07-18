@@ -8,11 +8,6 @@ using SatisfactorySmartHub.Infrastructure.Interfaces.Provider;
 using SatisfactorySmartHub.Infrastructure.Persistance;
 using SatisfactorySmartHub.Infrastructure.Provider;
 using SatisfactorySmartHub.Infrastructure.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Infrastructure.Extensions;
 
@@ -53,6 +48,7 @@ internal static class ServiceCollectionExtension
         services.TryAddSingleton<IFileProvider, FileProvider>();
         services.TryAddSingleton<IDirectoryProvider, DirectoryProvider>();
         services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
+        services.TryAddSingleton<IJsonSerializer, JsonSerializer>();
         return services;
     }
 

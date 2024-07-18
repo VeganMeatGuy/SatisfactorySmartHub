@@ -12,7 +12,7 @@ public interface ICorporationFileService
 {
     string DefaultFolderPath { get; }
     ICollection<string> GetSaveFiles();
-    void ExportCorporation(CorporationModel corporation, string filePath);
+    bool ExportCorporation(CorporationModel corporation, string filePath);
     CorporationModel GetCorporation(string filePath);
     bool SaveCorporation(CorporationModel corporation, bool overrideFile);
 }

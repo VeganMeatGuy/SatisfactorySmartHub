@@ -1,30 +1,64 @@
-﻿namespace SatisfactorySmartHub.Infrastructure.Tests.Persistance;
+﻿using Moq;
+using SatisfactorySmartHub.Infrastructure.Persistance;
+
+namespace SatisfactorySmartHub.Infrastructure.Tests.Persistance;
 
 public sealed partial class CorporationFileServiceTests
 {
-    //[TestMethod]
-    //public void CorporationModelFileRepository_GetSaveFiles()
-    //{
-    //    //arrange
-    //    CorporationModelFileRepository service = new CorporationModelFileRepository();
-    //    string folderPath = service.DefaultFolderPath;
-    //    string testCorporationName = "TestCorporation1";
-    //    CorporationModel testCorporation = new CorporationModel();
-    //    testCorporation.Name = testCorporationName;
-    //    string path = Path.Combine(folderPath, $"{testCorporationName}.json");
+    [TestMethod]
+    [TestCategory("Method")]
+    public void GetSaveFiles_ReturnsListOfFileNames_WhenFilesExist()
+    {
+        //arrange
+        CorporationFileService service = CreateMockedInstance();
 
-    //    //act
-    //    service.SaveCorporation(testCorporation, true);
-    //    service.SaveCorporation(testCorporation, true);
-    //    service.SaveCorporation(testCorporation, false);
-    //    service.SaveCorporation(testCorporation, false);
+        _directoryProviderMock.Setup(x => x.Exists(It.IsAny<string>())).Returns(true);
+        string[] fileListMock = { "File1", "File2", "File3" };
+        _directoryProviderMock.Setup(x => x.GetFiles(It.IsAny<string>())).Returns(fileListMock);
 
-    //    //assert
+        //act 
+        var result = service.GetSaveFiles();
 
-    //    ICollection<FileInfo> saveFiles = service.GetSaveFiles();
-    //    int testCorporationCount = saveFiles.Count(x => x.Name.Contains(testCorporationName));
+        //assert
+        Assert.AreEqual(fileListMock.ToList().Count, result.Count);
+        Assert.IsInstanceOfType(result, typeof(ICollection<string>));
+        _directoryProviderMock.Verify(x=> x.GetFiles(It.IsAny<string>()), Times.Once());
+    }
 
-    //    Assert.AreEqual(3, saveFiles.Count);
-    //    Assert.AreEqual(3, testCorporationCount);
-    //}
+    [TestMethod]
+    [TestCategory("Method")]
+    public void GetSaveFiles_ReturnsEmptyListOfFileNames_WhenNoFilesExist()
+    {
+        //arrange
+        CorporationFileService service = CreateMockedInstance();
+
+        _directoryProviderMock.Setup(x => x.Exists(It.IsAny<string>())).Returns(true);
+        string[] fileListMock = {};
+        _directoryProviderMock.Setup(x => x.GetFiles(It.IsAny<string>())).Returns(fileListMock);
+
+        //act 
+        var result = service.GetSaveFiles();
+
+        //assert
+        Assert.AreEqual(0, result.Count);
+        Assert.IsInstanceOfType(result, typeof(ICollection<string>));
+        _directoryProviderMock.Verify(x => x.GetFiles(It.IsAny<string>()), Times.Once());
+    }
+
+    [TestMethod]
+    [TestCategory("Method")]
+    public void GetSaveFiles_ReturnsEmptyListOfFileNames_WhenDirectoryDoesntExist()
+    {
+        //arrange
+        CorporationFileService service = CreateMockedInstance();
+
+        _directoryProviderMock.Setup(x => x.Exists(It.IsAny<string>())).Returns(false);
+        //act 
+        var result = service.GetSaveFiles();
+
+        //assert
+        Assert.AreEqual(0, result.Count);
+        Assert.IsInstanceOfType(result, typeof(ICollection<string>));
+
+    }
 }

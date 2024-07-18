@@ -6,7 +6,11 @@ using System.Text.Json;
 
 namespace SatisfactorySmartHub.Infrastructure.Persistance;
 
-internal class CorporationFileService(IFileProvider fileProvider, IDirectoryProvider directoryProvider, IDateTimeProvider dateTimeProvider) : ICorporationFileService
+internal class CorporationFileService(
+    IFileProvider fileProvider, 
+    IDirectoryProvider directoryProvider, 
+    IDateTimeProvider dateTimeProvider,
+    IJsonSerializer jsonSerializer) : ICorporationFileService
 {
     private readonly string _defaultFolderPath = Path.Combine(Environment.CurrentDirectory, "SaveFiles");
 
@@ -21,20 +25,30 @@ internal class CorporationFileService(IFileProvider fileProvider, IDirectoryProv
     }
 
 
-    public void ExportCorporation(CorporationModel corporation, string filePath)
+    public bool ExportCorporation(CorporationModel corporation, string filePath)
     {
-        string jsonData = JsonSerializer.Serialize(corporation);
-        fileProvider.WriteAllText(filePath, jsonData);
+        try
+        {
+            string jsonData = jsonSerializer.Serialize(corporation);
+            fileProvider.WriteAllText(filePath, jsonData);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 
     public CorporationModel GetCorporation(string filePath)
     {
+        if(filePath is null) throw new ArgumentNullException(nameof(filePath));
+
         if (fileProvider.Exists(filePath) == false)
-            throw new Exception();
+            throw new FileNotFoundException();
 
         string json = fileProvider.ReadAllText(filePath);
 
-        return JsonSerializer.Deserialize<CorporationModel>(json) ?? throw new Exception(); ;
+        return jsonSerializer.Deserialize<CorporationModel>(json) ?? throw new JsonException(); ;
     }
 
     public bool SaveCorporation(CorporationModel corporation, bool overwriteFile)
@@ -43,7 +57,7 @@ internal class CorporationFileService(IFileProvider fileProvider, IDirectoryProv
         {
             directoryProvider.CreateDirectory(_defaultFolderPath);
 
-            string jsonData = JsonSerializer.Serialize(corporation);
+            string jsonData = jsonSerializer.Serialize(corporation);
 
             string fileName;
 
@@ -57,7 +71,7 @@ internal class CorporationFileService(IFileProvider fileProvider, IDirectoryProv
 
             return true;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return false;
         }

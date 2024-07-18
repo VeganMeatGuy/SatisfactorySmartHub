@@ -1,95 +1,52 @@
-﻿namespace SatisfactorySmartHub.Infrastructure.Tests.Persistance;
+﻿using Moq;
+using SatisfactorySmartHub.Domain.Models;
+using SatisfactorySmartHub.Infrastructure.Persistance;
+
+namespace SatisfactorySmartHub.Infrastructure.Tests.Persistance;
 
 public sealed partial class CorporationFileServiceTests
 {
-    //[TestMethod]
-    //[DataRow("Corp1")]
-    //[DataRow("PetersCorp")]
-    //[DataRow("Corp With Blanks")]
-    //public void CorporationModelFileRepository_ExportCorporation_savesCorporationGivenFolder(string corporationName)
-    //{
-    //    //arrange
-    //    string testCorporationName = corporationName;
-    //    string directoryName = Environment.CurrentDirectory;
+    [TestMethod]
+    [TestCategory("Methods")]
+    public void ExportCorporation_ShouldReturnTrue_WhenExportWasSucceddful()
+    {
+        //arrange
+        string testCorporationName = "unitteest";
 
+        CorporationFileService service = CreateMockedInstance();
 
-    //    string path = Path.Combine(directoryName, $"{testCorporationName}.json");
-    //    if (File.Exists(path))
-    //        File.Delete(path);
+        CorporationModel corporation = new CorporationModel();
+        corporation.Name = testCorporationName;
 
-    //    CorporationFileService service = new CorporationFileService();
-    //    CorporationModel testCorporation = new CorporationModel();
-    //    testCorporation.Name = testCorporationName;
+        string validFilePath = Path.Combine(service.DefaultFolderPath, "unittest.json");
 
-    //    //act
-    //    service.ExportCorporation(testCorporation, path);
+        //act
+        bool result = service.ExportCorporation(corporation, validFilePath);
 
-    //    //assert
-    //    string textFromFile = File.ReadAllText(path);
-    //    CorporationModel? readedCorporation = JsonSerializer.Deserialize<CorporationModel>(textFromFile);
+        //assert
+        Assert.IsTrue(result);
+        _fileProviderMock.Verify(x => x.WriteAllText(validFilePath, It.IsAny<string>()), Times.Once());
+    }
 
-    //    Assert.IsTrue(File.Exists(path));
-    //    Assert.IsNotNull(readedCorporation);
-    //    Assert.AreEqual(JsonSerializer.Serialize(testCorporation), textFromFile);
-    //}
+    [TestMethod]
+    [TestCategory("Methods")]
+    public void ExportCorporation_ShouldReturnfalse_WhenExportWasNotSucceddful()
+    {
+        //arrange
+        string testCorporationName = "unitteest";
 
-    //[TestMethod]
-    //[DataRow("Corp1")]
-    //[DataRow("PetersCorp")]
-    //[DataRow("Corp With Blanks")]
-    //public void CorporationModelFileRepository_ExportCorporation_savesCorporationInAppFolder(string corporationName)
-    //{
-    //    //arrange
-    //    CorporationFileService service = new CorporationFileService();
-    //    string folderPath = service.DefaultFolderPath;
-    //    string path = Path.Combine(folderPath, $"{corporationName}.json");
-    //    CorporationModel testCorporation = new CorporationModel();
-    //    testCorporation.Name = corporationName;
+        CorporationFileService service = CreateMockedInstance();
+        _fileProviderMock.Setup(x => x.WriteAllText(It.IsAny<string>(), It.IsAny<string>())).Throws(new Exception());
+        CorporationModel corporation = new CorporationModel();
+        corporation.Name = testCorporationName;
 
-    //    //act
-    //    service.SaveCorporation(testCorporation, true);
-    //    service.SaveCorporation(testCorporation, true);
-    //    service.SaveCorporation(testCorporation, false);
-    //    service.SaveCorporation(testCorporation, false);
+        string validFilePath = Path.Combine(service.DefaultFolderPath, "unittest.json");
 
-    //    //assert
+        //act
+        bool result = service.ExportCorporation(corporation, validFilePath);
 
-    //    var files = Directory.GetFiles(folderPath);
-
-    //    int docs = files.Count(x => x.Contains(corporationName));
-
-    //    string textFromFile = File.ReadAllText(path);
-    //    CorporationModel? readedCorporation = JsonSerializer.Deserialize<CorporationModel>(textFromFile);
-
-    //    Assert.IsTrue(File.Exists(path));
-    //    Assert.IsNotNull(readedCorporation);
-    //    Assert.AreEqual(JsonSerializer.Serialize(testCorporation), textFromFile);
-    //    Assert.AreEqual(3, docs);
-    //}
-
-    //[TestMethod]
-    //public void CorporationModelFileRepository_ExportCorporation()
-    //{
-    //    //arrange
-    //    CorporationFileService service = new CorporationModelFileRepository();
-    //    string folderPath = service.DefaultFolderPath;
-    //    string testCorporationName = "TestCorporation1";
-    //    CorporationModel testCorporation = new CorporationModel();
-    //    testCorporation.Name = testCorporationName;
-    //    string path = Path.Combine(folderPath, $"{testCorporationName}.json");
-
-    //    //act
-    //    service.SaveCorporation(testCorporation, true);
-    //    service.SaveCorporation(testCorporation, true);
-    //    service.SaveCorporation(testCorporation, false);
-    //    service.SaveCorporation(testCorporation, false);
-
-    //    //assert
-
-    //    ICollection<FileInfo> saveFiles = service.GetSaveFiles();
-    //    int testCorporationCount = saveFiles.Count(x => x.Name.Contains(testCorporationName));
-
-    //    Assert.AreEqual(3, saveFiles.Count);
-    //    Assert.AreEqual(3, testCorporationCount);
-    //}
+        //assert
+        Assert.IsFalse(result);
+        _fileProviderMock.Verify(x => x.WriteAllText(It.IsAny<string>(), It.IsAny<string>()), Times.Once());
+    }
 }
