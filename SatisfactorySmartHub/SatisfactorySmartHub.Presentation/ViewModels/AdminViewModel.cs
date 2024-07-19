@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
-using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Common;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
 using SatisfactorySmartHub.Domain.Models;
 using SatisfactorySmartHub.Presentation.Common;
 using SatisfactorySmartHub.Presentation.Common.Interfaces;
@@ -15,7 +15,7 @@ public sealed class AdminViewModel : ViewModelBase
     private readonly INavigationHelper _navigationHelper;
     private readonly ICorporationService _corporationService;
     private readonly ICachingService _cachingService;
-    private readonly IUserOptionsHelper _userOptionsHelper;
+    private readonly IUserDataService _userOptionsHelper;
 
     private IRelayCommand? _corporationCommand;
     private IRelayCommand? _saveCommand;
@@ -26,7 +26,7 @@ public sealed class AdminViewModel : ViewModelBase
         INavigationHelper navigationHelper,
         ICorporationService corporationService,
         ICachingService cachingService,
-        IUserOptionsHelper userOptionsHelper)
+        IUserDataService userOptionsHelper)
     {
         _navigationHelper = navigationHelper;
         _corporationService = corporationService;
@@ -55,7 +55,7 @@ public sealed class AdminViewModel : ViewModelBase
             return;
         }
 
-        bool overWrite = _userOptionsHelper.GetUserOptions().OverWriteSaveFile;
+        bool overWrite = _userOptionsHelper.GetUserData().OverWriteSaveFile;
 
         _corporationService.SaveCorporation(_cachingService.ActiveCorporation, overWrite);
         SaveHint = "Speichern erfolgreich.";

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Common;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Infrastructure.Common;
@@ -34,7 +33,7 @@ internal static class ServiceCollectionExtension
     /// <returns>The enriched service collection.</returns>
     internal static IServiceCollection AddUtilities(this IServiceCollection services)
     {
-        services.TryAddTransient<IUserOptionsHelper, UserOptionsHelper>();
+        services.TryAddTransient<IUserDataService, UserDataService>();
         return services;
     }
 

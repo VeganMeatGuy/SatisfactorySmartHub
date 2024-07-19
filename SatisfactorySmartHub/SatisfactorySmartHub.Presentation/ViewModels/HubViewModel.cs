@@ -1,11 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
-using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Common;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
+using SatisfactorySmartHub.Domain.Models;
 using SatisfactorySmartHub.Presentation.Interfaces.Services;
 using SatisfactorySmartHub.Presentation.ViewModels.Base;
 using System.Collections.ObjectModel;
-using System.IO;
 
 namespace SatisfactorySmartHub.Presentation.ViewModels;
 
@@ -13,7 +13,7 @@ public sealed class HubViewModel : ViewModelBase
 {
     private readonly ICorporationService _corporationService;
     private readonly ICachingService _cachingService;
-    private readonly IUserOptionsHelper _userOptionsHelper;
+    private readonly IUserDataService _userOptionsHelper;
 
     private IRelayCommand? _createCorporationCommand;
     private IRelayCommand? _loadCorporationCommand;
@@ -29,7 +29,7 @@ public sealed class HubViewModel : ViewModelBase
     public HubViewModel(
         ICorporationService corporationService,
         ICachingService cachingService,
-        IUserOptionsHelper userOptionsHelper)
+        IUserDataService userOptionsHelper)
     {
         _corporationService = corporationService;
         _cachingService = cachingService;
@@ -40,7 +40,7 @@ public sealed class HubViewModel : ViewModelBase
         else
             LoadHint = $"kein Konzern geladen.";
 
-        OverWriteSaveFile = _userOptionsHelper.GetUserOptions().OverWriteSaveFile;
+        OverWriteSaveFile = _userOptionsHelper.GetUserData().OverWriteSaveFile;
 
         _saveFiles = new(_corporationService.GetSaveFiles());
     }
@@ -105,9 +105,9 @@ public sealed class HubViewModel : ViewModelBase
 
     private void ChangeOverWriteSaveFileOption()
     {
-        IUserOptions Options = _userOptionsHelper.GetUserOptions();
+        UserDataModel Options = _userOptionsHelper.GetUserData();
         Options.OverWriteSaveFile = OverWriteSaveFile;
-        _userOptionsHelper.SetUserOptions(Options);
+        _userOptionsHelper.SetUserData(Options);
     }
 
     private void LoadCorporation()
