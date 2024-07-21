@@ -49,7 +49,8 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
-                    <RowDefinition />
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <Button
@@ -59,9 +60,9 @@
                     Height="25"
                     Background="{StaticResource grey4}"
                     BorderThickness="0"
-                    Content="Neu"
-                    Foreground="{StaticResource FontWhite}"
-                    Command="{Binding CreateCompanyCommand}"/>
+                    Command="{Binding CreateCorporationCommand}"
+                    Content="neu"
+                    Foreground="{StaticResource FontWhite}" />
                 <StackPanel
                     Grid.Row="0"
                     Grid.Column="1"
@@ -72,8 +73,8 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Background="{StaticResource grey5}"
-                        MaxLines="1" 
-                        Text="{Binding CorporationName}"/>
+                        MaxLines="1"
+                        Text="{Binding CorporationName}" />
                     <TextBlock
                         Margin="7,0,5,0"
                         HorizontalAlignment="Left"
@@ -81,16 +82,30 @@
                         Foreground="{StaticResource FontWhite}"
                         Text="{Binding CreateHint}" />
                 </StackPanel>
+
                 <Button
                     Grid.Row="1"
                     Grid.Column="0"
                     Width="50"
                     Height="25"
+                    VerticalAlignment="Top"
                     Background="{StaticResource grey4}"
                     BorderThickness="0"
-                    Content="Laden"
-                    Foreground="{StaticResource FontWhite}" 
-                    Command="{Binding LoadCompanyCommand}"/>
+                    Command="{Binding ImportCorporationCommand}"
+                    Content="import"
+                    Foreground="{StaticResource FontWhite}" />
+
+                <Button
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Width="50"
+                    Height="25"
+                    VerticalAlignment="Top"
+                    Background="{StaticResource grey4}"
+                    BorderThickness="0"
+                    Command="{Binding LoadCorporationCommand}"
+                    Content="laden"
+                    Foreground="{StaticResource FontWhite}" />
 
                 <TextBlock
                     Grid.Row="1"
@@ -100,6 +115,28 @@
                     Foreground="{StaticResource FontWhite}"
                     Text="{Binding LoadHint}" />
 
+                <Expander
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Foreground="{StaticResource FontWhite}"
+                    Header="klicke für Übersicht der Speicherdaten">
+                    <StackPanel>
+                        <ListView
+                            Name="SaveFilesListView"
+                            ItemsSource="{Binding SaveFiles}"
+                            SelectedItem="{Binding SelectedSaveFile}"
+                            Height="150"
+                            HorizontalAlignment="Left">
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.Columns>
+                                        <GridViewColumn DisplayMemberBinding="{Binding}" Header="Datei-Name" />
+                                    </GridView.Columns>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                </Expander>
 
             </Grid>
         </Border>
@@ -116,8 +153,10 @@
             Background="{StaticResource backgroundBlack}">
             <CheckBox
                 Margin="7,0,0,0"
-                Content="enable history saving"
-                Foreground="{StaticResource FontWhite}" />
+                Command="{Binding OverWriteSaveFileCommand}"
+                Content="Überschreiben bei Speichern"
+                Foreground="{StaticResource FontWhite}"
+                IsChecked="{Binding OverWriteSaveFile}" />
         </Border>
         <Border Grid.Row="4" Background="{StaticResource grey3}">
             <TextBlock

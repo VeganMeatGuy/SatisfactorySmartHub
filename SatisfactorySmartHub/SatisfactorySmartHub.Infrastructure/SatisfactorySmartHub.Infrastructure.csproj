@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="SatisfactorySmartHub.Domain.Tests" />
+		<InternalsVisibleTo Include="SatisfactorySmartHub.Infrastructure.Tests" />
 	</ItemGroup>
 
 	<ItemGroup>

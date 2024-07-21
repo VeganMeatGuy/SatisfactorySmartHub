@@ -18,6 +18,9 @@ public static class DependencyInjection
         /// <param name="services">The service collection to enrich.</param>
         /// <returns>The enriched service collection.</returns>
         services.RegisterRepositoryService();
+        services.AddUtilities();  
+        services.AddProviders();
+        services.AddServices();
 
         return services;
     }

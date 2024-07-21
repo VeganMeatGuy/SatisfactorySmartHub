@@ -20,12 +20,33 @@
     </UserControl.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0">
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Button
+                Margin="2"
+                Padding="2"
+                HorizontalAlignment="Left"
+                Content="speichern"
+                Command="{Binding SaveCommand}"/>
+            <Button
+                Margin="2"
+                Padding="2"
+                HorizontalAlignment="Left"
+                Content="export"
+                Command="{Binding ExportCommand}"/>
+            <TextBlock Text="{Binding SaveHint}" Foreground="{StaticResource FontWhite}"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0">
             <RadioButton
                 Command="{Binding CorporationCommand}"
                 Content="Corporation"
@@ -35,7 +56,7 @@
             <RadioButton Content="Powerplant" Foreground="{StaticResource FontWhite}" />
             <RadioButton Content="Logistics" Foreground="{StaticResource FontWhite}" />
         </StackPanel>
-        <ContentControl Grid.Column="1" Content="{Binding NavigationHelper.CurrentView}" />
+        <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding NavigationHelper.CurrentView}" />
 
 
     </Grid>

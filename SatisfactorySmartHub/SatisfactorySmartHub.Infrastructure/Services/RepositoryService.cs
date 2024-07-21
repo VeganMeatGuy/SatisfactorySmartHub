@@ -1,6 +1,6 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence.Repositories.FileBased;
+﻿using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
-using SatisfactorySmartHub.Infrastructure.Persistance.Repositories.FileRepository;
+using SatisfactorySmartHub.Infrastructure.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +11,5 @@ namespace SatisfactorySmartHub.Infrastructure.Services;
 
 internal sealed class RepositoryService :IRepositoryService
 {
-    private readonly Lazy<CorporationModelFileRepository> _lazyCorporationFileRepository = new();
-
-   public ICorporationModelFileRepository CorporationModelFileRepository 
-        => _lazyCorporationFileRepository.Value;
-
    
 }

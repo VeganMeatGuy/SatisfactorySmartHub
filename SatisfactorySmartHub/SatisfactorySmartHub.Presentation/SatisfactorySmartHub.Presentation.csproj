@@ -40,4 +40,9 @@
 	  <Folder Include="Controls\" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="SatisfactorySmartHub.Presentation.Tests" />
+	</ItemGroup>
+
+
 </Project>
