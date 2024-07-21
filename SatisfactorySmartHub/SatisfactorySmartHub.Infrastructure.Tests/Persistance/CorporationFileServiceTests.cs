@@ -26,7 +26,7 @@ public sealed partial class CorporationFileServiceTests
 
 
     /// <summary>
-    /// Creates a new instance of the <see cref="CorporationFileServiceTests"/> class with mocked dependencies.
+    /// Creates a new instance of the <see cref="CorporationFileService"/> class with mocked dependencies.
     /// </summary>
     /// <returns>The new instance with mocked dependencies.</returns>
     private CorporationFileService CreateMockedInstance()

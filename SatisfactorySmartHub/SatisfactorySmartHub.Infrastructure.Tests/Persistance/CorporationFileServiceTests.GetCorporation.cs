@@ -35,10 +35,10 @@ public sealed partial class CorporationFileServiceTests
     {
         //arrange
         CorporationFileService service = CreateMockedInstance();
-
         string? nullFilePath = null;
-        var result = service.GetCorporation(nullFilePath);
+
         //act
+        var result = service.GetCorporation(nullFilePath);
     }
 
     [TestMethod]
@@ -50,8 +50,8 @@ public sealed partial class CorporationFileServiceTests
         CorporationFileService service = CreateMockedInstance();
         _fileProviderMock.Setup(x => x.Exists(It.IsAny<string>())).Returns(false);
 
-        var result = service.GetCorporation("");
         //act
+        var result = service.GetCorporation("");
     }
 
     [TestMethod]
@@ -64,8 +64,8 @@ public sealed partial class CorporationFileServiceTests
         _fileProviderMock.Setup(x => x.Exists(It.IsAny<string>())).Returns(true);
         _fileProviderMock.Setup(x => x.ReadAllText(It.IsAny<string>())).Returns("unittest");
 
-        var result = service.GetCorporation("unittest");
         //act
+        var result = service.GetCorporation("unittest");
     }
 
     [TestMethod]
@@ -80,6 +80,5 @@ public sealed partial class CorporationFileServiceTests
 
         //act
         var result = service.GetCorporation("unittest");
-        
     }
 }

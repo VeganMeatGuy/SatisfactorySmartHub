@@ -32,8 +32,4 @@
     <Folder Include="Common\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="Persistance\dede.cs" />
-  </ItemGroup>
-
 </Project>
