@@ -1,6 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Services;
+using SatisfactorySmartHub.Application.ViewModels;
+using SatisfactorySmartHub.Application.ViewModels.Base;
+using SatisfactorySmartHub.Application.WindowModels;
 
 namespace SatisfactorySmartHub.Application.Extensions;
 /// <summary>
@@ -16,7 +20,44 @@ internal static class ServiceCollectionExtension
     internal static IServiceCollection RegisterServices(this IServiceCollection services)
     {
         services.AddSingleton<ICorporationService, CorporationService>();
-
+        services.TryAddSingleton<ICachingService, CachingService>();
         return services;
     }
+
+    /// <summary>
+    /// Adds the windowmodels to the service collection.
+    /// </summary>
+    /// <param name="services">The service collection to enrich.</param>
+    /// <returns>The enriched service collection.</returns>
+    internal static IServiceCollection AddWindowModels(this IServiceCollection services)
+    {
+        services.TryAddTransient<MainWindowModel>();
+        return services;
+    }
+
+    /// <summary>
+    /// Adds the viewmodels to the service collection.
+    /// </summary>
+    /// <param name="services">The service collection to enrich.</param>
+    /// <returns>The enriched service collection.</returns>
+    internal static IServiceCollection AddViewModels(this IServiceCollection services)
+    {
+        services.TryAddTransient<HubViewModel>();
+        services.TryAddTransient<AdminViewModel>();
+        services.TryAddTransient<CorporationViewModel>();
+        return services;
+    }
+
+    /// <summary>
+    /// Adds the navigation to the service collection.
+    /// </summary>
+    /// <param name="services">The service collection to enrich.</param>
+    /// <returns>The enriched service collection.</returns>
+    internal static IServiceCollection AddNavigation(this IServiceCollection services)
+    {
+        services.TryAddTransient<INavigationService, NavigationService>();
+        services.TryAddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));
+        return services;
+    }
+
 }

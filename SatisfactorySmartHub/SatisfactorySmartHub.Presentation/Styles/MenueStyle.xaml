@@ -13,20 +13,26 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
-                    <StackPanel Height="36" Width="220" Name="BackPanel" VerticalAlignment="Center" Orientation="Horizontal" Background="{StaticResource grey1}">
+                    <StackPanel
+                        Name="BackPanel"
+                        Width="220"
+                        Height="36"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource grey1}"
+                        Orientation="Horizontal">
                         <Image
-                                    Grid.Column="1"
-                                    Width="20"
-                                    Height="20"
-                                    Margin="12,0,0,0"
-                                    Source="{DynamicResource IconSource}"
-                                    VerticalAlignment="Center"/>
+                            Grid.Column="1"
+                            Width="20"
+                            Height="20"
+                            Margin="12,0,0,0"
+                            VerticalAlignment="Center"
+                            Source="{DynamicResource IconSource}" />
                         <TextBlock
                             Padding="12,0,0,0"
                             VerticalAlignment="Center"
-                            Foreground="{StaticResource FontWhite}"
-                            FontSize="16"
                             FontFamily="Calibri"
+                            FontSize="16"
+                            Foreground="{StaticResource FontWhite}"
                             Text="{TemplateBinding Content}" />
                     </StackPanel>
                     <ControlTemplate.Triggers>
@@ -42,7 +48,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="HomeButton" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource MenueButton}">
+    <Style
+        x:Key="HomeButton"
+        BasedOn="{StaticResource MenueButton}"
+        TargetType="{x:Type RadioButton}">
         <Style.Resources>
             <ImageSource x:Key="IconSource">/SatisfactorySmartHub.Presentation;component/Assets/HomeIcon.png</ImageSource>
         </Style.Resources>

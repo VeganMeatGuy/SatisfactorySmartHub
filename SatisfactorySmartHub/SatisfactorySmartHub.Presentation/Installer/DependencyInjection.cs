@@ -22,10 +22,6 @@ public static class DependencyInjection
     {
         _ = services.AddApp();
         _ = services.AddWindows();
-        _ = services.AddWindowModels();
-        _ = services.AddViewModels();
-        _ = services.AddNavigation();
-        _ = services.AddUtilities();
 
         return services;
     }

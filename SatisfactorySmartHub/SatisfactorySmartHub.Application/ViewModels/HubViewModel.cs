@@ -1,13 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Microsoft.Win32;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
+using SatisfactorySmartHub.Application.ViewModels.Base;
 using SatisfactorySmartHub.Domain.Models;
-using SatisfactorySmartHub.Presentation.Interfaces.Services;
-using SatisfactorySmartHub.Presentation.ViewModels.Base;
 using System.Collections.ObjectModel;
 
-namespace SatisfactorySmartHub.Presentation.ViewModels;
+namespace SatisfactorySmartHub.Application.ViewModels;
 
 public sealed class HubViewModel : ViewModelBase
 {
@@ -47,7 +45,6 @@ public sealed class HubViewModel : ViewModelBase
 
     public IRelayCommand CreateCorporationCommand => _createCorporationCommand ?? new RelayCommand(new Action(CreateCorporation));
     public IRelayCommand LoadCorporationCommand => _loadCorporationCommand ?? new RelayCommand(new Action(LoadCorporation));
-    public IRelayCommand ImportCorporationCommand => _importCorporationCommand ?? new RelayCommand(new Action(ImportCorporation));
     public IRelayCommand OverWriteSaveFileCommand => _overWriteSaveFileCommand ?? new RelayCommand(new Action(ChangeOverWriteSaveFileOption));
 
 
@@ -88,6 +85,13 @@ public sealed class HubViewModel : ViewModelBase
         set => SetProperty(ref _selectedSaveFile, value);
     }
 
+
+    public void ImportCorporation(string filePath)
+    {
+        _cachingService.ActiveCorporation = _corporationService.GetCorporationFromFile(filePath);
+        LoadHint = $"{_cachingService.ActiveCorporation.Name} ist aktuell geladen.";
+    }
+
     private void CreateCorporation()
     {
         if (CorporationName == string.Empty)
@@ -123,24 +127,4 @@ public sealed class HubViewModel : ViewModelBase
 
     }
 
-    private void ImportCorporation()
-    {
-        string filepath;
-
-        var openFileDialog = new OpenFileDialog()
-        {
-            Filter = "json-Datei | *.json",
-            DefaultExt = "json",
-        };
-
-        if (openFileDialog.ShowDialog() == true)
-        {
-            filepath = openFileDialog.FileName;
-        }
-        else
-            return;
-
-        _cachingService.ActiveCorporation = _corporationService.GetCorporationFromFile(filepath);
-        LoadHint = $"{_cachingService.ActiveCorporation.Name} ist aktuell geladen.";
-    }
 }

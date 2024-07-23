@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SatisfactorySmartHub.Presentation.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:SatisfactorySmartHub.Presentation.ViewModels;assembly=SatisfactorySmartHub.Presentation"
+    xmlns:vm="clr-namespace:SatisfactorySmartHub.Application.ViewModels;assembly=SatisfactorySmartHub.Application"
     d:DataContext="{d:DesignInstance Type=vm:AdminViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -41,7 +41,8 @@
                 Padding="2"
                 HorizontalAlignment="Left"
                 Content="export"
-                Command="{Binding ExportCommand}"/>
+                Click="ExportButton_Click"
+                IsEnabled="{Binding ExportPossible}"/>
             <TextBlock Text="{Binding SaveHint}" Foreground="{StaticResource FontWhite}"/>
 
         </StackPanel>

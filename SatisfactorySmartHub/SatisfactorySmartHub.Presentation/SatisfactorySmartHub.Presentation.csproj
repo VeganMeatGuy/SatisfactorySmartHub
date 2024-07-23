@@ -10,6 +10,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Controls\**" />
+	  <EmbeddedResource Remove="Controls\**" />
+	  <None Remove="Controls\**" />
+	  <Page Remove="Controls\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="App.xaml" />
 	  <None Remove="Assets\DefaultIcon.png" />
 	  <None Remove="Assets\HomeIcon.png" />
@@ -34,10 +41,6 @@
 	<ItemGroup>
 		<Resource Include="Assets\DefaultIcon.png" />
 		<Resource Include="Assets\HomeIcon.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Controls\" />
 	</ItemGroup>
 
 	<ItemGroup>
