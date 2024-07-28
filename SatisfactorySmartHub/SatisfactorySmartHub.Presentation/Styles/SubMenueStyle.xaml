@@ -1,0 +1,79 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Styles/UiColors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <Style x:Key="SubMenueButton" TargetType="{x:Type RadioButton}">
+        <Style.Resources>
+            <ImageSource x:Key="IconSource">/SatisfactorySmartHub.Presentation;component/Assets/DefaultIcon.png</ImageSource>
+        </Style.Resources>
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <Border
+                        Name="BackPanel"
+                        Width="36"
+                        Height="36"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"                        
+                        Background="{StaticResource grey1}"
+                        Margin="2">
+                        <Image
+                            Width="25"
+                            Height="25"                           
+                            Source="{DynamicResource IconSource}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BackPanel" Property="Background" Value="{StaticResource SatisOrange}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="BackPanel" Property="Background" Value="{StaticResource grey2}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="CorporationButton"
+        BasedOn="{StaticResource SubMenueButton}"
+        TargetType="{x:Type RadioButton}">
+        <Style.Resources>
+            <ImageSource x:Key="IconSource">/SatisfactorySmartHub.Presentation;component/Assets/CorporationIcon.png</ImageSource>
+        </Style.Resources>
+    </Style>
+
+    <Style
+        x:Key="BranchButton"
+        BasedOn="{StaticResource SubMenueButton}"
+        TargetType="{x:Type RadioButton}">
+        <Style.Resources>
+            <ImageSource x:Key="IconSource">/SatisfactorySmartHub.Presentation;component/Assets/BranchIcon.png</ImageSource>
+        </Style.Resources>
+    </Style>
+
+    <Style
+        x:Key="PowerplantButton"
+        BasedOn="{StaticResource SubMenueButton}"
+        TargetType="{x:Type RadioButton}">
+        <Style.Resources>
+            <ImageSource x:Key="IconSource">/SatisfactorySmartHub.Presentation;component/Assets/PowerplantIcon.png</ImageSource>
+        </Style.Resources>
+    </Style>
+
+    <Style
+        x:Key="LogisticsButton"
+        BasedOn="{StaticResource SubMenueButton}"
+        TargetType="{x:Type RadioButton}">
+        <Style.Resources>
+            <ImageSource x:Key="IconSource">/SatisfactorySmartHub.Presentation;component/Assets/LogisticsIcon.png</ImageSource>
+        </Style.Resources>
+    </Style>
+
+</ResourceDictionary>

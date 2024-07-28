@@ -6,7 +6,6 @@
     xmlns:local="clr-namespace:SatisfactorySmartHub.Presentation.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Satisfactory Smart Hub"
-
     Width="1440"
     Height="1256"
     mc:Ignorable="d">
@@ -27,25 +26,23 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Border Background="{StaticResource grey3}" Padding="6,6,6,0">
-            <StackPanel Orientation="Horizontal" >
+        <Border Padding="6,6,6,0" Background="{StaticResource grey3}">
+            <StackPanel Orientation="Horizontal">
                 <RadioButton
-                    Style="{StaticResource HomeButton}"
                     Command="{Binding HubCommand}"
-                    Content="Hub" IsChecked="True"/>
-                <RadioButton 
-                    Style="{StaticResource MenueButton}"
+                    Content="Hub"
+                    IsChecked="True"
+                    Style="{StaticResource HomeButton}" />
+                <RadioButton
                     Command="{Binding AdminCommand}"
-                    Content="Verwaltung"/>
-                <RadioButton 
-                    Style="{StaticResource MenueButton}"
-                    Content="Planung"/>
+                    Content="Verwaltung"
+                    Style="{StaticResource MenueButton}" />
+                <RadioButton Content="Planung" Style="{StaticResource MenueButton}" />
             </StackPanel>
         </Border>
 
         <Border Grid.Row="1" Background="{StaticResource grey2}" />
-        <ContentControl Grid.Row="2"
-            Content="{Binding NavigationHelper.CurrentView}"/>
+        <ContentControl Grid.Row="2" Content="{Binding NavigationHelper.CurrentView}" />
 
     </Grid>
 
