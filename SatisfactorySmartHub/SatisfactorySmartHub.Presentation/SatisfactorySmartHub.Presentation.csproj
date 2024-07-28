@@ -18,9 +18,15 @@
 
 	<ItemGroup>
 	  <None Remove="App.xaml" />
+	  <None Remove="Assets\BranchIcon.png" />
+	  <None Remove="Assets\CorporationIcon.png" />
 	  <None Remove="Assets\DefaultIcon.png" />
 	  <None Remove="Assets\HomeIcon.png" />
+	  <None Remove="Assets\LogisticsIcon.png" />
+	  <None Remove="Assets\PowerplantIcon.png" />
+	  <None Remove="Styles\ButtonStyle.xaml" />
 	  <None Remove="Styles\MenueStyle.xaml" />
+	  <None Remove="Styles\SubMenueStyle.xaml" />
 	  <None Remove="Styles\UiColors.xaml" />
 	  <None Remove="Utilities\ViewDataTemplates.xaml" />
 	  <None Remove="Views\AdminView.xaml" />
@@ -39,8 +45,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Resource Include="Assets\BranchIcon.png" />
+		<Resource Include="Assets\CorporationIcon.png" />
 		<Resource Include="Assets\DefaultIcon.png" />
 		<Resource Include="Assets\HomeIcon.png" />
+		<Resource Include="Assets\LogisticsIcon.png" />
+		<Resource Include="Assets\PowerplantIcon.png" />
 	</ItemGroup>
 
 	<ItemGroup>

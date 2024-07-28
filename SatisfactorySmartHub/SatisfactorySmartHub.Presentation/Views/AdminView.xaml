@@ -14,7 +14,9 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Styles/UiColors.xaml" />
+                <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Styles/SubMenueStyle.xaml" />
+                <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Styles/ButtonStyle.xaml" />
+                <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Utilities/ViewDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -29,35 +31,46 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
+        <StackPanel
+            Grid.Column="2"
+            Orientation="Horizontal">
             <Button
-                Margin="2"
-                Padding="2"
-                HorizontalAlignment="Left"
+                Width="90"
+                Command="{Binding SaveCommand}"
                 Content="speichern"
-                Command="{Binding SaveCommand}"/>
+                Style="{StaticResource StandardButton}" />
             <Button
-                Margin="2"
-                Padding="2"
-                HorizontalAlignment="Left"
-                Content="export"
+                Width="90"
                 Click="ExportButton_Click"
-                IsEnabled="{Binding ExportPossible}"/>
-            <TextBlock Text="{Binding SaveHint}" Foreground="{StaticResource FontWhite}"/>
+                Content="export"
+                IsEnabled="{Binding ExportPossible}"
+                Style="{StaticResource StandardButton}" />
+            <TextBlock Foreground="{StaticResource FontWhite}" Text="{Binding SaveHint}" />
 
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="0">
+        <StackPanel Grid.RowSpan="2" Margin="4,0,0,0">
             <RadioButton
                 Command="{Binding CorporationCommand}"
-                Content="Corporation"
+                IsChecked="True"
+                Style="{StaticResource CorporationButton}" />
+            <RadioButton
+                Content="Branch"
                 Foreground="{StaticResource FontWhite}"
-                IsChecked="True" />
-            <RadioButton Content="Branch" Foreground="{StaticResource FontWhite}" />
-            <RadioButton Content="Powerplant" Foreground="{StaticResource FontWhite}" />
-            <RadioButton Content="Logistics" Foreground="{StaticResource FontWhite}" />
+                Style="{StaticResource BranchButton}" />
+            <RadioButton
+                Content="Powerplant"
+                Foreground="{StaticResource FontWhite}"
+                Style="{StaticResource PowerplantButton}" />
+            <RadioButton
+                Content="Logistics"
+                Foreground="{StaticResource FontWhite}"
+                Style="{StaticResource LogisticsButton}" />
         </StackPanel>
-        <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding NavigationHelper.CurrentView}" />
+        <ContentControl
+            Grid.Row="1"
+            Grid.Column="1"
+            Content="{Binding NavigationHelper.CurrentView}" />
 
 
     </Grid>

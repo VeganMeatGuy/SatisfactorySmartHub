@@ -22,8 +22,8 @@
                         Orientation="Horizontal">
                         <Image
                             Grid.Column="1"
-                            Width="20"
-                            Height="20"
+                            Width="28"
+                            Height="28"
                             Margin="12,0,0,0"
                             VerticalAlignment="Center"
                             Source="{DynamicResource IconSource}" />

@@ -5,15 +5,15 @@
     xmlns:vm="clr-namespace:SatisfactorySmartHub.Application.ViewModels;assembly=SatisfactorySmartHub.Application">
 
     <DataTemplate DataType="{x:Type TypeName=vm:HubViewModel}">
-        <v:HubView/>
+        <v:HubView />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type TypeName=vm:AdminViewModel}">
-        <v:AdminView/>
+        <v:AdminView />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type TypeName=vm:CorporationViewModel}">
-        <v:CorporationView/>
+        <v:CorporationView />
     </DataTemplate>
 
 </ResourceDictionary>
