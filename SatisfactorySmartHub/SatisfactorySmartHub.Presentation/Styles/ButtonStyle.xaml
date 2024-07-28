@@ -29,7 +29,7 @@
                             <Setter TargetName="Backpanel" Property="Background" Value="{StaticResource SatisOrange}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Text" Property="TextDecorations" Value="Strikethrough" />
+                            <Setter TargetName="Text" Property="Foreground" Value="{StaticResource grey3}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

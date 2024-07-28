@@ -93,6 +93,7 @@
                     Grid.Column="0"
                     Command="{Binding LoadCorporationCommand}"
                     Content="laden"
+                    VerticalAlignment="Top"
                     Style="{StaticResource StandardButton}" />
 
                 <TextBlock
