@@ -53,7 +53,7 @@
                 IsChecked="True"
                 Style="{StaticResource CorporationButton}" />
             <RadioButton
-                Content="Branch"
+               Command="{Binding BranchCommand}"
                 Foreground="{StaticResource FontWhite}"
                 Style="{StaticResource BranchButton}" />
             <RadioButton
@@ -68,7 +68,7 @@
         <ContentControl
             Grid.Row="1"
             Grid.Column="1"
-            Content="{Binding NavigationHelper.CurrentView}" />
+            Content="{Binding NavigationService.CurrentAdminView}" />
 
 
     </Grid>

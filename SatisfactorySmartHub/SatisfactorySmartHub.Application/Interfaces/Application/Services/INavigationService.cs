@@ -7,11 +7,22 @@ public interface INavigationService
     /// <summary>
     /// The current view model.
     /// </summary>
-    ViewModelBase CurrentView { get; }
+    ViewModelBase CurrentMainView { get; }
 
     /// <summary>
     /// Navigates to the provided view model.
     /// </summary>
     /// <typeparam name="T">The view model to navigate to.</typeparam>
-    void NavigateMainWindowTo<T>() where T : ViewModelBase;
+    void NavigateMainViewTo<T>() where T : ViewModelBase;
+
+    /// <summary>
+    /// The current view model.
+    /// </summary>
+    ViewModelBase CurrentAdminView { get; }
+
+    /// <summary>
+    /// Navigates to the provided view model.
+    /// </summary>
+    /// <typeparam name="T">The view model to navigate to.</typeparam>
+    void NavigateAdminViewTo<T>() where T : ViewModelBase;
 }

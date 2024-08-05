@@ -18,6 +18,7 @@
 
 	<ItemGroup>
 	  <None Remove="App.xaml" />
+	  <None Remove="Assets\ArrowIcon.png" />
 	  <None Remove="Assets\BranchIcon.png" />
 	  <None Remove="Assets\CorporationIcon.png" />
 	  <None Remove="Assets\DefaultIcon.png" />
@@ -30,6 +31,7 @@
 	  <None Remove="Styles\UiColors.xaml" />
 	  <None Remove="Utilities\ViewDataTemplates.xaml" />
 	  <None Remove="Views\AdminView.xaml" />
+	  <None Remove="Views\BranchView.xaml" />
 	  <None Remove="Views\CorporationView.xaml" />
 	  <None Remove="Views\HubView.xaml" />
 	  <None Remove="Windows\MainWindow.xaml" />
@@ -45,6 +47,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Resource Include="Assets\ArrowIcon.png" />
 		<Resource Include="Assets\BranchIcon.png" />
 		<Resource Include="Assets\CorporationIcon.png" />
 		<Resource Include="Assets\DefaultIcon.png" />

@@ -45,6 +45,7 @@ internal static class ServiceCollectionExtension
         services.TryAddTransient<HubViewModel>();
         services.TryAddTransient<AdminViewModel>();
         services.TryAddTransient<CorporationViewModel>();
+        services.TryAddTransient<BranchViewModel>();
         return services;
     }
 
@@ -55,7 +56,7 @@ internal static class ServiceCollectionExtension
     /// <returns>The enriched service collection.</returns>
     internal static IServiceCollection AddNavigation(this IServiceCollection services)
     {
-        services.TryAddTransient<INavigationService, NavigationService>();
+        services.TryAddSingleton<INavigationService, NavigationService>();
         services.TryAddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));
         return services;
     }

@@ -16,4 +16,7 @@
         <v:CorporationView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type TypeName=vm:BranchViewModel}">
+        <v:BranchView />
+    </DataTemplate>
 </ResourceDictionary>

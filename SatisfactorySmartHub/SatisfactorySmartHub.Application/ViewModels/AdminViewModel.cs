@@ -8,12 +8,13 @@ namespace SatisfactorySmartHub.Application.ViewModels;
 
 public sealed class AdminViewModel : ViewModelBase
 {
-    private readonly INavigationService _navigationHelper;
+    private readonly INavigationService _navigationService;
     private readonly ICorporationService _corporationService;
     private readonly ICachingService _cachingService;
     private readonly IUserDataService _userOptionsHelper;
 
     private IRelayCommand? _corporationCommand;
+    private IRelayCommand? _branchCommand;
     private IRelayCommand? _saveCommand;
     private string _saveHint = string.Empty;
     private bool _exportPossible = false;
@@ -24,32 +25,26 @@ public sealed class AdminViewModel : ViewModelBase
         ICachingService cachingService,
         IUserDataService userOptionsHelper)
     {
-        _navigationHelper = navigationHelper;
+        _navigationService = navigationHelper;
         _corporationService = corporationService;
         _cachingService = cachingService;
         _userOptionsHelper = userOptionsHelper;
 
         CorporationCommand.Execute(this);
-
-        if (_cachingService.ActiveCorporation is not null)
-            ExportPossible = true;
-
     }
 
-    public INavigationService NavigationHelper => _navigationHelper;
+    public INavigationService NavigationService => _navigationService;
     public string SaveHint
     {
         get => _saveHint;
         set => SetProperty(ref _saveHint, value);
     }
-    public bool ExportPossible
-    {
-        get => _exportPossible;
-        set => SetProperty(ref _exportPossible, value);
-    }
+    public bool ExportPossible => _cachingService.ActiveCorporationIsSet;
+
     public string ExportName => _cachingService.ActiveCorporation.Name ?? string.Empty;
 
-    public IRelayCommand CorporationCommand => _corporationCommand ??= new RelayCommand(NavigationHelper.NavigateMainWindowTo<CorporationViewModel>);
+    public IRelayCommand CorporationCommand => _corporationCommand ??= new RelayCommand(NavigationService.NavigateAdminViewTo<CorporationViewModel>);
+    public IRelayCommand BranchCommand => _branchCommand ??= new RelayCommand(NavigationService.NavigateAdminViewTo<BranchViewModel>);
     public IRelayCommand SaveCommand => _saveCommand ?? new RelayCommand(new Action(SaveCorporation));
 
 

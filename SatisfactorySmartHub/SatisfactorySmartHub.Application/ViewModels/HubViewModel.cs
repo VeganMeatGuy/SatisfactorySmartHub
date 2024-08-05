@@ -88,7 +88,7 @@ public sealed class HubViewModel : ViewModelBase
 
     public void ImportCorporation(string filePath)
     {
-        _cachingService.ActiveCorporation = _corporationService.GetCorporationFromFile(filePath);
+        _cachingService.SetActiveCorporation(_corporationService.GetCorporationFromFile(filePath));
         LoadHint = $"{_cachingService.ActiveCorporation.Name} ist aktuell geladen.";
     }
 
@@ -100,7 +100,7 @@ public sealed class HubViewModel : ViewModelBase
             return;
         }
 
-        _cachingService.ActiveCorporation = _corporationService.GetNewCorporation(CorporationName);
+        _cachingService.SetActiveCorporation(_corporationService.GetNewCorporation(CorporationName));
 
         CreateHint = string.Empty;
 
@@ -122,7 +122,7 @@ public sealed class HubViewModel : ViewModelBase
             return;
         }
 
-        _cachingService.ActiveCorporation = _corporationService.GetCorporationFromFile(SelectedSaveFile);
+        _cachingService.SetActiveCorporation(_corporationService.GetCorporationFromFile(SelectedSaveFile));
         LoadHint = $"{_cachingService.ActiveCorporation.Name} ist aktuell geladen.";
 
     }

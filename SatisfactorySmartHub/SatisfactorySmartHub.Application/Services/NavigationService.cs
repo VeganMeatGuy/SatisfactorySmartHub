@@ -5,15 +5,25 @@ using SatisfactorySmartHub.Domain.Common;
 namespace SatisfactorySmartHub.Application.Services;
 public sealed class NavigationService(Func<Type, ViewModelBase> viewModelFactory) : ObservableObjectBase, INavigationService
 {
-    private ViewModelBase _currentView = default!;
+    private ViewModelBase _currentMainView = default!;
+    private ViewModelBase _currentAdminView = default!;
 
-    public ViewModelBase CurrentView
+    public ViewModelBase CurrentMainView
     {
-        get => _currentView;
-        private set => SetProperty(ref _currentView, value);
+        get => _currentMainView;
+        private set => SetProperty(ref _currentMainView, value);
     }
 
-    public void NavigateMainWindowTo<T>() where T : ViewModelBase
-        => CurrentView = viewModelFactory.Invoke(typeof(T));
+    public ViewModelBase CurrentAdminView
+    {
+        get => _currentAdminView;
+        private set => SetProperty(ref _currentAdminView, value);
+    }
+
+    public void NavigateAdminViewTo<T>() where T : ViewModelBase
+    => CurrentAdminView = viewModelFactory.Invoke(typeof(T));
+
+    public void NavigateMainViewTo<T>() where T : ViewModelBase
+        => CurrentMainView = viewModelFactory.Invoke(typeof(T));
 
 }
