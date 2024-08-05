@@ -15,6 +15,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Styles/UiColors.xaml" />
+                <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Styles/ButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -23,74 +24,131 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="30"/>
             <RowDefinition />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel
-            Grid.Row="0"
-            Grid.Column="1"
-            Grid.ColumnSpan="5"
-            VerticalAlignment="Stretch">
-            <TextBlock
+             <TextBlock
+                Grid.Row="0"
+                Grid.Column="3"
                 Margin="0,0,0,5"
                 Foreground="{StaticResource FontWhite}"
-                Text="CorporationName:" />
-            <TextBox
+                Text="Konzern:" />
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="5"
                 Background="{StaticResource backgroundBlack}"
                 BorderThickness="0"
                 FontSize="25"
                 Foreground="{StaticResource FontWhite}"
                 Text="{Binding ActiveCorporation.Name}"
                 TextAlignment="Center"
-                TextDecorations="Underline" />
-        </StackPanel>
+                TextDecorations="Underline" 
+            Margin="0,0,0,10"/>
+
+        <Border
+            Grid.Row="2"
+            Grid.Column="1"
+            Grid.RowSpan="3"
+            Background="{StaticResource grey3}"/>
+
+        <Border
+            Grid.Row="2"
+            Grid.Column="3"
+            Grid.RowSpan="3"
+            Background="{StaticResource grey3}"/>
+
+        <Border
+            Grid.Row="2"
+            Grid.Column="5"
+            Grid.RowSpan="3"
+            Background="{StaticResource grey3}"/>
 
         <Label
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="1"
             Content="Branches"
             FontWeight="Bold"
-            Foreground="{StaticResource FontWhite}" />
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Foreground="{StaticResource FontWhite}"
+            FontSize="16"
+            Margin="5"
+            />
+
         <Label
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="3"
             Content="Powerplants"
             FontWeight="Bold"
-            Foreground="{StaticResource FontWhite}" />
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Foreground="{StaticResource FontWhite}"
+            FontSize="16"
+            Margin="5"/>
+        
         <Label
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="5"
             Content="Logistics"
             FontWeight="Bold"
-            Foreground="{StaticResource FontWhite}" />
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Foreground="{StaticResource FontWhite}"
+            FontSize="16"
+            Margin="5"/>
 
-        <ListView Grid.Row="2" Grid.Column="1" />
-        <ListView Grid.Row="2" Grid.Column="3" />
-        <ListView Grid.Row="2" Grid.Column="5" />
 
-        <Label
-            Grid.Row="3"
-            Grid.Column="0"
-            Content="bla bla"
-            />
+        <ListView 
+            Grid.Row="3" 
+            Grid.Column="1"
+            Margin="10,0,10,0"/>
+        <ListView Grid.Row="3" Grid.Column="3"  Margin="10,0,10,0"/>
+        <ListView Grid.Row="3" Grid.Column="5"  Margin="10,0,10,0"/>
 
-        <ListView Grid.Row="4" Grid.Column="1" />
-        <ListView Grid.Row="4" Grid.Column="3" />
-        <ListView Grid.Row="4" Grid.Column="5" />
+        <Button
+            Grid.Row="4"
+            Grid.Column="1"
+            Margin="5"
+            Content="+"
+            Style="{StaticResource StandardButton}"
+            HorizontalAlignment="Left"/>
+
+        <Button
+            Grid.Row="4"
+            Grid.Column="3"
+            Margin="5"
+            Content="+"
+            Style="{StaticResource StandardButton}"
+            HorizontalAlignment="Left"/>
+
+        <Button
+            Grid.Row="4"
+            Grid.Column="5"
+            Margin="5"
+            Content="+"
+            Style="{StaticResource StandardButton}"
+            HorizontalAlignment="Left"/>
+
+        <ListView Grid.Row="6" Grid.Column="1" />
+        <ListView Grid.Row="6" Grid.Column="3" />
+        <ListView Grid.Row="6" Grid.Column="5" />
 
     </Grid>
 </UserControl>
