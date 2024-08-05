@@ -31,9 +31,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel
-            Grid.Column="2"
-            Orientation="Horizontal">
+        <StackPanel Grid.Column="2" Orientation="Horizontal">
             <Button
                 Width="90"
                 Command="{Binding SaveCommand}"

@@ -19,20 +19,78 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <TextBlock Foreground="{StaticResource FontWhite}" Text="Konzern:" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="5"
+            VerticalAlignment="Stretch">
+            <TextBlock
+                Margin="0,0,0,5"
+                Foreground="{StaticResource FontWhite}"
+                Text="CorporationName:" />
             <TextBox
                 Background="{StaticResource backgroundBlack}"
                 BorderThickness="0"
+                FontSize="25"
                 Foreground="{StaticResource FontWhite}"
-                Text="{Binding ActiveCorporation.Name}" />
+                Text="{Binding ActiveCorporation.Name}"
+                TextAlignment="Center"
+                TextDecorations="Underline" />
         </StackPanel>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Content="Branches"
+            FontWeight="Bold"
+            Foreground="{StaticResource FontWhite}" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="3"
+            Content="Powerplants"
+            FontWeight="Bold"
+            Foreground="{StaticResource FontWhite}" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="5"
+            Content="Logistics"
+            FontWeight="Bold"
+            Foreground="{StaticResource FontWhite}" />
+
+        <ListView Grid.Row="2" Grid.Column="1" />
+        <ListView Grid.Row="2" Grid.Column="3" />
+        <ListView Grid.Row="2" Grid.Column="5" />
+
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Content="bla bla"
+            />
+
+        <ListView Grid.Row="4" Grid.Column="1" />
+        <ListView Grid.Row="4" Grid.Column="3" />
+        <ListView Grid.Row="4" Grid.Column="5" />
 
     </Grid>
 </UserControl>

@@ -9,10 +9,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid 
+                    <Grid
                         Name="Backpanel"
-                        Height="30" 
-                          Background="{StaticResource grey4}">
+                        Height="30"
+                        Background="{StaticResource grey4}">
                         <TextBlock
                             Name="Text"
                             Padding="10,0,10,0"
