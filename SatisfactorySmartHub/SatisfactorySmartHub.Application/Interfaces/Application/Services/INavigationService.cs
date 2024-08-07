@@ -1,8 +1,9 @@
 ﻿using SatisfactorySmartHub.Application.ViewModels.Base;
+using System.ComponentModel;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 
-public interface INavigationService
+public interface INavigationService : INotifyPropertyChanged
 {
     /// <summary>
     /// The current view model.

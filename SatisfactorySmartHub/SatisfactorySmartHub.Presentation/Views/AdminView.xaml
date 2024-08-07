@@ -50,19 +50,19 @@
         <StackPanel Grid.RowSpan="2" Margin="4,0,0,0">
             <RadioButton
                 Command="{Binding CorporationCommand}"
-                IsChecked="True"
+                IsChecked="{Binding CorporationViewIsShown}"
                 Style="{StaticResource CorporationButton}" />
             <RadioButton
                Command="{Binding BranchCommand}"
-                Foreground="{StaticResource FontWhite}"
+                IsChecked="{Binding BranchViewIsShown}"
                 Style="{StaticResource BranchButton}" />
             <RadioButton
                 Content="Powerplant"
-                Foreground="{StaticResource FontWhite}"
+                IsEnabled="False"
                 Style="{StaticResource PowerplantButton}" />
             <RadioButton
                 Content="Logistics"
-                Foreground="{StaticResource FontWhite}"
+                IsEnabled="False"
                 Style="{StaticResource LogisticsButton}" />
         </StackPanel>
         <ContentControl
