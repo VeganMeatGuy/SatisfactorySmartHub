@@ -85,7 +85,7 @@
             Margin="5"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
-            Content="Branches"
+            Content="Industriekomplexe"
             FontSize="16"
             FontWeight="Bold"
             Foreground="{StaticResource FontWhite}" />
@@ -96,7 +96,7 @@
             Margin="5"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
-            Content="Powerplants"
+            Content="Kraftwerke"
             FontSize="16"
             FontWeight="Bold"
             Foreground="{StaticResource FontWhite}" />
@@ -107,7 +107,7 @@
             Margin="5"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
-            Content="Logistics"
+            Content="Logistikzentrum"
             FontSize="16"
             FontWeight="Bold"
             Foreground="{StaticResource FontWhite}" />
