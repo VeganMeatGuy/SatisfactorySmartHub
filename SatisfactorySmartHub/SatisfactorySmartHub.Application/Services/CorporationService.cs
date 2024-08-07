@@ -12,6 +12,11 @@ namespace SatisfactorySmartHub.Application.Services;
 
 internal sealed class CorporationService(ICorporationFileService corporationFileService) : ICorporationService
 {
+    public void AddBranchToCorporation(BranchModel branch, CorporationModel corporation)
+    {
+        corporation.Branches.Add(branch);
+    }
+
     public bool ExportCorporation(CorporationModel corporation, string filePath)
     {
         if (corporation is null)

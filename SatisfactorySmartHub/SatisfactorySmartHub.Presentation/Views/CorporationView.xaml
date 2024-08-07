@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SatisfactorySmartHub.Presentation.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:vm="clr-namespace:SatisfactorySmartHub.Application.ViewModels;assembly=SatisfactorySmartHub.Application"
     d:DataContext="{d:DesignInstance Type=vm:CorporationViewModel}"
     d:DesignHeight="450"
@@ -114,9 +115,26 @@
 
 
         <ListView
+            Name="BranchListView"
             Grid.Row="3"
             Grid.Column="1"
-            Margin="5,0,5,0" />
+            Margin="5,0,5,0"
+            ItemsSource="{Binding ActiveCorporation.Branches}"
+            SelectedItem="{Binding SelectedBranch}"
+            >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <behaviors:Interaction.Triggers>
+                <behaviors:EventTrigger EventName="MouseDoubleClick" SourceObject="{Binding ElementName=BranchListView}">
+                    <behaviors:InvokeCommandAction Command="{Binding ShowBranchDetailsCommand}"/>
+                </behaviors:EventTrigger>
+            </behaviors:Interaction.Triggers>
+
+        </ListView>
         <ListView
             Grid.Row="3"
             Grid.Column="3"

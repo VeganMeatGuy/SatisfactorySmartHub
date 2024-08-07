@@ -6,7 +6,9 @@ namespace SatisfactorySmartHub.Application.Services;
 internal class CachingService : ObservableObjectBase, ICachingService
 {
     private CorporationModel? _activeCorporationModel;
+    private BranchModel? _activeBranchModel;
     private bool _ActiveCorporationIsSet = false;
+    private bool _ActiveBranchIsSet = false;
 
     public CorporationModel? ActiveCorporation
     {
@@ -18,6 +20,20 @@ internal class CachingService : ObservableObjectBase, ICachingService
     {
         get => _ActiveCorporationIsSet;
         private set => SetProperty(ref _ActiveCorporationIsSet, value);
+    }
+
+    public BranchModel? ActiveBranch
+    {
+        get => _activeBranchModel;
+        private set => SetProperty(ref _activeBranchModel, value);
+    }
+
+    public void SetActiveBranch(BranchModel? activeBranch)
+    {
+        if (activeBranch == null)
+            return;
+        ActiveBranch = activeBranch;
+        _ActiveBranchIsSet = true;
     }
 
     public void SetActiveCorporation(CorporationModel? activeCorporation)

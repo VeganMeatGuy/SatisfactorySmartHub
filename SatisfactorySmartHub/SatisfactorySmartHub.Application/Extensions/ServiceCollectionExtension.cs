@@ -20,6 +20,7 @@ internal static class ServiceCollectionExtension
     internal static IServiceCollection RegisterServices(this IServiceCollection services)
     {
         services.AddSingleton<ICorporationService, CorporationService>();
+        services.AddSingleton<IBranchService, BranchService>();
         services.TryAddSingleton<ICachingService, CachingService>();
         return services;
     }

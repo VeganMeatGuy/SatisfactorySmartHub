@@ -51,4 +51,12 @@ public interface ICorporationService
     /// </summary>
     /// <returns>A list of file names.</returns>
     ICollection<string> GetSaveFiles();
+
+    /// <summary>
+    /// Adds athe given branch to the given corporation.
+    /// </summary>
+    /// <param name="branch">The brach which is added to the corporation.</param>
+    /// <param name="corporation">The corporation model which the new branch is added to.</param>
+    /// <returns><see cref="BranchModel"/></returns>
+    void AddBranchToCorporation(BranchModel branch, CorporationModel corporation);
 }
