@@ -4,7 +4,7 @@ public sealed class BranchModel
 {
     private string _name = string.Empty;
     private ExtractionSiteModel _extractionSite = new ExtractionSiteModel();
-    private ProductionLineModel _productionSite = new ProductionLineModel();
+    private ProductionSiteModel _productionSite = new ProductionSiteModel();
 
     public string Name
     {
@@ -18,7 +18,7 @@ public sealed class BranchModel
         set => _extractionSite = value;
     }
 
-    public ProductionLineModel ProductionSite
+    public ProductionSiteModel ProductionSite
     {
         get => _productionSite;
         set => _productionSite = value;

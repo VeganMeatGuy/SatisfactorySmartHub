@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 
 /// <summary>
-/// The branch service interface.
+/// The process step service interface.
 /// </summary>
-public interface IBranchService
+public interface IProcessStepService
 {
     /// <summary>
-    /// Returns an empty branch model.
+    /// Returns an empty process step model.
     /// </summary>
-    /// <returns><see cref="BranchModel"/></returns>
-    BranchModel GetNewBranch();
-
+    /// <returns><see cref="ProcessStepModel"/></returns>
+    ProcessStepModel GetNewProcessStep();
 }

@@ -15,7 +15,6 @@ public sealed class HubViewModel : ViewModelBase
 
     private IRelayCommand? _createCorporationCommand;
     private IRelayCommand? _loadCorporationCommand;
-    private IRelayCommand? _importCorporationCommand;
     private IRelayCommand? _overWriteSaveFileCommand;
     private string _corporationName = string.Empty;
     private string _createHint = string.Empty;

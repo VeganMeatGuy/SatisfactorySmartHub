@@ -2,6 +2,7 @@
     x:Class="SatisfactorySmartHub.Presentation.Views.BranchView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:customcontrol="clr-namespace:SatisfactorySmartHub.Presentation.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SatisfactorySmartHub.Presentation.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -21,50 +22,81 @@
     </UserControl.Resources>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <TextBox
-            Foreground="{StaticResource FontWhite}"
-            FontSize="25"
-            TextDecorations="Underline"
-            Text="{Binding ActiveBranch.Name}"
-            Background="{StaticResource backgroundBlack}"
+            HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            HorizontalAlignment="Center"/>
+            Background="{StaticResource backgroundBlack}"
+            FontSize="25"
+            Foreground="{StaticResource FontWhite}"
+            Text="{Binding ActiveBranch.Name}"
+            TextDecorations="Underline" />
         <Label
             Grid.Row="1"
             Content="Bilanz"
-            Foreground="{StaticResource FontWhite}"
             FontSize="16"
-            FontWeight="Bold"/>
-        <ListView
-            Grid.Row="2"
-            Margin="5,0,5,0"></ListView>
+            FontWeight="Bold"
+            Foreground="{StaticResource FontWhite}" />
+        <ListView Grid.Row="2" Margin="5,0,5,0" />
         <Label
             Grid.Row="3"
             Content="Gewinnungsanlage"
-            Foreground="{StaticResource FontWhite}"
             FontSize="16"
-            FontWeight="Bold"/>
-        <ListView
-            Grid.Row="4"
-            Margin="5,0,5,0"></ListView>
+            FontWeight="Bold"
+            Foreground="{StaticResource FontWhite}" />
+        <ListView Grid.Row="4" Margin="5,0,5,0" />
+
         <Label
             Grid.Row="5"
             Content="Produktionslinie"
-            Foreground="{StaticResource FontWhite}"
             FontSize="16"
-            FontWeight="Bold"/>
+            FontWeight="Bold"
+            Foreground="{StaticResource FontWhite}" />
+
+
+        <Button
+            Grid.Row="5"
+            Grid.Column="2"
+            HorizontalAlignment="Left"
+            Command="{Binding AddProcessStepCommand}"
+            Content="+"
+            Style="{StaticResource StandardButton}" />
+        <Button
+            Grid.Row="5"
+            Grid.Column="3"
+            HorizontalAlignment="Right"
+            Content="🗑"
+            Style="{StaticResource StandardButton}" />
+
         <ListView
             Grid.Row="6"
-            Margin="5,0,5,0"></ListView>
+            Grid.ColumnSpan="4"
+            Margin="5,0,5,0"
+            ItemsSource="{Binding ActiveBranch.ProductionSite.ProcessSteps}"
+            Background="{StaticResource backgroundBlack}">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <customcontrol:ProcessStepDetails/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </UserControl>

@@ -14,6 +14,7 @@ namespace SatisfactorySmartHub.Application.Services;
 /// </summary>
 internal sealed class BranchService : IBranchService
 {
+
     /// <inheritdoc cref="IBranchService.GetNewBranch"/>
     public BranchModel GetNewBranch()
     {

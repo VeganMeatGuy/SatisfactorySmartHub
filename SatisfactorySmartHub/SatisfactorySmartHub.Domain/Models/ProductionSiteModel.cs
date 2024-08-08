@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Domain.Models;
 
-public sealed class ProductionLineModel
+public sealed class ProductionSiteModel
 {
-    private ICollection<ProcessStepModel> _processSteps = new HashSet<ProcessStepModel>();
+    private ObservableCollection<ProcessStepModel> _processSteps = new ObservableCollection<ProcessStepModel>();
     private bool _CalculationIsDone = false;
 
-    public ICollection<ProcessStepModel> ProcessSteps
+    public ObservableCollection<ProcessStepModel> ProcessSteps
     {
         get => _processSteps;
         set => _processSteps = value;

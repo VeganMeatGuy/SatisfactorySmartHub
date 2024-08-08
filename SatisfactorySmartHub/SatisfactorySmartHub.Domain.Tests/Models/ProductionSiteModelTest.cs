@@ -1,16 +1,17 @@
 ﻿using SatisfactorySmartHub.Domain.Models;
 using SatisfactorySmartHub.Infrastructure.Persistance.Repositories.StaticRepository;
+using System.Collections.ObjectModel;
 
 namespace SatisfactorySmartHub.Domain.Tests.Models;
 
 [TestClass]
-public class ProductionLineModelTest
+public class ProductionSiteModelTest
 {
     [TestMethod]
-    public void ProductionLineModelService_GetProductionLineBalance()
+    public void ProductionSiteModelService_GetProductionSiteBalance()
     {
         //arrange
-        ProductionLineModel productionLine = new ProductionLineModel();
+        ProductionSiteModel productionSite = new ProductionSiteModel();
 
         ProcessStepModel process1 = new ProcessStepModel() { Recipe = Recipes.Screw };
         process1.SetProcessStepTarget(new ItemWithAmount() { Amount = 300, Item = Items.Screw });
@@ -24,7 +25,7 @@ public class ProductionLineModelTest
         ProcessStepModel process4 = new ProcessStepModel() { Recipe = Recipes.HeavyOilResidue };
         process4.SetProcessStepTarget(new ItemWithAmount() { Amount = 25.67m, Item = Items.HeavyOilResidue });
 
-        List<ProcessStepModel> processSteps = new List<ProcessStepModel>()
+        ObservableCollection<ProcessStepModel> processSteps = new ObservableCollection<ProcessStepModel>()
         {
            process1,
            process2,
@@ -32,10 +33,10 @@ public class ProductionLineModelTest
            process4,
         };
 
-        productionLine.ProcessSteps = processSteps;
+        productionSite.ProcessSteps = processSteps;
 
         //act
-        ICollection<ItemBalanceModel> result = productionLine.GetBalance();
+        ICollection<ItemBalanceModel> result = productionSite.GetBalance();
 
         //assert
         Assert.IsTrue(result.Any(x => x.Item.Name == Items.IronOre.Name && x.NeededAmount == 110 && x.ProducedAmount == 0));
