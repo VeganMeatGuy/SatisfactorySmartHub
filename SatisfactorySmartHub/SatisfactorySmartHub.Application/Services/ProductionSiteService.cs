@@ -19,4 +19,9 @@ internal sealed class ProductionSiteService : IProductionSiteService
     {
         productionSite.ProcessSteps.Add(processStep);
     }
+
+    public bool RemoveProcessStepFromProductionSite(ProcessStepModel processStep, ProductionSiteModel productionSite)
+    {
+        return productionSite.ProcessSteps.Remove(processStep);
+    }
 }

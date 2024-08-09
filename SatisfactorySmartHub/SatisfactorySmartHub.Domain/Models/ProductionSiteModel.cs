@@ -9,10 +9,10 @@ namespace SatisfactorySmartHub.Domain.Models;
 
 public sealed class ProductionSiteModel
 {
-    private ObservableCollection<ProcessStepModel> _processSteps = new ObservableCollection<ProcessStepModel>();
+    private ICollection<ProcessStepModel> _processSteps = new HashSet<ProcessStepModel>();
     private bool _CalculationIsDone = false;
 
-    public ObservableCollection<ProcessStepModel> ProcessSteps
+    public ICollection<ProcessStepModel> ProcessSteps
     {
         get => _processSteps;
         set => _processSteps = value;

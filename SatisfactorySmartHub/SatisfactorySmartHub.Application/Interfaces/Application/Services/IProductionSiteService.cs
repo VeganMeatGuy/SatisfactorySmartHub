@@ -13,9 +13,17 @@ namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 public interface IProductionSiteService
 {
     /// <summary>
-    /// Adds the given production site to the given branch.
+    /// Adds the given process step to the given production site.
     /// </summary>
     /// <param name="processStep">The process step which is added to the production site.</param>
     /// <param name="productionSite">The production site which the process step is added to.</param>
     void AddProcessStepToProductionSite(ProcessStepModel processStep, ProductionSiteModel productionSite);
+
+    /// <summary>
+    /// Removes the given process step from the given production site.
+    /// </summary>
+    /// <param name="processStep">The process step which is removed from the production site.</param>
+    /// <param name="productionSite">The production site which the process step is removed from.</param>
+    /// <returns></returns>
+    bool RemoveProcessStepFromProductionSite(ProcessStepModel processStep, ProductionSiteModel productionSite);
 }

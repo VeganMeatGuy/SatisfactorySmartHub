@@ -81,6 +81,7 @@
             Grid.Row="5"
             Grid.Column="3"
             HorizontalAlignment="Right"
+            Command="{Binding RemoveProcessStepCommand}"
             Content="🗑"
             Style="{StaticResource StandardButton}" />
 
@@ -88,7 +89,8 @@
             Grid.Row="6"
             Grid.ColumnSpan="4"
             Margin="5,0,5,0"
-            ItemsSource="{Binding ActiveBranch.ProductionSite.ProcessSteps}"
+            ItemsSource="{Binding ProcessSteps}"
+            SelectedItem="{Binding SelectedProcessStep}"
             Background="{StaticResource backgroundBlack}">
 
             <ListView.ItemTemplate>

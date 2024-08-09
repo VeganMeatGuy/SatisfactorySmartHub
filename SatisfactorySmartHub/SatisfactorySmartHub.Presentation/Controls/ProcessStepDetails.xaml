@@ -18,6 +18,15 @@
     </UserControl.Resources>
 
     <Expander Header="Rezeptname" Foreground="{StaticResource FontWhite}">
+        <StackPanel Orientation="Horizontal">
+
+            <ComboBox>
+                <ComboBoxItem>Bla1</ComboBoxItem>
+                <ComboBoxItem>Bla2</ComboBoxItem>
+                <ComboBoxItem>Bla3</ComboBoxItem>
+                <ComboBoxItem>Bla4</ComboBoxItem>
+                <ComboBoxItem>Bla5</ComboBoxItem>
+            </ComboBox>    
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -253,6 +262,7 @@
             Content="Del"
             Style="{StaticResource SmallButton}" />
         </Grid>
+        </StackPanel>
     </Expander>
 
 
