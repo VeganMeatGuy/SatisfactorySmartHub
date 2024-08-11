@@ -25,8 +25,12 @@ public sealed class BranchViewModel : ViewModelBase
     
     
     private ProcessStepModel _activeProcessStepModel;
+    private bool _showForeFrontContent = false;
+    private bool _recipeSelectionVisible = false;
     private IRelayCommand? _addProcessStepCommand;
     private IRelayCommand? _removeProcessStepCommand;
+    private IRelayCommand? _selectRecipeCommand;
+    private IRelayCommand? _recipeSelectionConfirmedCommand;
     private ReadonlyObservableList<ProcessStepModel> _processSteps = new ReadonlyObservableList<ProcessStepModel>();
 
     public BranchViewModel(ICachingService cachingService, IProductionSiteService productionSiteService, IProcessStepService processStepService)
@@ -49,13 +53,38 @@ public sealed class BranchViewModel : ViewModelBase
         set => SetProperty(ref _activeProcessStepModel, value);
     }
 
+    public bool ShowForeFrontContent
+    {
+        get => _showForeFrontContent;
+        set => SetProperty(ref _showForeFrontContent, value);
+    }
+
+    public bool RecipeSelectionVisible
+    {
+        get => _recipeSelectionVisible;
+        set => SetProperty(ref _recipeSelectionVisible, value);
+    }
 
     public ReadonlyObservableList<ProcessStepModel> ProcessSteps => _processSteps;
 
 
     public IRelayCommand AddProcessStepCommand => _addProcessStepCommand ?? new RelayCommand(new Action(AddProcessStep));
     public IRelayCommand RemoveProcessStepCommand => _removeProcessStepCommand ?? new RelayCommand(new Action(RemoveProcessStep));
+    public IRelayCommand SelectRecipe => _selectRecipeCommand ?? new RelayCommand(new Action(ShowRecipeSelection));
 
+    public IRelayCommand RecipeSelectionConfirmedCommand => _recipeSelectionConfirmedCommand ?? new RelayCommand(new Action(RecipeSelectionConfirmed));
+
+    private void RecipeSelectionConfirmed()
+    {
+        ShowForeFrontContent = false;
+        RecipeSelectionVisible = false;
+    }
+
+    private void ShowRecipeSelection()
+    {
+        ShowForeFrontContent = true;
+        RecipeSelectionVisible = true;
+    }
 
     private void AddProcessStep()
     {

@@ -19,6 +19,8 @@
 	  <None Remove="Assets\LogisticsIcon.png" />
 	  <None Remove="Assets\PowerplantIcon.png" />
 	  <None Remove="Controls\ProcessStepDetails.xaml" />
+	  <None Remove="Controls\RecipeSelector.xaml" />
+	  <None Remove="Converters\Converters.xaml" />
 	  <None Remove="Styles\ButtonStyle.xaml" />
 	  <None Remove="Styles\MenueStyle.xaml" />
 	  <None Remove="Styles\SubMenueStyle.xaml" />

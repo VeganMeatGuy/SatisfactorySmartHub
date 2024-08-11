@@ -12,16 +12,22 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
+
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Styles/UiColors.xaml" />
                 <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Styles/ButtonStyle.xaml" />
+                <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Converters/Converters.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
+
+        <customcontrol:RecipeSelector Panel.ZIndex="2" Confirm="{Binding RecipeSelectionConfirmedCommand}" Visibility="{Binding RecipeSelectionVisible, Converter={StaticResource BoolToVis}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="10" />
@@ -39,7 +45,9 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBox
+            <Border Visibility="{Binding ShowForeFrontContent, Converter={StaticResource BoolToVis}}" Grid.ColumnSpan="4" Grid.RowSpan="8"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Panel.ZIndex="1"  BorderThickness="0" Background="{StaticResource grey1}" Opacity="0.7"/>
+
+            <TextBox
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Background="{StaticResource backgroundBlack}"
@@ -85,7 +93,7 @@
             Content="🗑"
             Style="{StaticResource StandardButton}" />
 
-        <ListView
+            <ListView
             Grid.Row="6"
             Grid.ColumnSpan="4"
             Margin="5,0,5,0"
@@ -95,10 +103,16 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <customcontrol:ProcessStepDetails/>
+                        <customcontrol:ProcessStepDetails SelectRecipe="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SelectRecipe}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
+            <!--<customcontrol:ProcessStepDetails
+                Grid.Row="6"
+                Grid.ColumnSpan="4"
+                SelectRecipe="{Binding SelectRecipe}"/>-->
+
+    </Grid>
     </Grid>
 </UserControl>

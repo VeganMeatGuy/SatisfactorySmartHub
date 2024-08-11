@@ -16,22 +16,22 @@ using System.Windows.Shapes;
 namespace SatisfactorySmartHub.Presentation.Controls
 {
     /// <summary>
-    /// Interaction logic for ProcessStepDetails.xaml
+    /// Interaction logic for RecipeSelector.xaml
     /// </summary>
-    public partial class ProcessStepDetails : UserControl
+    public partial class RecipeSelector : UserControl
     {
-        public ProcessStepDetails()
+        public RecipeSelector()
         {
             InitializeComponent();
         }
 
-        public static DependencyProperty SelectRecipeProperty
-          = DependencyProperty.Register("SelectRecipe", typeof(ICommand), typeof(ProcessStepDetails));
+        public static DependencyProperty ConfirmProperty
+        = DependencyProperty.Register("Confirm", typeof(ICommand), typeof(RecipeSelector));
 
-        public ICommand SelectRecipe
+        public ICommand Confirm
         {
-            get { return (ICommand)GetValue(SelectRecipeProperty); }
-            set { SetValue(SelectRecipeProperty, value); }
+            get { return (ICommand)GetValue(ConfirmProperty); }
+            set { SetValue(ConfirmProperty, value); }
         }
 
     }

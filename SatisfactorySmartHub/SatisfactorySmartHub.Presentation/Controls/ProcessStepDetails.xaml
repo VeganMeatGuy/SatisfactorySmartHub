@@ -5,9 +5,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SatisfactorySmartHub.Presentation.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
     HorizontalAlignment="Stretch"
     VerticalAlignment="Stretch"
     mc:Ignorable="d">
+
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,17 +18,16 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+    <Expander >
+        <Expander.Header>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Rezept" Foreground="{StaticResource FontWhite}"/>
+                <Button 
+                    Content="Change Recipe" Style="{StaticResource SmallButton}"
+                    Command="{Binding SelectRecipe , RelativeSource={RelativeSource AncestorType=local:ProcessStepDetails}}"/>
+            </StackPanel>
+        </Expander.Header>
 
-    <Expander Header="Rezeptname" Foreground="{StaticResource FontWhite}">
-        <StackPanel Orientation="Horizontal">
-
-            <ComboBox>
-                <ComboBoxItem>Bla1</ComboBoxItem>
-                <ComboBoxItem>Bla2</ComboBoxItem>
-                <ComboBoxItem>Bla3</ComboBoxItem>
-                <ComboBoxItem>Bla4</ComboBoxItem>
-                <ComboBoxItem>Bla5</ComboBoxItem>
-            </ComboBox>    
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -262,11 +263,5 @@
             Content="Del"
             Style="{StaticResource SmallButton}" />
         </Grid>
-        </StackPanel>
     </Expander>
-
-
-
-
-
 </UserControl>
