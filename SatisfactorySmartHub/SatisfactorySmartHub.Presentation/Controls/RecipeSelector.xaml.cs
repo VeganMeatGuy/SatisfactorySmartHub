@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SatisfactorySmartHub.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,15 @@ namespace SatisfactorySmartHub.Presentation.Controls
         {
             get { return (ICommand)GetValue(ConfirmProperty); }
             set { SetValue(ConfirmProperty, value); }
+        }
+
+        public static DependencyProperty RecipeListProperty
+        = DependencyProperty.Register("RecipeList", typeof(ICollection<RecipeModel>), typeof(RecipeSelector));
+
+        public ICollection<RecipeModel> RecipeList
+        {
+            get { return (ICollection<RecipeModel>)GetValue(RecipeListProperty); }
+            set { SetValue(RecipeListProperty, value); }
         }
 
     }

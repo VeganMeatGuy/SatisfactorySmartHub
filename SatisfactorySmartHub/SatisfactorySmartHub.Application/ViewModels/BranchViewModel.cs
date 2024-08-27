@@ -32,6 +32,7 @@ public sealed class BranchViewModel : ViewModelBase
     private IRelayCommand? _selectRecipeCommand;
     private IRelayCommand? _recipeSelectionConfirmedCommand;
     private ReadonlyObservableList<ProcessStepModel> _processSteps = new ReadonlyObservableList<ProcessStepModel>();
+    private ReadonlyObservableList<RecipeModel> _recipeList = new ReadonlyObservableList<RecipeModel>();
 
     public BranchViewModel(ICachingService cachingService, IProductionSiteService productionSiteService, IProcessStepService processStepService)
     {
@@ -67,11 +68,12 @@ public sealed class BranchViewModel : ViewModelBase
 
     public ReadonlyObservableList<ProcessStepModel> ProcessSteps => _processSteps;
 
+    public ReadonlyObservableList<RecipeModel> RecipeList => _recipeList;
+
 
     public IRelayCommand AddProcessStepCommand => _addProcessStepCommand ?? new RelayCommand(new Action(AddProcessStep));
     public IRelayCommand RemoveProcessStepCommand => _removeProcessStepCommand ?? new RelayCommand(new Action(RemoveProcessStep));
     public IRelayCommand SelectRecipe => _selectRecipeCommand ?? new RelayCommand(new Action(ShowRecipeSelection));
-
     public IRelayCommand RecipeSelectionConfirmedCommand => _recipeSelectionConfirmedCommand ?? new RelayCommand(new Action(RecipeSelectionConfirmed));
 
     private void RecipeSelectionConfirmed()
