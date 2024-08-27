@@ -1,36 +1,9 @@
 ﻿using SatisfactorySmartHub.Domain.Models;
 
-namespace SatisfactorySmartHub.Infrastructure.Persistance.Repositories.StaticRepository;
+namespace SatisfactorySmartHub.Infrastructure.Persistance.Repositories.StaticRepositories.StaticData;
 
 internal static class Recipes
 {
-    internal static ICollection<RecipeModel> RecipeList => new List<RecipeModel>()
-    {
-        //Iron
-        IronIngot,
-        IronAlloyIngot,
-        PureIronIngot,
-        //IronRod
-        IronRod,
-        SteelRod,
-        //Screw
-        Screw,
-        CastScrew,
-        SteelScrew,
-        //Steel
-        SteelIngot,
-        //SteelBeam
-        SteelBeam,
-        //HeavyModularFrames
-        HeavyEncasedFrame,
-        //HeavyOil
-        HeavyOilResidue,
-        //Fuel
-        Fuel,
-        //AluminumScrap
-        AluminumScrap
-    };
-
     #region IronIngot
     internal static RecipeModel IronIngot = new()
     {
