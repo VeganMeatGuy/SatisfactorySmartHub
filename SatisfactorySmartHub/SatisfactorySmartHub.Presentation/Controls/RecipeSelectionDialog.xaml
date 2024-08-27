@@ -1,12 +1,12 @@
 ﻿<UserControl
-    x:Class="SatisfactorySmartHub.Presentation.Controls.RecipeSelector"
+    x:Class="SatisfactorySmartHub.Presentation.Controls.RecipeSelectionDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SatisfactorySmartHub.Presentation.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:HorizontalAlignment="Stretch"
+    d:VerticalAlignment="Stretch"
     mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -18,24 +18,32 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <StackPanel>
+    <Grid >
 
-        <ListView
+        <Border 
+            Background="{StaticResource grey1}" 
+            Opacity="0.7"
+            BorderThickness="0"/>
+
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center" >
+
+            <ListView
             Margin="5,0,5,0"
             Background="{StaticResource backgroundBlack}"
-            ItemsSource="{Binding RecipeList, RelativeSource={RelativeSource AncestorType=local:RecipeSelector}}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Label Content="{Binding Name}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+            ItemsSource="{Binding RecipeList, RelativeSource={RelativeSource AncestorType=local:RecipeSelectionDialog}}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
-        </ListView>
+            </ListView>
 
 
-        <Button
-            HorizontalAlignment="Left"
-            Command="{Binding Confirm, RelativeSource={RelativeSource AncestorType=local:RecipeSelector}}"
+            <Button
+            Command="{Binding Confirm, RelativeSource={RelativeSource AncestorType=local:RecipeSelectionDialog}}"
             Content="Choose me!" />
-    </StackPanel>
+        </StackPanel>
+    </Grid>
 </UserControl>

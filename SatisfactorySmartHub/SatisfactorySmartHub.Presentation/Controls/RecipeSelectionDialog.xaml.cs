@@ -19,15 +19,15 @@ namespace SatisfactorySmartHub.Presentation.Controls
     /// <summary>
     /// Interaction logic for RecipeSelector.xaml
     /// </summary>
-    public partial class RecipeSelector : UserControl
+    public partial class RecipeSelectionDialog : UserControl
     {
-        public RecipeSelector()
+        public RecipeSelectionDialog()
         {
             InitializeComponent();
         }
 
         public static DependencyProperty ConfirmProperty
-        = DependencyProperty.Register("Confirm", typeof(ICommand), typeof(RecipeSelector));
+        = DependencyProperty.Register("Confirm", typeof(ICommand), typeof(RecipeSelectionDialog));
 
         public ICommand Confirm
         {
@@ -36,7 +36,7 @@ namespace SatisfactorySmartHub.Presentation.Controls
         }
 
         public static DependencyProperty RecipeListProperty
-        = DependencyProperty.Register("RecipeList", typeof(ICollection<RecipeModel>), typeof(RecipeSelector));
+        = DependencyProperty.Register("RecipeList", typeof(ICollection<RecipeModel>), typeof(RecipeSelectionDialog));
 
         public ICollection<RecipeModel> RecipeList
         {

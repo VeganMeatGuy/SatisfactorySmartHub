@@ -24,24 +24,11 @@
     </UserControl.Resources>
 
     <Grid>
-
-        <customcontrol:RecipeSelector
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Panel.ZIndex="2"
-            Confirm="{Binding RecipeSelectionConfirmedCommand}"
-            Visibility="{Binding RecipeSelectionVisible, Converter={StaticResource BoolToVis}}"
-            RecipeList="{Binding }"/>
-        <Border
-            Grid.RowSpan="8"
-            Grid.ColumnSpan="4"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
+        <customcontrol:RecipeSelectionDialog
             Panel.ZIndex="1"
-            Background="{StaticResource grey1}"
-            BorderThickness="0"
-            Opacity="0.7"
-            Visibility="{Binding ShowForeFrontContent, Converter={StaticResource BoolToVis}}" />
+            Confirm="{Binding RecipeSelectionConfirmedCommand}"
+            RecipeList="{Binding RecipeList}"
+            Visibility="{Binding RecipeSelectionVisible, Converter={StaticResource BoolToVis}}" />
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -121,12 +108,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-            <!--<customcontrol:ProcessStepDetails
-                Grid.Row="6"
-                Grid.ColumnSpan="4"
-                SelectRecipe="{Binding SelectRecipe}"/>-->
-
         </Grid>
     </Grid>
 </UserControl>
