@@ -18,31 +18,93 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid >
+    <Grid>
 
-        <Border 
-            Background="{StaticResource grey1}" 
-            Opacity="0.7"
-            BorderThickness="0"/>
+        <Border
+            Background="{StaticResource grey1}"
+            BorderThickness="0"
+            Opacity="0.7" />
 
-        <StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Center" >
-            <ListView 
-            Margin="5,0,5,0"
-            Background="{StaticResource backgroundBlack}"
-            ItemsSource="{Binding RecipeList, RelativeSource={RelativeSource AncestorType=local:RecipeSelectionDialog}}">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ListView
+                Height="500"
+                Margin="5,0,5,0"
+                Background="{StaticResource backgroundBlack}"
+                ItemsSource="{Binding RecipeList, RelativeSource={RelativeSource AncestorType=local:RecipeSelectionDialog}}"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Label Content="{Binding Name}" Foreground="{StaticResource FontWhite}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition MaxHeight="120" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Foreground="{StaticResource FontWhite}"
+                                Text="{Binding Name}"
+                                TextWrapping="WrapWithOverflow" />
+                            <ItemsControl Grid.Column="1" ItemsSource="{Binding Ingredients}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock
+                                                Foreground="{StaticResource FontWhite}"
+                                                Text="{Binding Item.Name}"
+                                                TextWrapping="WrapWithOverflow" />
+                                            <Label Content="{Binding Amount}" Foreground="{StaticResource FontWhite}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="2" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                            <TextBlock
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                Foreground="{StaticResource FontWhite}"
+                                Text="{Binding Machine.Name}"
+                                TextWrapping="WrapWithOverflow" />
+                            <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                                <Label Content="{Binding MainProduct.Item.Name}" Foreground="{StaticResource FontWhite}" />
+                                <Label Content="{Binding MainProduct.Amount}" Foreground="{StaticResource FontWhite}" />
+                            </StackPanel>
+                            <ItemsControl Grid.Column="4" ItemsSource="{Binding Byproducts}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Label Content="{Binding Item.Name}" Foreground="{StaticResource FontWhite}" />
+                                            <Label Content="{Binding Amount}" Foreground="{StaticResource FontWhite}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="2" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+
+
+
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
             </ListView>
 
 
-            <Button
-            Command="{Binding Confirm, RelativeSource={RelativeSource AncestorType=local:RecipeSelectionDialog}}"
-            Content="Choose me!" />
+            <Button Command="{Binding Confirm, RelativeSource={RelativeSource AncestorType=local:RecipeSelectionDialog}}" Content="Choose me!" />
         </StackPanel>
     </Grid>
 </UserControl>
