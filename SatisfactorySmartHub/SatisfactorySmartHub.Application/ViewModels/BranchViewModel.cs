@@ -22,8 +22,9 @@ public sealed class BranchViewModel : ViewModelBase
     private readonly ICachingService _cachingService;
     private readonly IProductionSiteService _productionSiteService;
     private readonly IProcessStepService _processStepService;
-    
-    
+    private readonly IRecipeService _recipeService;
+
+
     private ProcessStepModel _activeProcessStepModel;
     private bool _showForeFrontContent = false;
     private bool _recipeSelectionVisible = false;
@@ -34,11 +35,19 @@ public sealed class BranchViewModel : ViewModelBase
     private ReadonlyObservableList<ProcessStepModel> _processSteps = new ReadonlyObservableList<ProcessStepModel>();
     private ReadonlyObservableList<RecipeModel> _recipeList = new ReadonlyObservableList<RecipeModel>();
 
-    public BranchViewModel(ICachingService cachingService, IProductionSiteService productionSiteService, IProcessStepService processStepService)
+    public BranchViewModel(
+        ICachingService cachingService,
+        IProductionSiteService productionSiteService,
+        IProcessStepService processStepService,
+        IRecipeService recipeService)
     {
         _cachingService = cachingService;
         _productionSiteService = productionSiteService;
         _processStepService = processStepService;
+        _recipeService = recipeService;
+
+        LoadRecipes();
+
 
         if (ActiveBranch == null)
             return;
@@ -70,7 +79,6 @@ public sealed class BranchViewModel : ViewModelBase
 
     public ReadonlyObservableList<RecipeModel> RecipeList => _recipeList;
 
-
     public IRelayCommand AddProcessStepCommand => _addProcessStepCommand ?? new RelayCommand(new Action(AddProcessStep));
     public IRelayCommand RemoveProcessStepCommand => _removeProcessStepCommand ?? new RelayCommand(new Action(RemoveProcessStep));
     public IRelayCommand SelectRecipe => _selectRecipeCommand ?? new RelayCommand(new Action(ShowRecipeSelection));
@@ -84,6 +92,7 @@ public sealed class BranchViewModel : ViewModelBase
 
     private void ShowRecipeSelection()
     {
+        var one = RecipeList;
         ShowForeFrontContent = true;
         RecipeSelectionVisible = true;
     }
@@ -113,5 +122,10 @@ public sealed class BranchViewModel : ViewModelBase
         _productionSiteService.RemoveProcessStepFromProductionSite(SelectedProcessStep, productionSite);
 
         ProcessSteps.Update();
+    }
+
+    private void LoadRecipes()
+    {
+        _recipeList = new ReadonlyObservableList<RecipeModel>(_recipeService.GetAllRecipes());
     }
 }

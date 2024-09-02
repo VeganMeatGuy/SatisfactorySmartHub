@@ -24,6 +24,7 @@ internal static class ServiceCollectionExtension
         services.TryAddSingleton<ICachingService, CachingService>();
         services.TryAddSingleton<IProcessStepService, ProcessStepService>();
         services.TryAddSingleton<IProductionSiteService, ProductionSiteService>();
+        services.TryAddSingleton<IRecipeService, RecipeService>();
 
         return services;
     }
