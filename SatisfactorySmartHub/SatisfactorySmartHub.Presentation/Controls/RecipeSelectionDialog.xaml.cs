@@ -1,4 +1,5 @@
-﻿using SatisfactorySmartHub.Domain.Models;
+﻿using SatisfactorySmartHub.Application.Common;
+using SatisfactorySmartHub.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,11 +37,11 @@ namespace SatisfactorySmartHub.Presentation.Controls
         }
 
         public static DependencyProperty RecipeListProperty
-        = DependencyProperty.Register("RecipeList", typeof(ICollection<RecipeModel>), typeof(RecipeSelectionDialog));
+        = DependencyProperty.Register("RecipeList", typeof(ReadonlyObservableList<RecipeModel>), typeof(RecipeSelectionDialog));
 
-        public ICollection<RecipeModel> RecipeList
+        public ReadonlyObservableList<RecipeModel> RecipeList
         {
-            get { return (ICollection<RecipeModel>)GetValue(RecipeListProperty); }
+            get { return (ReadonlyObservableList<RecipeModel>)GetValue(RecipeListProperty); }
             set { SetValue(RecipeListProperty, value); }
         }
 

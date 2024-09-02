@@ -14,8 +14,8 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid
                         Name="Backpanel"
-                        Height="{TemplateBinding Height}"
                         Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
                         Background="{StaticResource grey4}">
                         <TextBlock
                             Name="Text"
@@ -42,21 +42,21 @@
     </Style>
 
     <Style
-       x:Key="SmallButton"
-       BasedOn="{StaticResource StandardButton}"
-       TargetType="{x:Type Button}">
+        x:Key="SmallButton"
+        BasedOn="{StaticResource StandardButton}"
+        TargetType="{x:Type Button}">
         <Setter Property="Height" Value="15" />
         <Setter Property="FontSize" Value="10" />
-        <Setter Property="Margin" Value="0"/>
-        <Setter Property="Padding" Value="2,0,2,0"/>
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="2,0,2,0" />
     </Style>
 
     <Style
-       x:Key="SmallQuadButton"
-       BasedOn="{StaticResource SmallButton}"
-       TargetType="{x:Type Button}">
+        x:Key="SmallQuadButton"
+        BasedOn="{StaticResource SmallButton}"
+        TargetType="{x:Type Button}">
         <Setter Property="Width" Value="15" />
-        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Padding" Value="0" />
     </Style>
 
 </ResourceDictionary>

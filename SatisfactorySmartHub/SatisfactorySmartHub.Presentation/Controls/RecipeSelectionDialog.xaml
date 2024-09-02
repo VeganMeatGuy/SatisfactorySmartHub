@@ -27,14 +27,13 @@
 
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center" >
-
-            <ListView
+            <ListView 
             Margin="5,0,5,0"
             Background="{StaticResource backgroundBlack}"
             ItemsSource="{Binding RecipeList, RelativeSource={RelativeSource AncestorType=local:RecipeSelectionDialog}}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Label Content="{Binding Name}" />
+                        <Label Content="{Binding Name}" Foreground="{StaticResource FontWhite}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
