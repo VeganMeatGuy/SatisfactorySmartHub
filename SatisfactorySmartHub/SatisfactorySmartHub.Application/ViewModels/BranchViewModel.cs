@@ -34,6 +34,7 @@ public sealed class BranchViewModel : ViewModelBase
     private IRelayCommand? _recipeSelectionConfirmedCommand;
     private ReadonlyObservableList<ProcessStepModel> _processSteps = new ReadonlyObservableList<ProcessStepModel>();
     private ReadonlyObservableList<RecipeModel> _recipeList = new ReadonlyObservableList<RecipeModel>();
+    private RecipeModel _selectedRecipe;
 
     public BranchViewModel(
         ICachingService cachingService,
@@ -75,17 +76,27 @@ public sealed class BranchViewModel : ViewModelBase
         set => SetProperty(ref _recipeSelectionVisible, value);
     }
 
+    public RecipeModel? SelectedRecipe
+    {
+        get => _selectedRecipe;
+        set => SetProperty(ref _selectedRecipe, value);
+    }
+
     public ReadonlyObservableList<ProcessStepModel> ProcessSteps => _processSteps;
 
     public ReadonlyObservableList<RecipeModel> RecipeList => _recipeList;
 
     public IRelayCommand AddProcessStepCommand => _addProcessStepCommand ?? new RelayCommand(new Action(AddProcessStep));
     public IRelayCommand RemoveProcessStepCommand => _removeProcessStepCommand ?? new RelayCommand(new Action(RemoveProcessStep));
-    public IRelayCommand SelectRecipe => _selectRecipeCommand ?? new RelayCommand(new Action(ShowRecipeSelection));
+    public IRelayCommand SelectRecipeCommand => _selectRecipeCommand ?? new RelayCommand(new Action(ShowRecipeSelection));
     public IRelayCommand RecipeSelectionConfirmedCommand => _recipeSelectionConfirmedCommand ?? new RelayCommand(new Action(RecipeSelectionConfirmed));
 
     private void RecipeSelectionConfirmed()
     {
+        var bla = SelectedRecipe;
+
+        SelectedProcessStep.Recipe = SelectedRecipe;
+        SelectedRecipe = null;
         ShowForeFrontContent = false;
         RecipeSelectionVisible = false;
     }

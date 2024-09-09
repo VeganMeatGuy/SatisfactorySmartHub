@@ -28,7 +28,8 @@
             Panel.ZIndex="1"
             Confirm="{Binding RecipeSelectionConfirmedCommand}"
             RecipeList="{Binding RecipeList}"
-            Visibility="{Binding RecipeSelectionVisible, Converter={StaticResource BoolToVis}}" />
+            Visibility="{Binding RecipeSelectionVisible, Converter={StaticResource BoolToVis}}"
+            SelectedRecipe="{Binding SelectedRecipe, Mode=TwoWay}"/>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -104,7 +105,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <customcontrol:ProcessStepDetails SelectRecipe="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SelectRecipe}" />
+                        <customcontrol:ProcessStepDetails SelectRecipe="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SelectRecipeCommand}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

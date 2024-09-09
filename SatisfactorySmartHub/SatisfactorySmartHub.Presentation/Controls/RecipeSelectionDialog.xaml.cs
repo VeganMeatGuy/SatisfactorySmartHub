@@ -45,5 +45,14 @@ namespace SatisfactorySmartHub.Presentation.Controls
             set { SetValue(RecipeListProperty, value); }
         }
 
+        public static DependencyProperty SelectedRecipeProperty
+        = DependencyProperty.Register("SelectedRecipe", typeof(RecipeModel), typeof(RecipeSelectionDialog));
+
+        public RecipeModel SelectedRecipe
+        {
+            get { return (RecipeModel)GetValue(SelectedRecipeProperty); }
+            set { SetValue(SelectedRecipeProperty, value); }
+        }
+
     }
 }
