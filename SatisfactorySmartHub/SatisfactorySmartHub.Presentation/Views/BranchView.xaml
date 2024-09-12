@@ -105,7 +105,9 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <customcontrol:ProcessStepDetails SelectRecipe="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SelectRecipeCommand}" />
+                        <customcontrol:ProcessStepDetails 
+                            SelectRecipe="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SelectRecipeCommand}"
+                            ProcessStep="{Binding}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

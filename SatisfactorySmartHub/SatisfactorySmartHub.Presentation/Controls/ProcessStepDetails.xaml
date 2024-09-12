@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SatisfactorySmartHub.Presentation.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    
     HorizontalAlignment="Stretch"
     VerticalAlignment="Stretch"
     mc:Ignorable="d">
@@ -18,13 +17,14 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Expander >
+    <Expander>
         <Expander.Header>
             <StackPanel Orientation="Horizontal">
-                <Label Content="Rezept" Foreground="{StaticResource FontWhite}"/>
-                <Button 
-                    Content="Change Recipe" Style="{StaticResource SmallButton}"
-                    Command="{Binding SelectRecipe , RelativeSource={RelativeSource AncestorType=local:ProcessStepDetails}}"/>
+                <Label Content="{Binding ProcessStep.Recipe.Name, RelativeSource={RelativeSource AncestorType=local:ProcessStepDetails}}" Foreground="{StaticResource FontWhite}" />
+                <Button
+                    Command="{Binding SelectRecipe, RelativeSource={RelativeSource AncestorType=local:ProcessStepDetails}}"
+                    Content="Change Recipe"
+                    Style="{StaticResource SmallButton}"/>
             </StackPanel>
         </Expander.Header>
 
@@ -59,209 +59,209 @@
 
             <Label Content="⌖" Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Column="1"
-            Content="1000"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Column="1"
+                Content="1000"
+                Foreground="{StaticResource FontWhite}" />
             <Button
-            Grid.Row="1"
-            Content="+"
-            Style="{StaticResource SmallQuadButton}" />
+                Grid.Row="1"
+                Content="+"
+                Style="{StaticResource SmallQuadButton}" />
             <Button
-            Grid.Row="2"
-            Content="-"
-            Style="{StaticResource SmallQuadButton}" />
+                Grid.Row="2"
+                Content="-"
+                Style="{StaticResource SmallQuadButton}" />
             <Button
-            Grid.Row="3"
-            Content="↻"
-            Style="{StaticResource SmallQuadButton}" />
+                Grid.Row="3"
+                Content="↻"
+                Style="{StaticResource SmallQuadButton}" />
 
             <RadioButton
-            Grid.Row="1"
-            Grid.Column="1"
-            VerticalAlignment="Center"
-            Content="1x"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="1"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Content="1x"
+                Foreground="{StaticResource FontWhite}" />
             <RadioButton
-            Grid.Row="2"
-            Grid.Column="1"
-            VerticalAlignment="Center"
-            Content="100x"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="2"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Content="100x"
+                Foreground="{StaticResource FontWhite}" />
             <RadioButton
-            Grid.Row="3"
-            Grid.Column="1"
-            VerticalAlignment="Center"
-            Content="1000x"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="3"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Content="1000x"
+                Foreground="{StaticResource FontWhite}" />
 
             <Label
-            Grid.Column="2"
-            Content="Item 1"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Column="2"
+                Content="Item 1"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Column="4"
-            Content="10"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Column="4"
+                Content="10"
+                Foreground="{StaticResource FontWhite}" />
 
             <Label
-            Grid.Row="1"
-            Grid.Column="2"
-            Content="Item 2"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="1"
+                Grid.Column="2"
+                Content="Item 2"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="1"
-            Grid.Column="4"
-            Content="10"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="1"
+                Grid.Column="4"
+                Content="10"
+                Foreground="{StaticResource FontWhite}" />
 
             <Label
-            Grid.Row="2"
-            Grid.Column="2"
-            Content="Item 3"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="2"
+                Grid.Column="2"
+                Content="Item 3"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="2"
-            Grid.Column="4"
-            Content="10"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="2"
+                Grid.Column="4"
+                Content="10"
+                Foreground="{StaticResource FontWhite}" />
 
             <Label
-            Grid.Row="3"
-            Grid.Column="2"
-            Content="Item 4"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="3"
+                Grid.Column="2"
+                Content="Item 4"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="3"
-            Grid.Column="4"
-            Content="10"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="3"
+                Grid.Column="4"
+                Content="10"
+                Foreground="{StaticResource FontWhite}" />
 
             <Label
-            Grid.Row="0"
-            Grid.Column="5"
-            Content="Item 1"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="0"
+                Grid.Column="5"
+                Content="Item 1"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="1"
-            Grid.Column="6"
-            Content="10"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="1"
+                Grid.Column="6"
+                Content="10"
+                Foreground="{StaticResource FontWhite}" />
 
             <Label
-            Grid.Row="2"
-            Grid.Column="5"
-            Content="Item 2"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="2"
+                Grid.Column="5"
+                Content="Item 2"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="3"
-            Grid.Column="6"
-            Content="10"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="3"
+                Grid.Column="6"
+                Content="10"
+                Foreground="{StaticResource FontWhite}" />
 
             <Label
-            Grid.Row="0"
-            Grid.Column="7"
-            Content="MachineName"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="0"
+                Grid.Column="7"
+                Content="MachineName"
+                Foreground="{StaticResource FontWhite}" />
 
             <Label
-            Grid.Row="1"
-            Grid.Column="8"
-            Content="10"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="1"
+                Grid.Column="8"
+                Content="10"
+                Foreground="{StaticResource FontWhite}" />
 
             <Image
-            Grid.Row="1"
-            Grid.Column="9"
-            Width="15"
-            Height="15"
-            Source="/SatisfactorySmartHub.Presentation;component/Assets/PowerplantIcon.png" />
+                Grid.Row="1"
+                Grid.Column="9"
+                Width="15"
+                Height="15"
+                Source="/SatisfactorySmartHub.Presentation;component/Assets/PowerplantIcon.png" />
 
             <Label
-            Grid.Row="2"
-            Grid.Column="7"
-            Content="??"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="2"
+                Grid.Column="7"
+                Content="??"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="2"
-            Grid.Column="8"
-            Content="x =&gt;"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="2"
+                Grid.Column="8"
+                Content="x =&gt;"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="2"
-            Grid.Column="9"
-            Content="100%"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="2"
+                Grid.Column="9"
+                Content="100%"
+                Foreground="{StaticResource FontWhite}" />
 
             <Label
-            Grid.Row="3"
-            Grid.Column="7"
-            Content="1"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="3"
+                Grid.Column="7"
+                Content="1"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="3"
-            Grid.Column="8"
-            Content="x =&gt;"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="3"
+                Grid.Column="8"
+                Content="x =&gt;"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="3"
-            Grid.Column="9"
-            Content="??%"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="3"
+                Grid.Column="9"
+                Content="??%"
+                Foreground="{StaticResource FontWhite}" />
 
             <Label
-            Grid.Row="0"
-            Grid.Column="10"
-            Content="Amount:"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="0"
+                Grid.Column="10"
+                Content="Amount:"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="1"
-            Grid.Column="10"
-            Content="5"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="1"
+                Grid.Column="10"
+                Content="5"
+                Foreground="{StaticResource FontWhite}" />
 
             <Label
-            Grid.Row="2"
-            Grid.Column="10"
-            Content="Speed"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="2"
+                Grid.Column="10"
+                Content="Speed"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="3"
-            Grid.Column="10"
-            Content="100%"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="3"
+                Grid.Column="10"
+                Content="100%"
+                Foreground="{StaticResource FontWhite}" />
 
             <Button
-            Grid.Row="3"
-            Grid.Column="11"
-            Content="Add"
-            Style="{StaticResource SmallButton}" />
+                Grid.Row="3"
+                Grid.Column="11"
+                Content="Add"
+                Style="{StaticResource SmallButton}" />
             <Label
-            Grid.Row="3"
-            Grid.Column="12"
-            Content="11"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="3"
+                Grid.Column="12"
+                Content="11"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="3"
-            Grid.Column="13"
-            Content="x"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="3"
+                Grid.Column="13"
+                Content="x"
+                Foreground="{StaticResource FontWhite}" />
             <Label
-            Grid.Row="3"
-            Grid.Column="14"
-            Content="10"
-            Foreground="{StaticResource FontWhite}" />
+                Grid.Row="3"
+                Grid.Column="14"
+                Content="10"
+                Foreground="{StaticResource FontWhite}" />
             <Image
-            Grid.Row="3"
-            Grid.Column="15"
-            Width="15"
-            Height="15"
-            Source="/SatisfactorySmartHub.Presentation;component/Assets/PowerplantIcon.png" />
+                Grid.Row="3"
+                Grid.Column="15"
+                Width="15"
+                Height="15"
+                Source="/SatisfactorySmartHub.Presentation;component/Assets/PowerplantIcon.png" />
             <Button
-            Grid.Row="3"
-            Grid.Column="16"
-            Content="Del"
-            Style="{StaticResource SmallButton}" />
+                Grid.Row="3"
+                Grid.Column="16"
+                Content="Del"
+                Style="{StaticResource SmallButton}" />
         </Grid>
     </Expander>
 </UserControl>

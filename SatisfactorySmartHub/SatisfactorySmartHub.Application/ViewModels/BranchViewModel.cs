@@ -93,9 +93,13 @@ public sealed class BranchViewModel : ViewModelBase
 
     private void RecipeSelectionConfirmed()
     {
-        var bla = SelectedRecipe;
+        if (SelectedRecipe != null)
+        {
+            SelectedProcessStep.Recipe = SelectedRecipe;
+        }
 
-        SelectedProcessStep.Recipe = SelectedRecipe;
+        ProcessSteps.Update();
+
         SelectedRecipe = null;
         ShowForeFrontContent = false;
         RecipeSelectionVisible = false;
@@ -103,7 +107,8 @@ public sealed class BranchViewModel : ViewModelBase
 
     private void ShowRecipeSelection()
     {
-        var one = RecipeList;
+        if (SelectedProcessStep == null)
+            return;
         ShowForeFrontContent = true;
         RecipeSelectionVisible = true;
     }
