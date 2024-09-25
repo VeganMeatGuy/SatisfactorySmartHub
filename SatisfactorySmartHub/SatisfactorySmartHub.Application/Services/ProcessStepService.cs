@@ -63,7 +63,7 @@ internal sealed class ProcessStepService : IProcessStepService
 
     private ICollection<MachineryConfigItemModel> PlanMachinery(ProcessStepModel processStepModel, MachineryPlanningType machineryPlanningType)
     {
-
+        throw new NotImplementedException();
     }
 
 
@@ -89,128 +89,131 @@ internal sealed class ProcessStepService : IProcessStepService
     }
     private ICollection<ItemBalanceModel> CalculateBalanceProductTarget()
     {
-        ICollection<ItemBalanceModel> balance = new HashSet<ItemBalanceModel>();
+        throw new NotImplementedException();
+        //ICollection<ItemBalanceModel> balance = new HashSet<ItemBalanceModel>();
 
-        decimal standardmenge = Recipe.MainProduct.Amount;
-        decimal multiplikator = ProcessStepTarget.Amount / standardmenge;
+        //decimal standardmenge = Recipe.MainProduct.Amount;
+        //decimal multiplikator = ProcessStepTarget.Amount / standardmenge;
 
-        ItemBalanceModel MainProduct = new ItemBalanceModel();
-        MainProduct.Item = Recipe.MainProduct.Item;
-        MainProduct.ProducedAmount = ProcessStepTarget.Amount;
+        //ItemBalanceModel MainProduct = new ItemBalanceModel();
+        //MainProduct.Item = Recipe.MainProduct.Item;
+        //MainProduct.ProducedAmount = ProcessStepTarget.Amount;
 
-        balance.Add(MainProduct);
+        //balance.Add(MainProduct);
 
 
-        foreach (ItemWithAmount bypitem in Recipe.Byproducts)
-        {
-            ItemBalanceModel byProduct = new ItemBalanceModel();
-            byProduct.Item = bypitem.Item;
-            byProduct.ProducedAmount = decimal.Round(multiplikator * bypitem.Amount, 2, MidpointRounding.ToNegativeInfinity);
-            balance.Add(byProduct);
-        }
+        //foreach (ItemWithAmount bypitem in Recipe.Byproducts)
+        //{
+        //    ItemBalanceModel byProduct = new ItemBalanceModel();
+        //    byProduct.Item = bypitem.Item;
+        //    byProduct.ProducedAmount = decimal.Round(multiplikator * bypitem.Amount, 2, MidpointRounding.ToNegativeInfinity);
+        //    balance.Add(byProduct);
+        //}
 
-        foreach (ItemWithAmount inItem in Recipe.Ingredients)
-        {
-            ItemBalanceModel ingredient = new ItemBalanceModel();
-            ingredient.Item = inItem.Item;
-            ingredient.NeededAmount = decimal.Round(multiplikator * inItem.Amount, 2, MidpointRounding.ToPositiveInfinity);
-            balance.Add(ingredient);
-        }
+        //foreach (ItemWithAmount inItem in Recipe.Ingredients)
+        //{
+        //    ItemBalanceModel ingredient = new ItemBalanceModel();
+        //    ingredient.Item = inItem.Item;
+        //    ingredient.NeededAmount = decimal.Round(multiplikator * inItem.Amount, 2, MidpointRounding.ToPositiveInfinity);
+        //    balance.Add(ingredient);
+        //}
 
-        return balance;
+        //return balance;
     }
     private ICollection<ItemBalanceModel> CalculateBalanceIngredientTarget()
     {
+        throw new NotImplementedException();
+        //ICollection<ItemBalanceModel> balance = new HashSet<ItemBalanceModel>();
 
-        ICollection<ItemBalanceModel> balance = new HashSet<ItemBalanceModel>();
+        //ItemWithAmount target = Recipe.Ingredients.First(x => x.Item.Name == ProcessStepTarget.Item.Name);
 
-        ItemWithAmount target = Recipe.Ingredients.First(x => x.Item.Name == ProcessStepTarget.Item.Name);
+        //decimal standardmenge = target.Amount;
+        //decimal multiplikator = ProcessStepTarget.Amount / standardmenge;
 
-        decimal standardmenge = target.Amount;
-        decimal multiplikator = ProcessStepTarget.Amount / standardmenge;
+        //ItemBalanceModel MainProduct = new ItemBalanceModel();
+        //MainProduct.Item = Recipe.MainProduct.Item;
+        //MainProduct.ProducedAmount = decimal.Round(multiplikator * Recipe.MainProduct.Amount, 2, MidpointRounding.ToNegativeInfinity);
 
-        ItemBalanceModel MainProduct = new ItemBalanceModel();
-        MainProduct.Item = Recipe.MainProduct.Item;
-        MainProduct.ProducedAmount = decimal.Round(multiplikator * Recipe.MainProduct.Amount, 2, MidpointRounding.ToNegativeInfinity);
-
-        balance.Add(MainProduct);
+        //balance.Add(MainProduct);
 
 
-        foreach (ItemWithAmount bypitem in Recipe.Byproducts)
-        {
-            ItemBalanceModel byProduct = new ItemBalanceModel();
-            byProduct.Item = bypitem.Item;
-            byProduct.ProducedAmount = decimal.Round(multiplikator * bypitem.Amount, 2, MidpointRounding.ToNegativeInfinity);
-            balance.Add(byProduct);
-        }
+        //foreach (ItemWithAmount bypitem in Recipe.Byproducts)
+        //{
+        //    ItemBalanceModel byProduct = new ItemBalanceModel();
+        //    byProduct.Item = bypitem.Item;
+        //    byProduct.ProducedAmount = decimal.Round(multiplikator * bypitem.Amount, 2, MidpointRounding.ToNegativeInfinity);
+        //    balance.Add(byProduct);
+        //}
 
-        foreach (ItemWithAmount inItem in Recipe.Ingredients)
-        {
-            ItemBalanceModel ingredient = new ItemBalanceModel();
-            ingredient.Item = inItem.Item;
-            if (inItem.Item.Name == target.Item.Name)
-                ingredient.NeededAmount = ProcessStepTarget.Amount;
-            else
-                ingredient.NeededAmount = decimal.Round(multiplikator * inItem.Amount, 2, MidpointRounding.ToPositiveInfinity);
-            balance.Add(ingredient);
-        }
+        //foreach (ItemWithAmount inItem in Recipe.Ingredients)
+        //{
+        //    ItemBalanceModel ingredient = new ItemBalanceModel();
+        //    ingredient.Item = inItem.Item;
+        //    if (inItem.Item.Name == target.Item.Name)
+        //        ingredient.NeededAmount = ProcessStepTarget.Amount;
+        //    else
+        //        ingredient.NeededAmount = decimal.Round(multiplikator * inItem.Amount, 2, MidpointRounding.ToPositiveInfinity);
+        //    balance.Add(ingredient);
+        //}
 
-        return balance;
+        //return balance;
     }
     private ICollection<ItemBalanceModel> CalculateBalanceByProductTarget()
     {
-        ICollection<ItemBalanceModel> balance = new HashSet<ItemBalanceModel>();
+        throw new NotImplementedException();
+        //ICollection<ItemBalanceModel> balance = new HashSet<ItemBalanceModel>();
 
-        ItemWithAmount target = Recipe.Byproducts.First(x => x.Item.Name == ProcessStepTarget.Item.Name);
+        //ItemWithAmount target = Recipe.Byproducts.First(x => x.Item.Name == ProcessStepTarget.Item.Name);
 
-        decimal standardmenge = target.Amount;
-        decimal multiplikator = ProcessStepTarget.Amount / standardmenge;
+        //decimal standardmenge = target.Amount;
+        //decimal multiplikator = ProcessStepTarget.Amount / standardmenge;
 
-        ItemBalanceModel MainProduct = new ItemBalanceModel();
-        MainProduct.Item = Recipe.MainProduct.Item;
-        MainProduct.ProducedAmount = decimal.Round(multiplikator * Recipe.MainProduct.Amount, 2, MidpointRounding.ToNegativeInfinity);
+        //ItemBalanceModel MainProduct = new ItemBalanceModel();
+        //MainProduct.Item = Recipe.MainProduct.Item;
+        //MainProduct.ProducedAmount = decimal.Round(multiplikator * Recipe.MainProduct.Amount, 2, MidpointRounding.ToNegativeInfinity);
 
-        balance.Add(MainProduct);
+        //balance.Add(MainProduct);
 
 
-        foreach (ItemWithAmount bypitem in Recipe.Byproducts)
-        {
-            ItemBalanceModel byProduct = new ItemBalanceModel();
-            byProduct.Item = bypitem.Item;
-            if (bypitem.Item.Name == target.Item.Name)
-                byProduct.ProducedAmount = ProcessStepTarget.Amount;
-            else
-                byProduct.ProducedAmount = decimal.Round(multiplikator * bypitem.Amount, 2, MidpointRounding.ToNegativeInfinity);
-            balance.Add(byProduct);
-        }
+        //foreach (ItemWithAmount bypitem in Recipe.Byproducts)
+        //{
+        //    ItemBalanceModel byProduct = new ItemBalanceModel();
+        //    byProduct.Item = bypitem.Item;
+        //    if (bypitem.Item.Name == target.Item.Name)
+        //        byProduct.ProducedAmount = ProcessStepTarget.Amount;
+        //    else
+        //        byProduct.ProducedAmount = decimal.Round(multiplikator * bypitem.Amount, 2, MidpointRounding.ToNegativeInfinity);
+        //    balance.Add(byProduct);
+        //}
 
-        foreach (ItemWithAmount inItem in Recipe.Ingredients)
-        {
-            ItemBalanceModel ingredient = new ItemBalanceModel();
-            ingredient.Item = inItem.Item;
-            ingredient.NeededAmount = decimal.Round(multiplikator * inItem.Amount, 2, MidpointRounding.ToPositiveInfinity);
-            balance.Add(ingredient);
-        }
+        //foreach (ItemWithAmount inItem in Recipe.Ingredients)
+        //{
+        //    ItemBalanceModel ingredient = new ItemBalanceModel();
+        //    ingredient.Item = inItem.Item;
+        //    ingredient.NeededAmount = decimal.Round(multiplikator * inItem.Amount, 2, MidpointRounding.ToPositiveInfinity);
+        //    balance.Add(ingredient);
+        //}
 
-        return balance;
+        //return balance;
     }
     private ICollection<ItemBalanceModel> CalculateBalanceWithoutTarget()
     {
-        ICollection<ItemBalanceModel> balance = new HashSet<ItemBalanceModel>();
+        throw new NotImplementedException();
+    //    ICollection<ItemBalanceModel> balance = new HashSet<ItemBalanceModel>();
 
-        balance.Add(new ItemBalanceModel() { Item = Recipe.MainProduct.Item });
+    //    balance.Add(new ItemBalanceModel() { Item = Recipe.MainProduct.Item });
 
-        foreach (ItemWithAmount bypitem in Recipe.Byproducts)
-        {
-            balance.Add(new ItemBalanceModel() { Item = bypitem.Item });
-        }
+    //    foreach (ItemWithAmount bypitem in Recipe.Byproducts)
+    //    {
+    //        balance.Add(new ItemBalanceModel() { Item = bypitem.Item });
+    //    }
 
-        foreach (ItemWithAmount inItem in Recipe.Ingredients)
-        {
-            balance.Add(new ItemBalanceModel() { Item = inItem.Item });
-        }
+    //    foreach (ItemWithAmount inItem in Recipe.Ingredients)
+    //    {
+    //        balance.Add(new ItemBalanceModel() { Item = inItem.Item });
+    //    }
 
-        return balance;
+    //    return balance;
     }
 
 

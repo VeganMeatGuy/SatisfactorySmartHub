@@ -26,21 +26,22 @@ public sealed class ProductionSiteModel
 
     public ICollection<ItemBalanceModel> GetBalance()
     {
-        ICollection<ItemBalanceModel> result = new HashSet<ItemBalanceModel>();
+        throw new NotImplementedException();
+        //ICollection<ItemBalanceModel> result = new HashSet<ItemBalanceModel>();
 
-        foreach (ProcessStepModel processStep in ProcessSteps)
-        {
+        //foreach (ProcessStepModel processStep in ProcessSteps)
+        //{
 
-            foreach (ItemBalanceModel item in processStep.GetBalance())
-                if (result.Any(x => x.Item.Name == item.Item.Name))
-                {
-                    result.First(x => x.Item.Name == item.Item.Name).ProducedAmount += item.ProducedAmount;
-                    result.First(x => x.Item.Name == item.Item.Name).ProducedAmount += item.NeededAmount;
-                }
-                else
-                    result.Add(item);
-        }
-        return result;
+        //    foreach (ItemBalanceModel item in processStep.GetBalance())
+        //        if (result.Any(x => x.Item.Name == item.Item.Name))
+        //        {
+        //            result.First(x => x.Item.Name == item.Item.Name).ProducedAmount += item.ProducedAmount;
+        //            result.First(x => x.Item.Name == item.Item.Name).ProducedAmount += item.NeededAmount;
+        //        }
+        //        else
+        //            result.Add(item);
+        //}
+        //return result;
     }
 }
 
