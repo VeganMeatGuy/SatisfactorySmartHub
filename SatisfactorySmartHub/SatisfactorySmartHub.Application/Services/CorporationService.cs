@@ -18,7 +18,7 @@ internal sealed class CorporationService(
 {
     public Corporation GetNewCorporation(string corporationName)
     {
-        return Corporation.Create(corporationName);
+        return Corporation.Create(corporationName).Value;
     }
 
     public IEnumerable<Corporation> GetCorporations()
