@@ -1,15 +1,14 @@
 ﻿using SatisfactorySmartHub.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Domain.Tests.Entities;
 
 [TestClass]
 public sealed partial class MachineTests
 {
+    private readonly static int _validMachineId = 1;
+    private readonly static string _validMachineName = "ValidMachineName";
+    private readonly static int _validMachinePowerConsumption = 1;
+
     [TestMethod]
     [TestCategory("Constructor")]
     public void MachineTest()
@@ -25,6 +24,6 @@ public sealed partial class MachineTests
 
     private Machine CreateMockedInstance()
     {
-        return Machine.Create("MockedMachine").Value;
+        return Machine.Create(_validMachineId, _validMachineName, _validMachinePowerConsumption).Value;
     }
 }

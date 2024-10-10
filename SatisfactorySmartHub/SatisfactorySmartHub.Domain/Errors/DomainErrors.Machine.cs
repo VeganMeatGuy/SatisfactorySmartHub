@@ -6,6 +6,7 @@ public static partial class DomainErrors
 {
     public static class Machine
     {
+        public static readonly Error MachineIdCannotBeZero = Error.Validation();
         public static readonly Error MachineNameCannotBeNull = Error.Validation();
         public static readonly Error MachineNameCannotBeEmpty = Error.Validation();
     }

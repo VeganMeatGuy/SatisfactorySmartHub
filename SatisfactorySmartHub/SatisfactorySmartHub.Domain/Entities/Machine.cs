@@ -14,9 +14,11 @@ public sealed class Machine : EntityBase
     public int Id { get; init; }
     public string Name { get; init; } = string.Empty;
     public int PowerConsumption { get; init; }
-
     public static ErrorOr<Machine> Create(int id, string name, int powerConsumption)
     {
+        if (id == 0)
+            return DomainErrors.Machine.MachineIdCannotBeZero;
+
         if (name == null)
             return DomainErrors.Machine.MachineNameCannotBeNull;
 
