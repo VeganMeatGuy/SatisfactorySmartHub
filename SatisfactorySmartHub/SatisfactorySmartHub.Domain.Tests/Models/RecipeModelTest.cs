@@ -1,6 +1,6 @@
 ﻿using SatisfactorySmartHub.Domain.Models;
 using SatisfactorySmartHub.Domain.Models.Enums;
-using SatisfactorySmartHub.Infrastructure.Persistance.Repositories.StaticRepositories.StaticData;
+using SatisfactorySmartHub.Infrastructure.Persistance.Data;
 
 namespace SatisfactorySmartHub.Domain.Tests.Models;
 

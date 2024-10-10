@@ -1,8 +1,4 @@
-﻿using SatisfactorySmartHub.Domain.Models;
-using SatisfactorySmartHub.Infrastructure.Persistance.Repositories.StaticRepositories.StaticData;
-using System.Collections.ObjectModel;
-
-namespace SatisfactorySmartHub.Domain.Tests.Models;
+﻿namespace SatisfactorySmartHub.Domain.Tests.Models;
 
 [TestClass]
 public class ProductionSiteModelTest
