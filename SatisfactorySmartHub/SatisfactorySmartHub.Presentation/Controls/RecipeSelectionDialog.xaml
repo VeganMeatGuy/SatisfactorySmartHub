@@ -35,8 +35,8 @@
                 Background="{StaticResource backgroundBlack}"
                 ItemContainerStyle="{DynamicResource Test}"
                 ItemsSource="{Binding RecipeList, RelativeSource={RelativeSource AncestorType=local:RecipeSelectionDialog}}"
-                SelectedItem="{Binding  SelectedRecipe, RelativeSource={RelativeSource AncestorType=local:RecipeSelectionDialog}}"
-                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SelectedItem="{Binding SelectedRecipe, RelativeSource={RelativeSource AncestorType=local:RecipeSelectionDialog}}">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>

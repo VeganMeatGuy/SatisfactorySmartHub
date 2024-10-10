@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SatisfactorySmartHub.Domain.Entities.Base;
+using SatisfactorySmartHub.Domain.Interfaces.Entities;
 
 namespace SatisfactorySmartHub.Domain.Entities;
 
-public class Item
+public sealed class Item : EntityBase
 {
-    //empty constructor for EF Core
-    private Item() { }
+    public int Id { get; init; }
+    public string Name { get; init; } = string.Empty;
 
-    public Guid Id { get; init; }
-    public string Name { get; private set; }
-
-    public static Item Create(string name)
+    public static Item Create(int id, string name)
     {
         var item = new Item
         {
-            Id = Guid.NewGuid(),
+            Id = id,
             Name = name
         };
         return item;

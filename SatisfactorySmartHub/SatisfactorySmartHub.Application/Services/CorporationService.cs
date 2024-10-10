@@ -1,5 +1,7 @@
 ﻿using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
+using SatisfactorySmartHub.Domain.Entities;
 using SatisfactorySmartHub.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -10,8 +12,51 @@ using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Application.Services;
 
-internal sealed class CorporationService(ICorporationFileService corporationFileService) : ICorporationService
+internal sealed class CorporationService(
+    ICorporationFileService corporationFileService,
+    IRepositoryService repositoryService) : ICorporationService
 {
+    public Corporation GetNewCorporation(string corporationName)
+    {
+        return Corporation.Create(corporationName);
+    }
+
+    public IEnumerable<Corporation> GetCorporations()
+    {
+        try
+        {
+            return repositoryService.CorporationRepository.GetAll();
+        }
+        catch
+        {
+            return new List<Corporation>();
+        }
+    }
+
+    public bool Update(Corporation corporation)
+    {
+        try
+        {
+            Corporation? dbCorporation = repositoryService.CorporationRepository.GetById(corporation.Id);
+
+
+            if (dbCorporation is null)
+            {
+                repositoryService.CorporationRepository.Create(corporation);
+            }
+            else
+            {
+                repositoryService.CorporationRepository.Update(corporation);
+            }
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+
     public void AddBranchToCorporation(BranchModel branch, CorporationModel corporation)
     {
         corporation.Branches.Add(branch);
@@ -43,16 +88,7 @@ internal sealed class CorporationService(ICorporationFileService corporationFile
         return corporationFileService.GetCorporation(filePath);
     }
 
-    public CorporationModel GetNewCorporation(string corporationName)
-    {
-        if (corporationName is null)
-            throw new ArgumentNullException(nameof(corporationName));
 
-        if (corporationName == string.Empty)
-            throw new ArgumentException(nameof(corporationName));
-
-        return new CorporationModel() { Name = corporationName };
-    }
 
     public ICollection<string> GetSaveFiles() => corporationFileService.GetSaveFiles();
 

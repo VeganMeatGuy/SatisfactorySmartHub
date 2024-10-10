@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using SatisfactorySmartHub.Application.Common;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
 using SatisfactorySmartHub.Application.ViewModels.Base;
+using SatisfactorySmartHub.Domain.Entities;
 using SatisfactorySmartHub.Domain.Models;
 using System.Collections.ObjectModel;
 
@@ -13,15 +15,22 @@ public sealed class HubViewModel : ViewModelBase
     private readonly ICachingService _cachingService;
     private readonly IUserDataService _userOptionsHelper;
 
+    private static string EnteredItemNameCaption = "Gebe Item Namen ein.";
+
     private IRelayCommand? _createCorporationCommand;
     private IRelayCommand? _loadCorporationCommand;
     private IRelayCommand? _overWriteSaveFileCommand;
+    private IRelayCommand? _addItemCommand;
     private string _corporationName = string.Empty;
     private string _createHint = string.Empty;
     private string _loadHint = string.Empty;
+    private string _enteredItemName = EnteredItemNameCaption;
     private bool _overWriteSaveFile;
     private ObservableCollection<string> _saveFiles = new();
+    private ReadonlyObservableList<Corporation> _items = new();
     private string? _selectedSaveFile;
+
+    private List<Corporation> _itemDisplayedDataSource = new();
 
     public HubViewModel(
         ICorporationService corporationService,
@@ -39,13 +48,17 @@ public sealed class HubViewModel : ViewModelBase
 
         OverWriteSaveFile = _userOptionsHelper.GetUserData().OverWriteSaveFile;
 
+
         _saveFiles = new(_corporationService.GetSaveFiles());
+
+        _itemDisplayedDataSource = new List<Corporation>(_corporationService.GetCorporations());
+        _items = new ReadonlyObservableList<Corporation>(_itemDisplayedDataSource);
     }
 
     public IRelayCommand CreateCorporationCommand => _createCorporationCommand ?? new RelayCommand(new Action(CreateCorporation));
     public IRelayCommand LoadCorporationCommand => _loadCorporationCommand ?? new RelayCommand(new Action(LoadCorporation));
     public IRelayCommand OverWriteSaveFileCommand => _overWriteSaveFileCommand ?? new RelayCommand(new Action(ChangeOverWriteSaveFileOption));
-
+    public IRelayCommand AddItemCommand => _addItemCommand ?? new RelayCommand(new Action(AddItem));
 
 
     public string CorporationName
@@ -66,6 +79,12 @@ public sealed class HubViewModel : ViewModelBase
         set => SetProperty(ref _loadHint, value);
     }
 
+    public string EnteredItemName
+    {
+        get => _enteredItemName;
+        set => SetProperty(ref _enteredItemName, value);
+    }
+
     public bool OverWriteSaveFile
     {
         get => _overWriteSaveFile;
@@ -77,6 +96,8 @@ public sealed class HubViewModel : ViewModelBase
         get => _saveFiles;
         set => SetProperty(ref _saveFiles, value);
     }
+
+    public ReadonlyObservableList<Corporation> Items => _items;
 
     public string? SelectedSaveFile
     {
@@ -99,7 +120,7 @@ public sealed class HubViewModel : ViewModelBase
             return;
         }
 
-        _cachingService.SetActiveCorporation(_corporationService.GetNewCorporation(CorporationName));
+       // _cachingService.SetActiveCorporation(_corporationService.GetNewCorporation(CorporationName));
 
         CreateHint = string.Empty;
 
@@ -124,6 +145,18 @@ public sealed class HubViewModel : ViewModelBase
         _cachingService.SetActiveCorporation(_corporationService.GetCorporationFromFile(SelectedSaveFile));
         LoadHint = $"{_cachingService.ActiveCorporation.Name} ist aktuell geladen.";
 
+    }
+
+    private void AddItem()
+    {
+        if (EnteredItemName == EnteredItemNameCaption)
+            return;
+        Corporation corporation = _corporationService.GetNewCorporation(EnteredItemName);
+        var result = _corporationService.Update(corporation);
+
+        _itemDisplayedDataSource.Clear();
+        _itemDisplayedDataSource.AddRange(_corporationService.GetCorporations());
+        Items.Update();
     }
 
 }

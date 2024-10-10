@@ -1,6 +1,6 @@
 ﻿using SatisfactorySmartHub.Domain.Models;
 
-namespace SatisfactorySmartHub.Infrastructure.Persistance.Repositories.StaticRepositories.StaticData;
+namespace SatisfactorySmartHub.Infrastructure.Persistance.Data;
 
 internal static class Items
 {

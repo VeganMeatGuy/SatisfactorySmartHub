@@ -1,11 +1,6 @@
 ﻿using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence.Repositories;
 using SatisfactorySmartHub.Domain.Models;
-using SatisfactorySmartHub.Infrastructure.Persistance.Repositories.StaticRepositories.StaticData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SatisfactorySmartHub.Infrastructure.Persistance.Data;
 
 namespace SatisfactorySmartHub.Infrastructure.Persistance.Repositories.StaticRepositories;
 

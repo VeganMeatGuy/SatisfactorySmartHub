@@ -1,4 +1,5 @@
-﻿using SatisfactorySmartHub.Domain.Models;
+﻿using SatisfactorySmartHub.Domain.Entities;
+using SatisfactorySmartHub.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,14 @@ public interface ICorporationService
     /// Returns a empty corporation model wich is named after <paramref name="corporationName"/> parameter.
     /// </summary>
     /// <param name="corporationName">The name for the corporation.</param>
-    /// <returns><see cref="CorporationModel"/></returns>
+    /// <returns><see cref="Corporation"/></returns>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="ArgumentException"/>
-    CorporationModel GetNewCorporation(string corporationName);
+    Corporation GetNewCorporation(string corporationName);
+
+    IEnumerable<Corporation> GetCorporations();
+
+    bool Update(Corporation corporation);
 
     /// <summary>
     /// Returns a corporation model which is loaded from a .json file.

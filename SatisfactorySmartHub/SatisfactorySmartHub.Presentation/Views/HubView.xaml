@@ -60,7 +60,7 @@
                     Command="{Binding CreateCorporationCommand}"
                     Content="neu"
                     Style="{StaticResource StandardButton}" />
-                
+
                 <StackPanel
                     Grid.Row="0"
                     Grid.Column="1"
@@ -91,9 +91,9 @@
                 <Button
                     Grid.Row="2"
                     Grid.Column="0"
+                    VerticalAlignment="Top"
                     Command="{Binding LoadCorporationCommand}"
                     Content="laden"
-                    VerticalAlignment="Top"
                     Style="{StaticResource StandardButton}" />
 
                 <TextBlock
@@ -152,26 +152,22 @@
                 Margin="17,3,0,3"
                 FontSize="14"
                 Foreground="{StaticResource FontWhite}"
-                Text="Rezepte" />
+                Text="Items" />
         </Border>
         <Border Grid.Row="5" Background="{StaticResource backgroundBlack}">
-            <ListBox
-                HorizontalAlignment="Left"
-                Background="Transparent"
-                BorderThickness="0">
-                <ListBoxItem>
-                    <CheckBox Content="Rezept 1" Foreground="{StaticResource FontWhite}" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <CheckBox Content="Rezept 2" Foreground="{StaticResource FontWhite}" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <CheckBox Content="Rezept 3" Foreground="{StaticResource FontWhite}" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <CheckBox Content="Rezept 4" Foreground="{StaticResource FontWhite}" />
-                </ListBoxItem>
-            </ListBox>
+            <StackPanel>
+                <TextBox Text="{Binding EnteredItemName}" Background="{StaticResource grey5}" />
+                <Button Content="Add Item" Style="{StaticResource StandardButton}" Command="{Binding AddItemCommand}" />
+                <ListView
+                    HorizontalAlignment="Left"
+                    ItemsSource="{Binding Items}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
         </Border>
     </Grid>
 </UserControl>

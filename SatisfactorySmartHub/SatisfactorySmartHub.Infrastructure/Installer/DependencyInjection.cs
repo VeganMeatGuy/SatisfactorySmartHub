@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using SatisfactorySmartHub.Infrastructure.Extensions;
 using System;
 using System.Collections.Generic;
@@ -10,13 +12,14 @@ namespace SatisfactorySmartHub.Infrastructure.Installer;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+    /// <summary>
+    /// Adds the infrastructure services to the service collection.
+    /// </summary>
+    /// <param name="services">The service collection to enrich.</param>
+    /// <returns>The enriched service collection.</returns>
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
     {
-        /// <summary>
-        /// Adds the infrastructure services to the service collection.
-        /// </summary>
-        /// <param name="services">The service collection to enrich.</param>
-        /// <returns>The enriched service collection.</returns>
+        services.RegisterRepositoryContext(configuration, environment);
         services.RegisterRepositoryService();
         services.AddUtilities();  
         services.AddProviders();

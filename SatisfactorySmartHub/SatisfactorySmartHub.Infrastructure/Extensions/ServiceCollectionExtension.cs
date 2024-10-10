@@ -1,10 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Infrastructure.Common;
 using SatisfactorySmartHub.Infrastructure.Interfaces.Provider;
 using SatisfactorySmartHub.Infrastructure.Persistance;
+using SatisfactorySmartHub.Infrastructure.Persistance.Repositories;
 using SatisfactorySmartHub.Infrastructure.Provider;
 using SatisfactorySmartHub.Infrastructure.Services;
 
@@ -15,6 +19,31 @@ namespace SatisfactorySmartHub.Infrastructure.Extensions;
 /// </summary>
 internal static class ServiceCollectionExtension
 {
+    internal static IServiceCollection RegisterRepositoryContext(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
+    {
+        services.AddDbContext<RepositoryContext>(optionsAction =>
+        {
+            optionsAction.UseSqlite(configuration.GetConnectionString("SqLiteConnection"), sqliteOptionsAction
+                => sqliteOptionsAction.MigrationsAssembly("SatisfactorySmartHub"));
+
+            if(environment.IsDevelopment())
+            {
+                optionsAction.EnableSensitiveDataLogging();
+                optionsAction.EnableDetailedErrors();
+                //optionsAction.LogTo(Console.WriteLine, LogLevel.Debug);
+            }
+
+            if (environment.IsProduction())
+            {
+                optionsAction.EnableDetailedErrors(false);
+                optionsAction.EnableSensitiveDataLogging(false);
+            }
+        }, ServiceLifetime.Scoped);
+
+        return services;
+    }
+
+
     /// <summary>
     /// Registers the repository service to the service collection.
     /// </summary>

@@ -1,4 +1,5 @@
 ﻿using ErrorOr;
+using SatisfactorySmartHub.Domain.Entities.Base;
 using SatisfactorySmartHub.Domain.Errors;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,13 @@ using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Domain.Entities;
 
-public sealed class Machine
+public sealed class Machine : EntityBase
 {
-    //empty constructor for EF Core
-    private Machine() { }
+    public int Id { get; init; }
+    public string Name { get; init; } = string.Empty;
+    public int PowerConsumption { get; init; }
 
-    public Guid Id { get; init; }
-    public string Name { get; private set; }
-    public int PowerConsumption { get; private set; }
-
-    public static ErrorOr<Machine> Create(string name)
+    public static ErrorOr<Machine> Create(int id, string name, int powerConsumption)
     {
         if (name == null)
             return DomainErrors.Machine.MachineNameCannotBeNull;
@@ -27,8 +25,9 @@ public sealed class Machine
 
         var machine = new Machine
         {
-            Id = Guid.NewGuid(),
-            Name = name
+            Id = id,
+            Name = name,
+            PowerConsumption = powerConsumption
         };
         return machine;
     }
