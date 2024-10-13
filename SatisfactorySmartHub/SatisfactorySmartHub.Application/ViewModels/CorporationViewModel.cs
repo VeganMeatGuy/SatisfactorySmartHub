@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using SatisfactorySmartHub.Application.DataTranferObjects;
+using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Services;
 using SatisfactorySmartHub.Application.ViewModels.Base;
@@ -29,7 +31,7 @@ public sealed class CorporationViewModel : ViewModelBase
     public IRelayCommand AddBranchCommand => _addBranchCommand ??= new RelayCommand(new Action(AddBranch));
     public IRelayCommand ShowBranchDetailsCommand => _showBranchDetailsCommand ??= new RelayCommand(new Action(ShowBranchDetails));
 
-    public CorporationModel ActiveCorporation => _cachingService.ActiveCorporation;
+    public ICorporationDto ActiveCorporation => _cachingService.ActiveCorporation;
 
     public BranchModel SelectedBranch
     {
@@ -39,16 +41,16 @@ public sealed class CorporationViewModel : ViewModelBase
 
     private void AddBranch()
     {
-        CorporationModel? corporation = _cachingService.ActiveCorporation;
+        //CorporationDto? corporation = _cachingService.ActiveCorporation;
 
-        if (corporation == null)
-            return;
+        //if (corporation == null)
+        //    return;
 
-        BranchModel addedBranch = _branchService.GetNewBranch();
+        //BranchModel addedBranch = _branchService.GetNewBranch();
 
-        _corporationService.AddBranchToCorporation(addedBranch, corporation);
-        _cachingService.SetActiveBranch(addedBranch);
-        _navigationService.NavigateAdminViewTo<BranchViewModel>();
+        //_corporationService.AddBranchToCorporation(addedBranch, corporation);
+        //_cachingService.SetActiveBranch(addedBranch);
+        //_navigationService.NavigateAdminViewTo<BranchViewModel>();
     }
 
     private void ShowBranchDetails()

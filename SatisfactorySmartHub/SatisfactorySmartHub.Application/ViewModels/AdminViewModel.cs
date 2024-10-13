@@ -84,23 +84,23 @@ public sealed class AdminViewModel : ViewModelBase
 
     public void ExportCorporation(string filepath)
     {
-        CorporationModel exportCorporation = _cachingService.ActiveCorporation;
-        _corporationService.ExportCorporation(exportCorporation, filepath);
-        SaveHint = "Export erfolgreich.";
+        //CorporationModel exportCorporation = _cachingService.ActiveCorporation;
+        //_corporationService.ExportCorporation(exportCorporation, filepath);
+        //SaveHint = "Export erfolgreich.";
     }
 
     private void SaveCorporation()
     {
-        if (_cachingService.ActiveCorporation == null)
-        {
-            SaveHint = "Kein Konzern zum speichern geladen.";
-            return;
-        }
+        //if (_cachingService.ActiveCorporation == null)
+        //{
+        //    SaveHint = "Kein Konzern zum speichern geladen.";
+        //    return;
+        //}
 
-        bool overWrite = _userOptionsHelper.GetUserData().OverWriteSaveFile;
+        //bool overWrite = _userOptionsHelper.GetUserData().OverWriteSaveFile;
 
-        _corporationService.SaveCorporation(_cachingService.ActiveCorporation, overWrite);
-        SaveHint = "Speichern erfolgreich.";
+        //_corporationService.SaveCorporation(_cachingService.ActiveCorporation, overWrite);
+        //SaveHint = "Speichern erfolgreich.";
     }
     private void NavigationChanged()
     {

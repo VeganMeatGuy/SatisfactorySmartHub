@@ -1,14 +1,11 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Application.Services;
+﻿using ErrorOr;
+using SatisfactorySmartHub.Application.DataTranferObjects;
+using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
+using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Domain.Entities;
 using SatisfactorySmartHub.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Application.Services;
 
@@ -16,47 +13,65 @@ internal sealed class CorporationService(
     ICorporationFileService corporationFileService,
     IRepositoryService repositoryService) : ICorporationService
 {
-    public Corporation GetNewCorporation(string corporationName)
-    {
-        return Corporation.Create(corporationName).Value;
-    }
 
-    public IEnumerable<Corporation> GetCorporations()
+    public IEnumerable<ICorporationDto> GetCorporations()
     {
         try
         {
-            return repositoryService.CorporationRepository.GetAll();
+            List<CorporationDto> result = new List<CorporationDto>();
+            var repoResult = repositoryService.CorporationRepository.GetAll();
+
+            foreach (Corporation corporation in repoResult)
+                result.Add(CorporationDto.CreateFromEntity(corporation));
+            return result;
         }
         catch
         {
-            return new List<Corporation>();
+            return new List<CorporationDto>();
         }
     }
-
-    public bool Update(Corporation corporation)
+    public ErrorOr<ICorporationDto> AddCorporation(string corporationName)
     {
-        try
-        {
-            Corporation? dbCorporation = repositoryService.CorporationRepository.GetById(corporation.Id);
+        ErrorOr<Corporation> CreateCorporationResult = Corporation.Create(corporationName);
 
-
-            if (dbCorporation is null)
-            {
-                repositoryService.CorporationRepository.Create(corporation);
-            }
-            else
-            {
-                repositoryService.CorporationRepository.Update(corporation);
-            }
-            return true;
-        }
-        catch (Exception ex)
+        if (CreateCorporationResult.IsError)
         {
-            return false;
+            //do something to error handling
+            // something like: return ApplicationErrors.CorporationService.CorporationWasNotInDb;
+            return Error.Validation();
         }
+
+        Corporation newCorporation = CreateCorporationResult.Value;
+
+        Corporation? dbCorporation = repositoryService.CorporationRepository.GetById(newCorporation.Id);
+
+        if (dbCorporation != null)
+        {
+            return Error.Failure();
+        }
+
+        repositoryService.CorporationRepository.Create(newCorporation);
+
+        return CorporationDto.CreateFromEntity(newCorporation);
     }
 
+    public ErrorOr<Updated> UpdateCorporation(ICorporationDto corporation)
+    {
+        Corporation? dbCorporation = repositoryService.CorporationRepository.GetById(corporation.Id);
 
+        if (dbCorporation == null)
+            return Error.Conflict();
+
+        if (dbCorporation.Name.Equals(corporation.Name))
+            return Error.Conflict();
+            
+        dbCorporation.ChangeName(corporation.Name);
+
+        repositoryService.CorporationRepository.Update(dbCorporation);
+
+        return Result.Updated;
+    }
+    
     public void AddBranchToCorporation(BranchModel branch, CorporationModel corporation)
     {
         corporation.Branches.Add(branch);
@@ -87,8 +102,6 @@ internal sealed class CorporationService(
 
         return corporationFileService.GetCorporation(filePath);
     }
-
-
 
     public ICollection<string> GetSaveFiles() => corporationFileService.GetSaveFiles();
 

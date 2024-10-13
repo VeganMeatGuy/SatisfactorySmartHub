@@ -14,8 +14,5 @@ public sealed class Branch : IdentityEntityBase
 
     //navigational properties
     public Corporation? Corporation { get; private set; }
-    public ConstuctionSite
-
-
 
 }

@@ -13,24 +13,4 @@ public partial class HubView : UserControl
     {
         InitializeComponent();
     }
-
-    private void LoadButton_Click(object sender, System.Windows.RoutedEventArgs e)
-    {
-        string filepath;
-        var openFileDialog = new OpenFileDialog()
-        {
-            Filter = "json-Datei | *.json",
-            DefaultExt = "json",
-        };
-
-        if (openFileDialog.ShowDialog() == true)
-        {
-            filepath = openFileDialog.FileName;
-        }
-        else
-            return;
-
-        HubViewModel dc = (HubViewModel)DataContext;
-        dc.ImportCorporation(filepath);
-    }
 }

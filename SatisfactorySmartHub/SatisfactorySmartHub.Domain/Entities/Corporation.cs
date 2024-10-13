@@ -21,11 +21,10 @@ public sealed class Corporation : IdentityEntityBase
 
     public static ErrorOr<Corporation> Create(string name)
     {
-        if (name == null)
-            return DomainErrors.Corporation.CorporationNameCannotBeNull;
+        ErrorOr<Success> ValidationResult = ValidateCorporationName(name);
 
-        if (name == string.Empty)
-            return DomainErrors.Corporation.CorporationNameCannotBeEmpty;
+        if (ValidationResult.IsError)
+            return ValidationResult.FirstError;
 
         var corporation = new Corporation
         {
@@ -33,6 +32,28 @@ public sealed class Corporation : IdentityEntityBase
             Name = name
         };
         return corporation;
+    }
+
+    public ErrorOr<Success> ChangeName(string name)
+    {
+        ErrorOr<Success> ValidationResult = ValidateCorporationName(name);
+
+        if (ValidationResult.IsError)
+            return ValidationResult.FirstError;
+
+        Name = name;
+        return Result.Success;
+    }
+
+    private static ErrorOr<Success> ValidateCorporationName(string name)
+    {
+        if (name == null)
+            return DomainErrors.Corporation.CorporationNameCannotBeNull;
+
+        if (name == string.Empty)
+            return DomainErrors.Corporation.CorporationNameCannotBeEmpty;
+
+        return Result.Success;
     }
 
 }
