@@ -26,29 +26,5 @@ namespace SatisfactorySmartHub.Presentation.Views
         {
             InitializeComponent();
         }
-
-        private void ExportButton_Click(object sender, RoutedEventArgs e)
-        {
-            AdminViewModel dc = (AdminViewModel)DataContext;
-            string filepath;
-
-
-            var saveFileDialog = new SaveFileDialog()
-            {
-                Filter = "json-Datei | *.json",
-                DefaultExt = "json",
-                FileName = dc.ExportName,
-            };
-
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                filepath = saveFileDialog.FileName;
-            }
-            else
-                return;
-
-            dc.ExportCorporation(filepath);
-        }
-
     }
 }
