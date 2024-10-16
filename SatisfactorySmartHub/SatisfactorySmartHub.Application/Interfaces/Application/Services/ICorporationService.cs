@@ -19,5 +19,5 @@ public interface ICorporationService
     /// <param name="branch">The branch which is added to the corporation.</param>
     /// <param name="corporation">The corporation model which the branch is added to.</param>
     /// <returns><see cref="BranchModel"/></returns>
-    void AddBranchToCorporation(BranchModel branch, CorporationModel corporation);
+   ErrorOr<Success> AddBranchToCorporation(IBranchDto branch, ICorporationDto corporation);
 }

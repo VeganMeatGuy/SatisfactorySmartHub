@@ -1,10 +1,9 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Application.Services;
-using SatisfactorySmartHub.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ErrorOr;
+using SatisfactorySmartHub.Application.DataTranferObjects;
+using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
+using SatisfactorySmartHub.Application.Interfaces.Application.Services;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
+using SatisfactorySmartHub.Domain.Entities;
 
 namespace SatisfactorySmartHub.Application.Services;
 
@@ -12,12 +11,36 @@ namespace SatisfactorySmartHub.Application.Services;
 /// The branch service class.
 /// It implements  the <see cref="IBranchService"/> interface.
 /// </summary>
-internal sealed class BranchService : IBranchService
+internal sealed class BranchService(
+    IRepositoryService repositoryService) : IBranchService
 {
-
-    /// <inheritdoc cref="IBranchService.GetNewBranch"/>
-    public BranchModel GetNewBranch()
+    public ErrorOr<IBranchDto> AddBranch(string branchName)
     {
-        return new BranchModel() { Name = "unbenannter Industriekomplex"};
+        ErrorOr<Branch> CreateBranchResult = Branch.Create(branchName);
+
+        if(CreateBranchResult.IsError)
+        {
+            //do something to error handling
+            // something like: return ApplicationErrors.CorporationService.CorporationWasNotInDb;
+            return Error.Unexpected();
+        }
+
+        Branch newBranch = CreateBranchResult.Value;
+
+       Branch? dbBranch = repositoryService.BranchRepository.GetById(newBranch.Id);
+
+        if(dbBranch != null)
+        {
+            return Error.Failure();
+        }
+
+        repositoryService.BranchRepository.Create(newBranch);
+
+        return BranchDto.CreateFromEntity(newBranch);
+    }
+
+    public ErrorOr<Updated> UpdateBranch(IBranchDto branch)
+    {
+        throw new NotImplementedException();
     }
 }

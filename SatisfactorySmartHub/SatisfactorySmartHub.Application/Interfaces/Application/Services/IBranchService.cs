@@ -1,9 +1,5 @@
-﻿using SatisfactorySmartHub.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ErrorOr;
+using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 
@@ -12,10 +8,7 @@ namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 /// </summary>
 public interface IBranchService
 {
-    /// <summary>
-    /// Returns an empty branch model.
-    /// </summary>
-    /// <returns><see cref="BranchModel"/></returns>
-    BranchModel GetNewBranch();
+    public ErrorOr<IBranchDto> AddBranch(string branchName);
 
+    public ErrorOr<Updated> UpdateBranch(IBranchDto branch);
 }

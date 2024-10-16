@@ -10,7 +10,6 @@ using SatisfactorySmartHub.Domain.Models;
 namespace SatisfactorySmartHub.Application.Services;
 
 internal sealed class CorporationService(
-    ICorporationFileService corporationFileService,
     IRepositoryService repositoryService) : ICorporationService
 {
 
@@ -38,7 +37,7 @@ internal sealed class CorporationService(
         {
             //do something to error handling
             // something like: return ApplicationErrors.CorporationService.CorporationWasNotInDb;
-            return Error.Validation();
+            return Error.Unexpected();
         }
 
         Corporation newCorporation = CreateCorporationResult.Value;
@@ -76,48 +75,4 @@ internal sealed class CorporationService(
     {
         corporation.Branches.Add(branch);
     }
-
-    public bool ExportCorporation(CorporationModel corporation, string filePath)
-    {
-        if (corporation is null)
-            throw new ArgumentNullException(nameof(corporation));
-
-        try
-        {
-            return corporationFileService.ExportCorporation(corporation, filePath);
-        }
-        catch (Exception)
-        {
-            return false;
-        }
-    }
-
-    public CorporationModel GetCorporationFromFile(string filePath)
-    {
-        if (filePath is null)
-            throw new ArgumentNullException(nameof(filePath));
-
-        if (filePath == string.Empty)
-            throw new ArgumentException(nameof(filePath));
-
-        return corporationFileService.GetCorporation(filePath);
-    }
-
-    public ICollection<string> GetSaveFiles() => corporationFileService.GetSaveFiles();
-
-    public bool SaveCorporation(CorporationModel corporation, bool overrideFile)
-    {
-        if (corporation is null)
-            throw new ArgumentNullException(nameof(corporation));
-
-        try
-        {
-            return corporationFileService.SaveCorporation(corporation, overrideFile);
-        }
-        catch (Exception)
-        {
-            return false;
-        }
-    }
-
 }

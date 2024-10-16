@@ -14,4 +14,5 @@ public interface IRepositoryService
     IRecipeRepository StaticRecipeRepository { get; }
     IItemRepository ItemRepository { get; }
     ICorporationRepository CorporationRepository { get; }
+    IBranchRepository BranchRepository { get; }
 }

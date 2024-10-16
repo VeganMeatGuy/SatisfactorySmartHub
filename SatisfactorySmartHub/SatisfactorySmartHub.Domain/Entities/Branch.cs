@@ -1,4 +1,7 @@
-﻿using SatisfactorySmartHub.Domain.Entities.Base;
+﻿using ErrorOr;
+using SatisfactorySmartHub.Domain.Entities.Base;
+using SatisfactorySmartHub.Domain.Errors;
+using System.Net.Http.Headers;
 
 namespace SatisfactorySmartHub.Domain.Entities;
 
@@ -15,4 +18,29 @@ public sealed class Branch : IdentityEntityBase
     //navigational properties
     public Corporation? Corporation { get; private set; }
 
+    public static ErrorOr<Branch> Create(string name)
+    {
+        ErrorOr<Success> ValidationResult = ValidateBrancheName(name);
+
+        if (ValidationResult.IsError)
+            return ValidationResult.FirstError;
+
+        var branch = new Branch
+        {
+            Id = Guid.NewGuid(),
+            Name = name,
+        };
+        return branch;
+    }
+
+    private static ErrorOr<Success> ValidateBrancheName(string name)
+    {
+        if (name == null)
+            return DomainErrors.Branch.BranchNameCannotBeNull;
+
+        if (name == string.Empty)
+            return DomainErrors.Branch.BranchNameCannotBeEmpty;
+
+        return Result.Success;
+    }
 }

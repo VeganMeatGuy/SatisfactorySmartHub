@@ -6,8 +6,8 @@ namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 public interface ICachingService : INotifyPropertyChanging, INotifyPropertyChanged
 {
     ICorporationDto? ActiveCorporation { get; }
-    BranchModel? ActiveBranch { get; }
+    IBranchDto? ActiveBranch { get; }
     bool ActiveCorporationIsSet { get; }
     void SetActiveCorporation(ICorporationDto? corporationModel);
-    void SetActiveBranch(BranchModel? branchModel);
+    void SetActiveBranch(IBranchDto? branchModel);
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SatisfactorySmartHub.Domain.Entities;
 using SatisfactorySmartHub.Infrastructure.Persistance.Configurations.Base;
 using System;
@@ -15,6 +16,11 @@ internal sealed class CorporationConfiguration : IdentityEntityBaseConfiguration
     {
         builder.Property(p => p.Name)
             .IsUnicode();
+
+        builder.HasMany(e => e.Branches)
+            .WithOne(e => e.Corporation)
+            .HasForeignKey(e => e.CorporationId)
+            .IsRequired(false);
 
         base.Configure(builder);
     }
