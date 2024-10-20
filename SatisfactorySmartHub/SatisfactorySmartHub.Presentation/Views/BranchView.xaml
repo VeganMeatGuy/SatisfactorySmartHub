@@ -24,12 +24,12 @@
     </UserControl.Resources>
 
     <Grid>
-        <customcontrol:RecipeSelectionDialog
+        <!--<customcontrol:RecipeSelectionDialog
             Panel.ZIndex="1"
             Confirm="{Binding RecipeSelectionConfirmedCommand}"
             RecipeList="{Binding RecipeList}"
             Visibility="{Binding RecipeSelectionVisible, Converter={StaticResource BoolToVis}}"
-            SelectedRecipe="{Binding SelectedRecipe, Mode=TwoWay}"/>
+            SelectedRecipe="{Binding SelectedRecipe, Mode=TwoWay}"/>-->
 
         <Grid>
             <Grid.ColumnDefinitions>

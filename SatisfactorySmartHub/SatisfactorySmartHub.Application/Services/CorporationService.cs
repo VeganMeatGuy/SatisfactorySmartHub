@@ -71,8 +71,20 @@ internal sealed class CorporationService(
         return Result.Updated;
     }
     
-    public void AddBranchToCorporation(BranchModel branch, CorporationModel corporation)
+    public ErrorOr<Success> AddBranchToCorporation(IBranchDto branch, ICorporationDto corporation)
     {
-        corporation.Branches.Add(branch);
+        Corporation? dbCorporation = repositoryService.CorporationRepository.GetById(corporation.Id);
+
+        if(dbCorporation == null)
+            return Error.NotFound();
+
+        Branch? dbBranch = repositoryService.BranchRepository.GetById(branch.Id);
+
+
+        dbBranch.ChangeCorporationId(dbCorporation.Id);
+
+        repositoryService.BranchRepository.Update(dbBranch);
+
+        return Result.Success;
     }
 }

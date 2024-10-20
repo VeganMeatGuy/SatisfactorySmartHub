@@ -18,7 +18,7 @@ internal sealed class BranchService(
     {
         ErrorOr<Branch> CreateBranchResult = Branch.Create(branchName);
 
-        if(CreateBranchResult.IsError)
+        if (CreateBranchResult.IsError)
         {
             //do something to error handling
             // something like: return ApplicationErrors.CorporationService.CorporationWasNotInDb;
@@ -27,9 +27,9 @@ internal sealed class BranchService(
 
         Branch newBranch = CreateBranchResult.Value;
 
-       Branch? dbBranch = repositoryService.BranchRepository.GetById(newBranch.Id);
+        Branch? dbBranch = repositoryService.BranchRepository.GetById(newBranch.Id);
 
-        if(dbBranch != null)
+        if (dbBranch != null)
         {
             return Error.Failure();
         }
@@ -37,6 +37,26 @@ internal sealed class BranchService(
         repositoryService.BranchRepository.Create(newBranch);
 
         return BranchDto.CreateFromEntity(newBranch);
+    }
+
+    public ErrorOr<IEnumerable<IBranchDto>> GetBranchesOfCorporation(Guid corporationId)
+    {
+        try
+        {
+            List<BranchDto> result = [];
+            var reporResult = repositoryService.BranchRepository.GetManyByCondition(x => x.CorporationId == corporationId);
+
+            foreach (Branch branch in reporResult)
+            {
+                result.Add(BranchDto.CreateFromEntity(branch));
+            }
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            return new List<BranchDto>();
+        }
     }
 
     public ErrorOr<Updated> UpdateBranch(IBranchDto branch)

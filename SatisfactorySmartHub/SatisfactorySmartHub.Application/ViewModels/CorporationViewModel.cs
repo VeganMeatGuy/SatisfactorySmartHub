@@ -40,7 +40,9 @@ public sealed class CorporationViewModel : ViewModelBase
     private ErrorOr<Success> UpdateBranchesDataSource()
     {
         _branchesDisplayDataSource.Clear();
-        _branchesDisplayDataSource.AddRange(_branchService.) // get branches for IDCorp (IGenericRepo.getbyCondition)
+        _branchesDisplayDataSource.AddRange(_branchService.GetBranchesOfCorporation(_cachingService.ActiveCorporation.Id).Value);
+        Branches.Update();
+        return Result.Success;
     }
 
     public IRelayCommand SaveCorporationCommand => _saveCorporationCommand ??= new RelayCommand(new Action(SaveCorporation));
@@ -53,6 +55,12 @@ public sealed class CorporationViewModel : ViewModelBase
     {
         get => _selectedBranchModel;
         set => SetProperty(ref _selectedBranchModel, value);
+    }
+
+    public ReadonlyObservableList<IBranchDto> Branches
+    {
+        get => _branches;
+        set => SetProperty(ref _branches, value);
     }
 
     private void ShowBranchDetails()
@@ -83,6 +91,7 @@ public sealed class CorporationViewModel : ViewModelBase
         if (AddBranchToCorporationResult.IsError)
             return;
 
+        UpdateBranchesDataSource();
         //_cachingService.SetActiveBranch(addBranchResult.Value);
 
         //_navigationService.NavigateAdminViewTo<BranchViewModel>();

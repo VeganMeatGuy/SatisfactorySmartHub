@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using SatisfactorySmartHub.Application.Common;
+using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Services;
 using SatisfactorySmartHub.Application.ViewModels.Base;
@@ -53,10 +54,10 @@ public sealed class BranchViewModel : ViewModelBase
         if (ActiveBranch == null)
             return;
 
-        _processSteps = new ReadonlyObservableList<ProcessStepModel>(ActiveBranch.ProductionSite.ProcessSteps);
+       // _processSteps = new ReadonlyObservableList<ProcessStepModel>(ActiveBranch.ProductionSite.ProcessSteps);
     }
 
-    public BranchModel ActiveBranch => _cachingService.ActiveBranch;
+    public IBranchDto ActiveBranch => _cachingService.ActiveBranch;
 
     public ProcessStepModel SelectedProcessStep
     {
@@ -115,29 +116,29 @@ public sealed class BranchViewModel : ViewModelBase
 
     private void AddProcessStep()
     {
-        BranchModel? branch = _cachingService.ActiveBranch;
+        //BranchModel? branch = _cachingService.ActiveBranch;
 
-        if (branch == null)
-            return;
+        //if (branch == null)
+        //    return;
 
-        ProductionSiteModel productionSite = branch.ProductionSite;
+        //ProductionSiteModel productionSite = branch.ProductionSite;
 
-        ProcessStepModel processStep = _processStepService.GetNewProcessStep();
-        _productionSiteService.AddProcessStepToProductionSite(processStep, productionSite);
+        //ProcessStepModel processStep = _processStepService.GetNewProcessStep();
+        //_productionSiteService.AddProcessStepToProductionSite(processStep, productionSite);
 
-        ProcessSteps.Update();
+        //ProcessSteps.Update();
     }
 
     private void RemoveProcessStep()
     {
-        ProductionSiteModel? productionSite = _cachingService.ActiveBranch.ProductionSite;
+        //ProductionSiteModel? productionSite = _cachingService.ActiveBranch.ProductionSite;
 
-        if (productionSite == null)
-            return;
+        //if (productionSite == null)
+        //    return;
 
-        _productionSiteService.RemoveProcessStepFromProductionSite(SelectedProcessStep, productionSite);
+        //_productionSiteService.RemoveProcessStepFromProductionSite(SelectedProcessStep, productionSite);
 
-        ProcessSteps.Update();
+        //ProcessSteps.Update();
     }
 
     private void LoadRecipes()

@@ -33,6 +33,12 @@ public sealed class Branch : IdentityEntityBase
         return branch;
     }
 
+    public ErrorOr<Success> ChangeCorporationId(Guid corporationId)
+    {
+        CorporationId = corporationId;
+        return Result.Success;
+    }
+
     private static ErrorOr<Success> ValidateBrancheName(string name)
     {
         if (name == null)
