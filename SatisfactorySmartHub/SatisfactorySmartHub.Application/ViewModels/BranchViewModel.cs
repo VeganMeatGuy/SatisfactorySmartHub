@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using ErrorOr;
 using SatisfactorySmartHub.Application.Common;
+using SatisfactorySmartHub.Application.DataTranferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Services;
@@ -26,14 +28,17 @@ public sealed class BranchViewModel : ViewModelBase
     private readonly IRecipeService _recipeService;
 
 
-    private ProcessStepModel _activeProcessStepModel;
     private bool _showForeFrontContent = false;
     private bool _recipeSelectionVisible = false;
     private IRelayCommand? _addProcessStepCommand;
     private IRelayCommand? _removeProcessStepCommand;
     private IRelayCommand? _selectRecipeCommand;
     private IRelayCommand? _recipeSelectionConfirmedCommand;
-    private ReadonlyObservableList<ProcessStepModel> _processSteps = new ReadonlyObservableList<ProcessStepModel>();
+
+    private List<IProcessStepDto> _processStepsDisplayDataSource = [];
+    private ReadonlyObservableList<IProcessStepDto> _processSteps = new();
+    private IProcessStepDto _SelectedProcessStep;
+
     private ReadonlyObservableList<RecipeModel> _recipeList = new ReadonlyObservableList<RecipeModel>();
     private RecipeModel _selectedRecipe;
 
@@ -50,60 +55,99 @@ public sealed class BranchViewModel : ViewModelBase
 
         LoadRecipes();
 
-
         if (ActiveBranch == null)
             return;
 
-       // _processSteps = new ReadonlyObservableList<ProcessStepModel>(ActiveBranch.ProductionSite.ProcessSteps);
+        UpdateProcessStepDataSource();
+        _processSteps = new ReadonlyObservableList<IProcessStepDto>(_processStepsDisplayDataSource);
     }
 
     public IBranchDto ActiveBranch => _cachingService.ActiveBranch;
-
-    public ProcessStepModel SelectedProcessStep
+    public IProcessStepDto SelectedProcessStep
     {
-        get => _activeProcessStepModel;
-        set => SetProperty(ref _activeProcessStepModel, value);
+        get => _SelectedProcessStep;
+        set => SetProperty(ref _SelectedProcessStep, value);
     }
+    public ReadonlyObservableList<IProcessStepDto> ProcessSteps => _processSteps;
+
+    public IRelayCommand AddProcessStepCommand => _addProcessStepCommand ?? new RelayCommand(new Action(AddProcessStep));
+    public IRelayCommand RemoveProcessStepCommand => _removeProcessStepCommand ?? new RelayCommand(new Action(RemoveProcessStep));
+
+
+    private ErrorOr<Success> UpdateProcessStepDataSource()
+    {
+        _processStepsDisplayDataSource.Clear();
+
+        var result = _processStepService.GetProcessStepsOfBranch(_cachingService.ActiveBranch.Id);
+
+        _processStepsDisplayDataSource.AddRange(result.Value);
+        ProcessSteps.Update();
+        return Result.Success;
+    }
+
+    private void AddProcessStep()
+    {
+        IBranchDto branch = _cachingService.ActiveBranch;
+
+        if (branch == null)
+            return;
+
+        ErrorOr<IProcessStepDto> addProcessStepResult = _processStepService.AddProcessStep(branch.Id);
+
+        if (addProcessStepResult.IsError)
+            return;
+
+        UpdateProcessStepDataSource();
+    }
+
+    private void RemoveProcessStep()
+    {
+        if (SelectedProcessStep == null)
+            return;
+
+        _processStepService.DeleteProcessStep(SelectedProcessStep);
+
+        UpdateProcessStepDataSource();
+    }
+
+
+
+    // old>
 
     public bool ShowForeFrontContent
     {
         get => _showForeFrontContent;
         set => SetProperty(ref _showForeFrontContent, value);
     }
-
     public bool RecipeSelectionVisible
     {
         get => _recipeSelectionVisible;
         set => SetProperty(ref _recipeSelectionVisible, value);
     }
-
     public RecipeModel? SelectedRecipe
     {
         get => _selectedRecipe;
         set => SetProperty(ref _selectedRecipe, value);
     }
-
-    public ReadonlyObservableList<ProcessStepModel> ProcessSteps => _processSteps;
-
     public ReadonlyObservableList<RecipeModel> RecipeList => _recipeList;
 
-    public IRelayCommand AddProcessStepCommand => _addProcessStepCommand ?? new RelayCommand(new Action(AddProcessStep));
-    public IRelayCommand RemoveProcessStepCommand => _removeProcessStepCommand ?? new RelayCommand(new Action(RemoveProcessStep));
+
     public IRelayCommand SelectRecipeCommand => _selectRecipeCommand ?? new RelayCommand(new Action(ShowRecipeSelection));
     public IRelayCommand RecipeSelectionConfirmedCommand => _recipeSelectionConfirmedCommand ?? new RelayCommand(new Action(RecipeSelectionConfirmed));
 
+
     private void RecipeSelectionConfirmed()
     {
-        if (SelectedRecipe != null)
-        {
-            SelectedProcessStep.Recipe = SelectedRecipe;
-        }
+        //if (SelectedRecipe != null)
+        //{
+        //    SelectedProcessStep.Recipe = SelectedRecipe;
+        //}
 
-        ProcessSteps.Update();
+        //ProcessSteps.Update();
 
-        SelectedRecipe = null;
-        ShowForeFrontContent = false;
-        RecipeSelectionVisible = false;
+        //SelectedRecipe = null;
+        //ShowForeFrontContent = false;
+        //RecipeSelectionVisible = false;
     }
 
     private void ShowRecipeSelection()
@@ -114,32 +158,7 @@ public sealed class BranchViewModel : ViewModelBase
         RecipeSelectionVisible = true;
     }
 
-    private void AddProcessStep()
-    {
-        //BranchModel? branch = _cachingService.ActiveBranch;
 
-        //if (branch == null)
-        //    return;
-
-        //ProductionSiteModel productionSite = branch.ProductionSite;
-
-        //ProcessStepModel processStep = _processStepService.GetNewProcessStep();
-        //_productionSiteService.AddProcessStepToProductionSite(processStep, productionSite);
-
-        //ProcessSteps.Update();
-    }
-
-    private void RemoveProcessStep()
-    {
-        //ProductionSiteModel? productionSite = _cachingService.ActiveBranch.ProductionSite;
-
-        //if (productionSite == null)
-        //    return;
-
-        //_productionSiteService.RemoveProcessStepFromProductionSite(SelectedProcessStep, productionSite);
-
-        //ProcessSteps.Update();
-    }
 
     private void LoadRecipes()
     {

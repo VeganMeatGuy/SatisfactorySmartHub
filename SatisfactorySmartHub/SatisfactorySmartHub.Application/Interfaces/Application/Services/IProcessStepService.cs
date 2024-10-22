@@ -1,9 +1,6 @@
-﻿using SatisfactorySmartHub.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ErrorOr;
+using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
+using SatisfactorySmartHub.Domain.Models;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 
@@ -12,9 +9,8 @@ namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 /// </summary>
 public interface IProcessStepService
 {
-    /// <summary>
-    /// Returns an empty process step model.
-    /// </summary>
-    /// <returns><see cref="ProcessStepModel"/></returns>
-    ProcessStepModel GetNewProcessStep();
+    public ErrorOr<IProcessStepDto> AddProcessStep(Guid branchId);
+    public ErrorOr<Updated> UpdateProcessStep(IProcessStepDto processStep);
+    public ErrorOr<Deleted> DeleteProcessStep(IProcessStepDto processStep);
+    public ErrorOr<IEnumerable<IProcessStepDto>> GetProcessStepsOfBranch(Guid branchId);
 }

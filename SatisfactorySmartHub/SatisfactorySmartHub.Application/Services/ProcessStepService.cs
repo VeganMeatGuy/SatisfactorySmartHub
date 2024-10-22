@@ -1,24 +1,86 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Application.Services;
+﻿using ErrorOr;
+using SatisfactorySmartHub.Application.DataTranferObjects;
+using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
+using SatisfactorySmartHub.Application.Interfaces.Application.Services;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
+using SatisfactorySmartHub.Domain.Entities;
 using SatisfactorySmartHub.Domain.Models;
 using SatisfactorySmartHub.Domain.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection.Metadata.Ecma335;
 
 namespace SatisfactorySmartHub.Application.Services;
 
 
 /// <inheritdoc cref="IProcessStepService"/>
-internal sealed class ProcessStepService : IProcessStepService
+internal sealed class ProcessStepService(
+    IRepositoryService repositoryService) : IProcessStepService
 {
+    public ErrorOr<IProcessStepDto> AddProcessStep(Guid branchId)
+    {
+        ErrorOr<ProcessStep> CreateProcessStepResult = ProcessStep.Create(branchId);
+
+        if (CreateProcessStepResult.IsError)
+        {
+            //do something to error handling
+            // something like: return ApplicationErrors.CorporationService.CorporationWasNotInDb;
+            return Error.Unexpected();
+        }
+
+        ProcessStep newProcessStep = CreateProcessStepResult.Value;
+
+        ProcessStep? dbProcessStep = repositoryService.ProcessStepRepository.GetById(newProcessStep.Id);
+
+        if (dbProcessStep != null)
+        {
+            return Error.Failure();
+        }
+
+        repositoryService.ProcessStepRepository.Create(newProcessStep);
+
+        return ProcessStepDto.CreateFromEntity(newProcessStep);
+    }
+
+    public ErrorOr<Updated> UpdateProcessStep(IProcessStepDto processStep)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ErrorOr<Deleted> DeleteProcessStep(IProcessStepDto processStep)
+    {
+        ProcessStep? dbProcessStep = repositoryService.ProcessStepRepository.GetById(processStep.Id);
+
+        if (dbProcessStep == null)
+            return Error.NotFound();
+
+        repositoryService.ProcessStepRepository.Delete(dbProcessStep);
+        return Result.Deleted;
+    }
+
+
+    public ErrorOr<IEnumerable<IProcessStepDto>> GetProcessStepsOfBranch(Guid branchId)
+    {
+        try
+        {
+            List<ProcessStepDto> result = [];
+            var repoResult = repositoryService.ProcessStepRepository.GetManyByCondition(x => x.BranchId == branchId);
+
+            foreach (ProcessStep processStep in repoResult)
+                result.Add(ProcessStepDto.CreateFromEntity(processStep));
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            return new List<ProcessStepDto>();
+        }
+    }
+
+    #region old stuff
     /// <inheritdoc cref="IProcessStepService.GetNewProcessStep"/>
     public ProcessStepModel GetNewProcessStep()
     {
         return new ProcessStepModel();
     }
-
     public ProcessStepModel SetRecipe(ProcessStepModel processStepModel, RecipeModel recipe)
     {
         if (processStepModel == null) throw new ArgumentNullException(nameof(processStepModel));
@@ -35,8 +97,7 @@ internal sealed class ProcessStepService : IProcessStepService
 
         return processStepModel;
     }
-
-    public ProcessStepModel SetProcessStepTarget(ProcessStepModel processStepModel, ItemWithAmount targetItemWithAmount, MachineryPlanningType machineryPlanningType)
+    public ProcessStepModel SetProcessStepTarget(ProcessStepModel processStepModel, Domain.Models.ItemWithAmount targetItemWithAmount, MachineryPlanningType machineryPlanningType)
     {
         //check parameters
         if (processStepModel == null)
@@ -60,13 +121,10 @@ internal sealed class ProcessStepService : IProcessStepService
         return processStepModel;
 
     }
-
     private ICollection<MachineryConfigItemModel> PlanMachinery(ProcessStepModel processStepModel, MachineryPlanningType machineryPlanningType)
     {
         throw new NotImplementedException();
     }
-
-
     private ICollection<ItemBalanceModel> PlanFlowOfMaterials(ProcessStepModel processStepModel)
     {
         if (processStepModel.Recipe == null)
@@ -199,23 +257,24 @@ internal sealed class ProcessStepService : IProcessStepService
     private ICollection<ItemBalanceModel> CalculateBalanceWithoutTarget()
     {
         throw new NotImplementedException();
-    //    ICollection<ItemBalanceModel> balance = new HashSet<ItemBalanceModel>();
+        //    ICollection<ItemBalanceModel> balance = new HashSet<ItemBalanceModel>();
 
-    //    balance.Add(new ItemBalanceModel() { Item = Recipe.MainProduct.Item });
+        //    balance.Add(new ItemBalanceModel() { Item = Recipe.MainProduct.Item });
 
-    //    foreach (ItemWithAmount bypitem in Recipe.Byproducts)
-    //    {
-    //        balance.Add(new ItemBalanceModel() { Item = bypitem.Item });
-    //    }
+        //    foreach (ItemWithAmount bypitem in Recipe.Byproducts)
+        //    {
+        //        balance.Add(new ItemBalanceModel() { Item = bypitem.Item });
+        //    }
 
-    //    foreach (ItemWithAmount inItem in Recipe.Ingredients)
-    //    {
-    //        balance.Add(new ItemBalanceModel() { Item = inItem.Item });
-    //    }
+        //    foreach (ItemWithAmount inItem in Recipe.Ingredients)
+        //    {
+        //        balance.Add(new ItemBalanceModel() { Item = inItem.Item });
+        //    }
 
-    //    return balance;
+        //    return balance;
     }
 
 
+    #endregion
 
 }
