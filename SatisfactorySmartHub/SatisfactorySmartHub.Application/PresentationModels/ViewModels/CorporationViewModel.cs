@@ -4,11 +4,11 @@ using SatisfactorySmartHub.Application.Common;
 using SatisfactorySmartHub.Application.DataTranferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
+using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
 using SatisfactorySmartHub.Application.Services;
-using SatisfactorySmartHub.Application.ViewModels.Base;
 using SatisfactorySmartHub.Domain.Models;
 
-namespace SatisfactorySmartHub.Application.ViewModels;
+namespace SatisfactorySmartHub.Application.PresentationModels.ViewModels;
 
 public sealed class CorporationViewModel : ViewModelBase
 {

@@ -1,7 +1,7 @@
 ﻿using SatisfactorySmartHub.Domain.Common;
 using System.ComponentModel;
 
-namespace SatisfactorySmartHub.Application.ViewModels.Base;
+namespace SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
 
 
 /// <summary>

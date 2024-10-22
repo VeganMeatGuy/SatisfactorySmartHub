@@ -1,30 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using ErrorOr;
 using SatisfactorySmartHub.Application.Common;
-using SatisfactorySmartHub.Application.DataTranferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
-using SatisfactorySmartHub.Application.Services;
-using SatisfactorySmartHub.Application.ViewModels.Base;
-using SatisfactorySmartHub.Domain.Common;
+using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
 using SatisfactorySmartHub.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SatisfactorySmartHub.Application.ViewModels;
+namespace SatisfactorySmartHub.Application.PresentationModels.ViewModels;
 
 public sealed class BranchViewModel : ViewModelBase
 {
     private readonly ICachingService _cachingService;
     private readonly IBranchService _branchService;
     private readonly IProcessStepService _processStepService;
+    private readonly INavigationService _navigationService;
     private readonly IRecipeService _recipeService;
 
 
@@ -34,9 +23,9 @@ public sealed class BranchViewModel : ViewModelBase
     private IRelayCommand? _saveBranchCommand;
     private IRelayCommand? _addProcessStepCommand;
     private IRelayCommand? _removeProcessStepCommand;
+    private IRelayCommand? _selectProcessStepRecipeCommand;
 
 
-    private IRelayCommand? _selectRecipeCommand;
     private IRelayCommand? _recipeSelectionConfirmedCommand;
 
     private List<IProcessStepDto> _processStepsDisplayDataSource = [];
@@ -50,11 +39,13 @@ public sealed class BranchViewModel : ViewModelBase
         ICachingService cachingService,
         IBranchService branchService,
         IProcessStepService processStepService,
+        INavigationService navigationService,
         IRecipeService recipeService)
     {
         _cachingService = cachingService;
         _branchService = branchService;
         _processStepService = processStepService;
+        _navigationService = navigationService;
         _recipeService = recipeService;
 
         LoadRecipes();
@@ -77,10 +68,7 @@ public sealed class BranchViewModel : ViewModelBase
     public IRelayCommand SaveBranchCommand => _saveBranchCommand ?? new RelayCommand(new Action(SaveBranch));
     public IRelayCommand AddProcessStepCommand => _addProcessStepCommand ?? new RelayCommand(new Action(AddProcessStep));
     public IRelayCommand RemoveProcessStepCommand => _removeProcessStepCommand ?? new RelayCommand(new Action(RemoveProcessStep));
-
-
-    
-
+    public IRelayCommand SelectProcessStepRecipeCommand => _selectProcessStepRecipeCommand ?? new RelayCommand(new Action(SelectProcessStepRecipe));
 
     private ErrorOr<Success> UpdateProcessStepDataSource()
     {
@@ -123,6 +111,38 @@ public sealed class BranchViewModel : ViewModelBase
         UpdateProcessStepDataSource();
     }
 
+    private void SelectProcessStepRecipe()
+    {
+
+        var result = _navigationService.ShowSelectRecipeDialog();
+
+        return;
+
+        //öffne Dialog um Rezept auszuwählen
+        // --> navigation service show RecipeSelectionDialog
+
+
+
+        ///if(NavigationService.ShowRecipeSelectionDialog() == True)
+        ///{
+        ///
+        ///}
+
+        //var saveFileDialog = new SaveFileDialog()
+        //{
+        //    Filter = "json-Datei | *.json",
+        //        DefaultExt = "json",
+        //        FileName = dc.ExportName,
+        //    };
+
+        //if (saveFileDialog.ShowDialog() == true)
+        //{
+        //    filepath = saveFileDialog.FileName;
+        //}
+
+        throw new NotImplementedException();
+    }
+
 
 
     // old>
@@ -145,7 +165,7 @@ public sealed class BranchViewModel : ViewModelBase
     public ReadonlyObservableList<RecipeModel> RecipeList => _recipeList;
 
 
-    public IRelayCommand SelectRecipeCommand => _selectRecipeCommand ?? new RelayCommand(new Action(ShowRecipeSelection));
+
     public IRelayCommand RecipeSelectionConfirmedCommand => _recipeSelectionConfirmedCommand ?? new RelayCommand(new Action(RecipeSelectionConfirmed));
 
 

@@ -1,6 +1,4 @@
-﻿using Microsoft.Win32;
-using SatisfactorySmartHub.Application.ViewModels;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace SatisfactorySmartHub.Presentation.Views;
 

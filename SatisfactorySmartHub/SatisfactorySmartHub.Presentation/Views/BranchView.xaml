@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SatisfactorySmartHub.Presentation.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:SatisfactorySmartHub.Application.ViewModels;assembly=SatisfactorySmartHub.Application"
+    xmlns:vm="clr-namespace:SatisfactorySmartHub.Application.PresentationModels.ViewModels;assembly=SatisfactorySmartHub.Application"
     d:DataContext="{d:DesignInstance Type=vm:BranchViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -120,7 +120,9 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <customcontrol:ProcessStepDetails ProcessStep="{Binding}" SelectRecipe="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SelectRecipeCommand}" />
+                        <customcontrol:ProcessStepDetails 
+                            ProcessStep="{Binding}" 
+                            SelectRecipe="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SelectProcessStepRecipeCommand}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

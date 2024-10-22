@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
+using SatisfactorySmartHub.Application.PresentationModels.DialogModels;
+using SatisfactorySmartHub.Application.PresentationModels.ViewModels;
+using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
+using SatisfactorySmartHub.Application.PresentationModels.WindowModels;
 using SatisfactorySmartHub.Application.Services;
-using SatisfactorySmartHub.Application.ViewModels;
-using SatisfactorySmartHub.Application.ViewModels.Base;
-using SatisfactorySmartHub.Application.WindowModels;
 
 namespace SatisfactorySmartHub.Application.Extensions;
 /// <summary>
@@ -38,6 +39,7 @@ internal static class ServiceCollectionExtension
     internal static IServiceCollection AddWindowModels(this IServiceCollection services)
     {
         services.TryAddTransient<MainWindowModel>();
+        services.TryAddTransient<SelectRecipeDialogModel>();
         return services;
     }
 

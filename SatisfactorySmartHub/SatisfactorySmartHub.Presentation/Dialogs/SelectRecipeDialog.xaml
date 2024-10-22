@@ -1,0 +1,21 @@
+﻿<Window
+    x:Class="SatisfactorySmartHub.Presentation.Dialogs.SelectRecipeDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SatisfactorySmartHub.Presentation.Windows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SatisfactorySmartHub.Application.PresentationModels.DialogModels;assembly=SatisfactorySmartHub.Application"
+    d:DataContext="{d:DesignInstance Type=vm:SelectRecipeDialogModel}"
+    Title="RecipeSelectionDialog"
+    Width="800"
+    Height="450"
+    
+    mc:Ignorable="d">
+    <StackPanel>
+        <TextBox Text="{Binding RecipeId}" Background="Aqua"/>
+        <Button Click="Button_Click" IsDefault="True">OK</Button>
+    </StackPanel>
+    
+    
+</Window>

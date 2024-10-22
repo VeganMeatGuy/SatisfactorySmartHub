@@ -1,11 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
-using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
-using SatisfactorySmartHub.Application.ViewModels.Base;
-using SatisfactorySmartHub.Domain.Common;
-using SatisfactorySmartHub.Domain.Models;
+using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
 
-namespace SatisfactorySmartHub.Application.ViewModels;
+namespace SatisfactorySmartHub.Application.PresentationModels.ViewModels;
 
 public sealed class AdminViewModel : ViewModelBase
 {
@@ -22,7 +19,7 @@ public sealed class AdminViewModel : ViewModelBase
     public AdminViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
-        _navigationService.PropertyChanged += (s,e) => NavigationChanged();
+        _navigationService.PropertyChanged += (s, e) => NavigationChanged();
         CorporationCommand.Execute(this);
     }
 

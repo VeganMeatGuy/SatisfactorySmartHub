@@ -23,12 +23,13 @@
                 <Label Content="{Binding ProcessStep.Recipe.Name, RelativeSource={RelativeSource AncestorType=local:ProcessStepDetails}}" Foreground="{StaticResource FontWhite}" />
                 <Button
                     Command="{Binding SelectRecipe, RelativeSource={RelativeSource AncestorType=local:ProcessStepDetails}}"
-                    Content="Change Recipe"
+                    Content="Rezept Auwählen..."
                     Style="{StaticResource SmallButton}"/>
             </StackPanel>
         </Expander.Header>
 
-        <Grid>
+        <Grid
+            Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />

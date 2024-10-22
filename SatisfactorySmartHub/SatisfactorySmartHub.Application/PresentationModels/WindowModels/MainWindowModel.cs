@@ -1,10 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
-using SatisfactorySmartHub.Application.ViewModels;
+using SatisfactorySmartHub.Application.PresentationModels.ViewModels;
+using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
 
-namespace SatisfactorySmartHub.Application.WindowModels;
+namespace SatisfactorySmartHub.Application.PresentationModels.WindowModels;
 
-public sealed class MainWindowModel(INavigationService navigationService)
+public sealed class MainWindowModel(INavigationService navigationService) : ViewModelBase
 {
     private IRelayCommand? _hubCommand;
     private IRelayCommand? _adminCommand;
