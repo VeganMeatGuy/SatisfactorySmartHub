@@ -1,4 +1,5 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
+﻿using SatisfactorySmartHub.Application.Interfaces.Application.Services;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence.Repositories;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
@@ -15,4 +16,6 @@ public interface IRepositoryService
     IItemRepository ItemRepository { get; }
     ICorporationRepository CorporationRepository { get; }
     IBranchRepository BranchRepository { get; }
+
+    IProcessStepRepository ProcessStepRepository { get; }
 }

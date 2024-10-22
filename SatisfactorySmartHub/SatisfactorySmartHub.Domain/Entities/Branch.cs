@@ -17,8 +17,9 @@ public sealed class Branch : IdentityEntityBase
 
     //navigational properties
     public Corporation? Corporation { get; private set; }
+    public IEnumerable<ProcessStep> ProcessSteps { get; private set; }  = new List<ProcessStep>();
 
-    public static ErrorOr<Branch> Create(string name)
+public static ErrorOr<Branch> Create(string name)
     {
         ErrorOr<Success> ValidationResult = ValidateBrancheName(name);
 
