@@ -61,6 +61,18 @@ internal sealed class BranchService(
 
     public ErrorOr<Updated> UpdateBranch(IBranchDto branch)
     {
-        throw new NotImplementedException();
+        Branch? dbBranch = repositoryService.BranchRepository.GetById(branch.Id);
+
+        if (dbBranch == null)
+            return Error.Conflict();
+
+        if (dbBranch.Name.Equals(branch.Name))
+            return Error.Conflict();
+
+        dbBranch.ChangeName(branch.Name);
+
+        repositoryService.BranchRepository.Update(dbBranch);
+
+        return Result.Updated;
     }
 }

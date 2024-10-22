@@ -34,6 +34,17 @@ public static ErrorOr<Branch> Create(string name)
         return branch;
     }
 
+    public ErrorOr<Success> ChangeName(string name)
+    {
+        ErrorOr<Success> ValidationResult = ValidateBrancheName(name);
+
+        if (ValidationResult.IsError)
+            return ValidationResult.FirstError;
+
+        Name = name;
+        return Result.Success;
+    }
+
     public ErrorOr<Success> ChangeCorporationId(Guid corporationId)
     {
         CorporationId = corporationId;

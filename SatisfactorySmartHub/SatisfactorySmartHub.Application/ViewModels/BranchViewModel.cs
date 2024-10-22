@@ -23,15 +23,19 @@ namespace SatisfactorySmartHub.Application.ViewModels;
 public sealed class BranchViewModel : ViewModelBase
 {
     private readonly ICachingService _cachingService;
-    private readonly IProductionSiteService _productionSiteService;
+    private readonly IBranchService _branchService;
     private readonly IProcessStepService _processStepService;
     private readonly IRecipeService _recipeService;
 
 
     private bool _showForeFrontContent = false;
     private bool _recipeSelectionVisible = false;
+
+    private IRelayCommand? _saveBranchCommand;
     private IRelayCommand? _addProcessStepCommand;
     private IRelayCommand? _removeProcessStepCommand;
+
+
     private IRelayCommand? _selectRecipeCommand;
     private IRelayCommand? _recipeSelectionConfirmedCommand;
 
@@ -44,12 +48,12 @@ public sealed class BranchViewModel : ViewModelBase
 
     public BranchViewModel(
         ICachingService cachingService,
-        IProductionSiteService productionSiteService,
+        IBranchService branchService,
         IProcessStepService processStepService,
         IRecipeService recipeService)
     {
         _cachingService = cachingService;
-        _productionSiteService = productionSiteService;
+        _branchService = branchService;
         _processStepService = processStepService;
         _recipeService = recipeService;
 
@@ -70,8 +74,12 @@ public sealed class BranchViewModel : ViewModelBase
     }
     public ReadonlyObservableList<IProcessStepDto> ProcessSteps => _processSteps;
 
+    public IRelayCommand SaveBranchCommand => _saveBranchCommand ?? new RelayCommand(new Action(SaveBranch));
     public IRelayCommand AddProcessStepCommand => _addProcessStepCommand ?? new RelayCommand(new Action(AddProcessStep));
     public IRelayCommand RemoveProcessStepCommand => _removeProcessStepCommand ?? new RelayCommand(new Action(RemoveProcessStep));
+
+
+    
 
 
     private ErrorOr<Success> UpdateProcessStepDataSource()
@@ -83,6 +91,11 @@ public sealed class BranchViewModel : ViewModelBase
         _processStepsDisplayDataSource.AddRange(result.Value);
         ProcessSteps.Update();
         return Result.Success;
+    }
+
+    private void SaveBranch()
+    {
+        ErrorOr<Updated> result = _branchService.UpdateBranch(ActiveBranch);
     }
 
     private void AddProcessStep()
