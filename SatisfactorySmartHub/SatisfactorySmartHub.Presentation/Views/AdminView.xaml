@@ -35,7 +35,7 @@
                 IsChecked="{Binding CorporationViewIsShown}"
                 Style="{StaticResource CorporationButton}" />
             <RadioButton
-               Command="{Binding BranchCommand}"
+                Command="{Binding BranchCommand}"
                 IsChecked="{Binding BranchViewIsShown}"
                 Style="{StaticResource BranchButton}" />
             <RadioButton

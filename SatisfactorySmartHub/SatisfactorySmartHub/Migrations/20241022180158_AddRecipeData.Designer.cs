@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SatisfactorySmartHub.Infrastructure.Persistance.Repositories;
 
@@ -10,9 +11,11 @@ using SatisfactorySmartHub.Infrastructure.Persistance.Repositories;
 namespace SatisfactorySmartHub.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20241022180158_AddRecipeData")]
+    partial class AddRecipeData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
@@ -127,11 +130,6 @@ namespace SatisfactorySmartHub.Migrations
                         {
                             Id = new Guid("05cd0d20-dc9d-4d5e-b798-4fcd4a9f90cc"),
                             Name = "Iron Rod"
-                        },
-                        new
-                        {
-                            Id = new Guid("a3e1febf-d514-43ab-a7d9-46297d5d4029"),
-                            Name = "Wire"
                         });
                 });
 

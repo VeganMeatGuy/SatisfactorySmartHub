@@ -10,7 +10,7 @@ namespace SatisfactorySmartHub.Infrastructure.Persistance.Repositories
 {
     public sealed partial class RepositoryContext
     {
-        public DbSet<Item> Items { get; set; }
+        //public DbSet<Item> Items { get; set; }
         public DbSet<Corporation> Corporations { get; set; }
     }
 }

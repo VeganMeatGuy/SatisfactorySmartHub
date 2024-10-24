@@ -48,7 +48,7 @@ public sealed class BranchViewModel : ViewModelBase
         _navigationService = navigationService;
         _recipeService = recipeService;
 
-        LoadRecipes();
+        //LoadRecipes();
 
         if (ActiveBranch == null)
             return;

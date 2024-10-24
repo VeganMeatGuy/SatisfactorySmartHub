@@ -12,10 +12,10 @@ public interface IRepositoryService
     /// <summary>
     /// The static recipe repository instance.
     /// </summary>
-    IRecipeRepository StaticRecipeRepository { get; }
+    //IRecipeRepository StaticRecipeRepository { get; }
     IItemRepository ItemRepository { get; }
     ICorporationRepository CorporationRepository { get; }
     IBranchRepository BranchRepository { get; }
-
     IProcessStepRepository ProcessStepRepository { get; }
+    IRecipeRepository RecipeRepository { get; }
 }

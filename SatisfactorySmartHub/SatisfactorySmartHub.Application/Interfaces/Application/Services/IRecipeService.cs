@@ -1,4 +1,5 @@
-﻿using SatisfactorySmartHub.Domain.Models;
+﻿using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
+using SatisfactorySmartHub.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 /// </summary>
 public interface IRecipeService
 {
+    IEnumerable<IRecipeDto> GetRecipes();
+
 
     /// <summary>
     /// Returns a collection of all available recipes.

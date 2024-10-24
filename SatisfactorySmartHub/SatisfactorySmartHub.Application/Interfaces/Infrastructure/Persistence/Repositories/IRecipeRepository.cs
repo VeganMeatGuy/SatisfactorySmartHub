@@ -1,15 +1,11 @@
-﻿using SatisfactorySmartHub.Domain.Models;
+﻿using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence.Repositories.Base;
+using SatisfactorySmartHub.Domain.Entities;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence.Repositories;
 
 /// <summary>
 /// The recipe repository interface.
 /// </summary>
-public interface IRecipeRepository
+public interface IRecipeRepository : IIdentityRepository<Recipe>
 {
-    /// <summary>
-    /// Returns all entries of the <see cref="RecipeModel"/> entities.
-    /// </summary>
-    /// <returns><see cref="ICollection{RecipeModel}"/></returns>
-    ICollection<RecipeModel> GetAll();
 }

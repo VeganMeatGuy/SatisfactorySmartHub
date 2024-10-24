@@ -8,6 +8,9 @@ internal sealed class RecipeConfiguration : IdentityEntityBaseConfiguration<Reci
 {
     public override void Configure(EntityTypeBuilder<Recipe> builder)
     {
+        builder.Property(p => p.Name)
+            .IsUnicode();
+
         base.Configure(builder);
     }
 }

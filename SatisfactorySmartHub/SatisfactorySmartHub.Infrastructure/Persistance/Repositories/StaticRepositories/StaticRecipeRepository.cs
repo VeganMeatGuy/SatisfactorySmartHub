@@ -7,7 +7,7 @@ namespace SatisfactorySmartHub.Infrastructure.Persistance.Repositories.StaticRep
 /// <summary>
 /// The static recipe repository.
 /// </summary>
-internal class StaticRecipeRepository : IRecipeRepository
+internal class StaticRecipeRepository
 {
     private ICollection<RecipeModel> _recipeList = new HashSet<RecipeModel>();
 

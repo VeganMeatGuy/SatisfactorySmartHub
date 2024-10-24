@@ -24,12 +24,11 @@
                 <Button
                     Command="{Binding SelectRecipe, RelativeSource={RelativeSource AncestorType=local:ProcessStepDetails}}"
                     Content="Rezept Auwählen..."
-                    Style="{StaticResource SmallButton}"/>
+                    Style="{StaticResource SmallButton}" />
             </StackPanel>
         </Expander.Header>
 
-        <Grid
-            Visibility="Collapsed">
+        <Grid Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
