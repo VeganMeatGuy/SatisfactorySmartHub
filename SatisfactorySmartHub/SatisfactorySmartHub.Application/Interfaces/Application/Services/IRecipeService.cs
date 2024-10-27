@@ -14,11 +14,4 @@ namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 public interface IRecipeService
 {
     IEnumerable<IRecipeDto> GetRecipes();
-
-
-    /// <summary>
-    /// Returns a collection of all available recipes.
-    /// </summary>
-    /// <returns><see cref="ICollection{T}"/></returns>
-    ICollection<RecipeModel> GetAllRecipes();
 }

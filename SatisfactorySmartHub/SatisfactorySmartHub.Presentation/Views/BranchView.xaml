@@ -110,7 +110,7 @@
                 Content="🗑"
                 Style="{StaticResource StandardButton}" />
 
-            <ListView
+            <!--<ListView
                 Grid.Row="7"
                 Grid.ColumnSpan="4"
                 Margin="5,0,5,0"
@@ -123,7 +123,7 @@
                         <customcontrol:ProcessStepDetails ProcessStep="{Binding}" SelectRecipe="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SelectProcessStepRecipeCommand}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView>-->
         </Grid>
     </Grid>
 </UserControl>

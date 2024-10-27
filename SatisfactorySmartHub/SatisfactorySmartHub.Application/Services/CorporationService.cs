@@ -2,10 +2,8 @@
 using SatisfactorySmartHub.Application.DataTranferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
-using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Domain.Entities;
-using SatisfactorySmartHub.Domain.Models;
 
 namespace SatisfactorySmartHub.Application.Services;
 
@@ -63,19 +61,19 @@ internal sealed class CorporationService(
 
         if (dbCorporation.Name.Equals(corporation.Name))
             return Error.Conflict();
-            
+
         dbCorporation.ChangeName(corporation.Name);
 
         repositoryService.CorporationRepository.Update(dbCorporation);
 
         return Result.Updated;
     }
-    
+
     public ErrorOr<Success> AddBranchToCorporation(IBranchDto branch, ICorporationDto corporation)
     {
         Corporation? dbCorporation = repositoryService.CorporationRepository.GetById(corporation.Id);
 
-        if(dbCorporation == null)
+        if (dbCorporation == null)
             return Error.NotFound();
 
         Branch? dbBranch = repositoryService.BranchRepository.GetById(branch.Id);

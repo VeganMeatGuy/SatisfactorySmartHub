@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SatisfactorySmartHub.Infrastructure.Persistance.Repositories;
 
@@ -10,9 +11,11 @@ using SatisfactorySmartHub.Infrastructure.Persistance.Repositories;
 namespace SatisfactorySmartHub.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20241025074905_AddMachineToRecipe")]
+    partial class AddMachineToRecipe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
@@ -36,7 +39,7 @@ namespace SatisfactorySmartHub.Migrations
 
                     b.HasIndex("CorporationId");
 
-                    b.ToTable("Branches");
+                    b.ToTable("Branch");
                 });
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.ByProduct", b =>
@@ -60,7 +63,7 @@ namespace SatisfactorySmartHub.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("ByProducts");
+                    b.ToTable("ByProduct");
                 });
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.Corporation", b =>
@@ -101,16 +104,7 @@ namespace SatisfactorySmartHub.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Ingredients");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("eb936b9c-dc1c-45cf-9b71-c9155b1dd790"),
-                            Amount = 1m,
-                            ItemId = new Guid("6c944ca5-c6ba-4df4-a08e-c06134ba1472"),
-                            RecipeId = new Guid("6b95911b-3711-470a-84ff-f843825eb3e6")
-                        });
+                    b.ToTable("Ingredient");
                 });
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.Item", b =>
@@ -127,24 +121,7 @@ namespace SatisfactorySmartHub.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Items");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("6c944ca5-c6ba-4df4-a08e-c06134ba1472"),
-                            Name = "Iron Ore"
-                        },
-                        new
-                        {
-                            Id = new Guid("be5c74ec-52aa-400c-a1b4-3fd3ac9a5ee5"),
-                            Name = "Iron Ingot"
-                        },
-                        new
-                        {
-                            Id = new Guid("bb7bde8d-b9ce-4d68-a852-b16e621fa3a6"),
-                            Name = "Iron Plate"
-                        });
+                    b.ToTable("Item");
                 });
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.Machine", b =>
@@ -163,15 +140,7 @@ namespace SatisfactorySmartHub.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Machines");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("629893a3-3ae2-408f-8af5-70bcea9c1d19"),
-                            Name = "Smelter",
-                            PowerConsumption = 4
-                        });
+                    b.ToTable("Machine");
                 });
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.MachineryConfigItem", b =>
@@ -194,7 +163,7 @@ namespace SatisfactorySmartHub.Migrations
 
                     b.HasIndex("ProcessStepId");
 
-                    b.ToTable("MachineConfigItems");
+                    b.ToTable("MachineryConfigItem");
                 });
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.MainProduct", b =>
@@ -219,16 +188,7 @@ namespace SatisfactorySmartHub.Migrations
                     b.HasIndex("RecipeId")
                         .IsUnique();
 
-                    b.ToTable("MainProducts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("5f075a56-f6a5-409f-bf92-0920edd02de1"),
-                            Amount = 1m,
-                            ItemId = new Guid("be5c74ec-52aa-400c-a1b4-3fd3ac9a5ee5"),
-                            RecipeId = new Guid("6b95911b-3711-470a-84ff-f843825eb3e6")
-                        });
+                    b.ToTable("MainProduct");
                 });
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.ProcessStep", b =>
@@ -250,7 +210,7 @@ namespace SatisfactorySmartHub.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("ProcessSteps");
+                    b.ToTable("ProcessStep");
                 });
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.ProcessStepTarget", b =>
@@ -275,7 +235,7 @@ namespace SatisfactorySmartHub.Migrations
                     b.HasIndex("ProcessStepId")
                         .IsUnique();
 
-                    b.ToTable("ProcessStepTargets");
+                    b.ToTable("ProcessStepTarget");
                 });
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.Recipe", b =>
@@ -297,15 +257,7 @@ namespace SatisfactorySmartHub.Migrations
 
                     b.HasIndex("MachineId");
 
-                    b.ToTable("Recipes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("6b95911b-3711-470a-84ff-f843825eb3e6"),
-                            MachineId = new Guid("629893a3-3ae2-408f-8af5-70bcea9c1d19"),
-                            Name = "Iron Ingot"
-                        });
+                    b.ToTable("Recipe");
                 });
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.Branch", b =>

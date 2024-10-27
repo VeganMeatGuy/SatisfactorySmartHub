@@ -10,16 +10,15 @@ using SatisfactorySmartHub.Domain.Interfaces.Entities;
 
 namespace SatisfactorySmartHub.Domain.Entities;
 
-public sealed class Item : EntityBase
+public sealed class Item : IdentityEntityBase
 {
-    public int Id { get; init; }
+    //empty constructor for EF Core
+    private Item() { }
+
     public string Name { get; init; } = string.Empty;
 
-    public static ErrorOr<Item> Create(int id, string name)
+    public static ErrorOr<Item> Create(Guid id, string name)
     {
-        if (id == 0)
-            return DomainErrors.Item.ItemIdCannotBeZero;
-
         if (name == null)
             return DomainErrors.Item.ItemNameCannotBeNull;
 

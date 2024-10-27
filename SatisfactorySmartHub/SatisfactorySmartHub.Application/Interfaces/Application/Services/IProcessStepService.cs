@@ -1,6 +1,5 @@
 ﻿using ErrorOr;
 using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
-using SatisfactorySmartHub.Domain.Models;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 

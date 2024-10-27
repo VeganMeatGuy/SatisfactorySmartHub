@@ -32,9 +32,6 @@ public sealed class BranchViewModel : ViewModelBase
     private ReadonlyObservableList<IProcessStepDto> _processSteps = new();
     private IProcessStepDto _SelectedProcessStep;
 
-    private ReadonlyObservableList<RecipeModel> _recipeList = new ReadonlyObservableList<RecipeModel>();
-    private RecipeModel _selectedRecipe;
-
     public BranchViewModel(
         ICachingService cachingService,
         IBranchService branchService,
@@ -141,60 +138,5 @@ public sealed class BranchViewModel : ViewModelBase
         //}
 
         throw new NotImplementedException();
-    }
-
-
-
-    // old>
-
-    public bool ShowForeFrontContent
-    {
-        get => _showForeFrontContent;
-        set => SetProperty(ref _showForeFrontContent, value);
-    }
-    public bool RecipeSelectionVisible
-    {
-        get => _recipeSelectionVisible;
-        set => SetProperty(ref _recipeSelectionVisible, value);
-    }
-    public RecipeModel? SelectedRecipe
-    {
-        get => _selectedRecipe;
-        set => SetProperty(ref _selectedRecipe, value);
-    }
-    public ReadonlyObservableList<RecipeModel> RecipeList => _recipeList;
-
-
-
-    public IRelayCommand RecipeSelectionConfirmedCommand => _recipeSelectionConfirmedCommand ?? new RelayCommand(new Action(RecipeSelectionConfirmed));
-
-
-    private void RecipeSelectionConfirmed()
-    {
-        //if (SelectedRecipe != null)
-        //{
-        //    SelectedProcessStep.Recipe = SelectedRecipe;
-        //}
-
-        //ProcessSteps.Update();
-
-        //SelectedRecipe = null;
-        //ShowForeFrontContent = false;
-        //RecipeSelectionVisible = false;
-    }
-
-    private void ShowRecipeSelection()
-    {
-        if (SelectedProcessStep == null)
-            return;
-        ShowForeFrontContent = true;
-        RecipeSelectionVisible = true;
-    }
-
-
-
-    private void LoadRecipes()
-    {
-        _recipeList = new ReadonlyObservableList<RecipeModel>(_recipeService.GetAllRecipes());
     }
 }

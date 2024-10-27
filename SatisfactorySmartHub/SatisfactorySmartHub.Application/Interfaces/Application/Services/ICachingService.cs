@@ -1,5 +1,4 @@
 ﻿using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
-using SatisfactorySmartHub.Domain.Models;
 using System.ComponentModel;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;

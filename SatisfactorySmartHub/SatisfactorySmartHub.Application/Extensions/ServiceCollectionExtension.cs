@@ -20,12 +20,10 @@ internal static class ServiceCollectionExtension
     /// <returns>The enriched service collection.</returns>
     internal static IServiceCollection RegisterServices(this IServiceCollection services)
     {
-        services.TryAddSingleton<IItemService, ItemService>();
         services.TryAddSingleton<ICorporationService, CorporationService>();
         services.TryAddSingleton<IBranchService, BranchService>();
         services.TryAddSingleton<ICachingService, CachingService>();
         services.TryAddSingleton<IProcessStepService, ProcessStepService>();
-        services.TryAddSingleton<IProductionSiteService, ProductionSiteService>();
         services.TryAddSingleton<IRecipeService, RecipeService>();
 
         return services;

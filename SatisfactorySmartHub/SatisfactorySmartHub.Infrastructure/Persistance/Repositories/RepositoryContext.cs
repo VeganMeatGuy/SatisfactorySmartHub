@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SatisfactorySmartHub.Domain.Entities;
 using SatisfactorySmartHub.Infrastructure.Common;
+using SatisfactorySmartHub.Infrastructure.Persistance.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,30 @@ public sealed partial class RepositoryContext(DbContextOptions<RepositoryContext
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(IInfrastructureAssemblyMarker).Assembly);
 
+        modelBuilder.Entity<Machine>().HasData(StaticData.Machines);
+
+        modelBuilder.Entity<Item>().HasData(StaticData.Items);
+
+        modelBuilder.Entity<Ingredient>().HasData(
+            Ingredient.Create(
+                       Guid.Parse("eb936b9c-dc1c-45cf-9b71-c9155b1dd790"),
+                       Guid.Parse("6b95911b-3711-470a-84ff-f843825eb3e6"),
+                       Guid.Parse("6c944ca5-c6ba-4df4-a08e-c06134ba1472"),
+                       1m).Value);
+
+        modelBuilder.Entity<MainProduct>().HasData(
+           MainProduct.Create(
+                   Guid.Parse("5f075a56-f6a5-409f-bf92-0920edd02de1"),
+                   Guid.Parse("6b95911b-3711-470a-84ff-f843825eb3e6"),
+                   Guid.Parse("be5c74ec-52aa-400c-a1b4-3fd3ac9a5ee5"),
+                   1).Value);
+
+
         modelBuilder.Entity<Recipe>().HasData(
-            Recipe.Create(Guid.Parse("75121144-cdbf-4a3b-a859-ccf80d8664b6"), "Iron Plate").Value,
-            Recipe.Create(Guid.Parse("05cd0d20-dc9d-4d5e-b798-4fcd4a9f90cc"), "Iron Rod").Value,
-            Recipe.Create(Guid.Parse("a3e1febf-d514-43ab-a7d9-46297d5d4029"), "Wire").Value);
+           Recipe.Create(
+               Guid.Parse("6b95911b-3711-470a-84ff-f843825eb3e6"),
+               "Iron Ingot",
+               Guid.Parse("629893a3-3ae2-408f-8af5-70bcea9c1d19")).Value);
     }
 
     public override int SaveChanges()

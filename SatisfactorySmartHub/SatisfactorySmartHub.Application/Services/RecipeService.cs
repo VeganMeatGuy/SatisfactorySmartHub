@@ -12,10 +12,6 @@ namespace SatisfactorySmartHub.Application.Services;
 /// </summary>
 internal sealed class RecipeService(IRepositoryService repositoryService) : IRecipeService
 {
-    public ICollection<RecipeModel> GetAllRecipes()
-        => throw new NotImplementedException();
-    //    => repositoryService.StaticRecipeRepository.GetAll();
-
     public IEnumerable<IRecipeDto> GetRecipes()
     {
         try

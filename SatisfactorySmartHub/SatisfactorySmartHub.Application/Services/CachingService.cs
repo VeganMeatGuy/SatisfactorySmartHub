@@ -1,8 +1,6 @@
-﻿using SatisfactorySmartHub.Application.DataTranferObjects;
-using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
+﻿using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Domain.Common;
-using SatisfactorySmartHub.Domain.Models;
 
 namespace SatisfactorySmartHub.Application.Services;
 internal class CachingService : ObservableObjectBase, ICachingService

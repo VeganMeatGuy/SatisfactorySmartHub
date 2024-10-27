@@ -9,16 +9,12 @@ using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Domain.Entities;
 
-public sealed class Machine : EntityBase
+public sealed class Machine : IdentityEntityBase
 {
-    public int Id { get; init; }
     public string Name { get; init; } = string.Empty;
     public int PowerConsumption { get; init; }
-    public static ErrorOr<Machine> Create(int id, string name, int powerConsumption)
+    public static ErrorOr<Machine> Create(Guid id, string name, int powerConsumption)
     {
-        if (id == 0)
-            return DomainErrors.Machine.MachineIdCannotBeZero;
-
         if (name == null)
             return DomainErrors.Machine.MachineNameCannotBeNull;
 

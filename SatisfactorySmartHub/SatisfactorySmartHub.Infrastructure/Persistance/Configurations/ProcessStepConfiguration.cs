@@ -18,11 +18,10 @@ internal sealed class ProcessStepConfiguration : IdentityEntityBaseConfiguration
             .HasForeignKey(e => e.RecipeId)
             .IsRequired(false);
 
-        builder.OwnsOne(p => p.Target, targetBuilder =>
-        {
-            targetBuilder.Property(m => m.ItemId).IsRequired();
-            targetBuilder.Property(m => m.Amount).IsRequired();
-        });
+        builder.HasOne(e => e.Target)
+            .WithOne(e => e.ProcessStep)
+            .HasForeignKey<ProcessStepTarget>(e => e.ProcessStepId)
+            .IsRequired(false);
 
         builder.HasMany(e => e.ImplementedMachinery)
             .WithOne(e => e.ProcessStep)

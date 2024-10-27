@@ -15,7 +15,19 @@ public sealed class Recipe : IdentityEntityBase
 
     public string Name { get; init; } = string.Empty;
 
-public static ErrorOr<Recipe> Create(Guid id, string name)
+    public Guid MachineId { get; init; }
+
+    //navigational properties
+    public IEnumerable<Ingredient> Ingredients { get; init; } = new List<Ingredient>();
+    public MainProduct MainProduct { get; init; }
+    public IEnumerable<ByProduct> ByProducts { get; init; } = new List<ByProduct>();
+    public Machine Machine { get; init; }
+
+
+    public static ErrorOr<Recipe> Create(
+        Guid id, 
+        string name, 
+        Guid machineId)
     {
         //ErrorOr<Success> ValidationResult = ValidateBrancheName(name);
 
@@ -26,6 +38,7 @@ public static ErrorOr<Recipe> Create(Guid id, string name)
         {
             Id = id,
             Name = name,
+            MachineId = machineId,
         };
         return recipe;
     }

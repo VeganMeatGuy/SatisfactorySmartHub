@@ -35,16 +35,5 @@ namespace SatisfactorySmartHub.Presentation.Controls
             set { SetValue(SelectRecipeProperty, value); }
         }
 
-        public static DependencyProperty ProcessStepProperty
-            = DependencyProperty.Register("ProcessStep", typeof(ProcessStepModel), typeof(ProcessStepDetails));
-
-        public ProcessStepModel ProcessStep
-        {
-            get { return (ProcessStepModel)GetValue(ProcessStepProperty); }
-            set { SetValue(ProcessStepProperty, value); }
-        }
-
-        public RecipeModel Recipe => ProcessStep.Recipe;
-
     }
 }

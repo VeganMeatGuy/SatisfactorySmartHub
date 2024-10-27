@@ -1,6 +1,5 @@
 ﻿using ErrorOr;
 using SatisfactorySmartHub.Domain.Entities.Base;
-using SatisfactorySmartHub.Domain.Models.Enums;
 
 namespace SatisfactorySmartHub.Domain.Entities;
 
@@ -12,12 +11,12 @@ public sealed class ProcessStep : IdentityEntityBase
     //foreign key
     public Guid BranchId { get; private set; }
     public Guid? RecipeId { get; private set; }
-    public ItemWithAmount? Target { get; private set; }
 
 
     //navigational property
     public Branch Branch { get; private set; }
     public Recipe? Recipe { get; private set; }
+    public ProcessStepTarget? Target { get; private set; }
     public IEnumerable<MachineryConfigItem> ImplementedMachinery { get; private set; } = new List<MachineryConfigItem>();
 
 

@@ -87,7 +87,7 @@ internal static class ServiceCollectionExtension
     /// <returns>The enriched service collection.</returns>
     internal static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.TryAddSingleton<ICorporationFileService, CorporationFileService>();
+        //add here services :-)
         return services;
     }
 
