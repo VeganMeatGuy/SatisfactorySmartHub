@@ -24,13 +24,6 @@
     </UserControl.Resources>
 
     <Grid>
-        <!--<customcontrol:RecipeSelectionDialog
-            Panel.ZIndex="1"
-            Confirm="{Binding RecipeSelectionConfirmedCommand}"
-            RecipeList="{Binding RecipeList}"
-            Visibility="{Binding RecipeSelectionVisible, Converter={StaticResource BoolToVis}}"
-            SelectedRecipe="{Binding SelectedRecipe, Mode=TwoWay}"/>-->
-
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -110,7 +103,7 @@
                 Content="🗑"
                 Style="{StaticResource StandardButton}" />
 
-            <!--<ListView
+            <ListView
                 Grid.Row="7"
                 Grid.ColumnSpan="4"
                 Margin="5,0,5,0"
@@ -123,7 +116,7 @@
                         <customcontrol:ProcessStepDetails ProcessStep="{Binding}" SelectRecipe="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SelectProcessStepRecipeCommand}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>-->
+            </ListView>
         </Grid>
     </Grid>
 </UserControl>

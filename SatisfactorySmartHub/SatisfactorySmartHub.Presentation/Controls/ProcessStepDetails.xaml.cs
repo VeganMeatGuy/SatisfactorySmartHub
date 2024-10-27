@@ -1,4 +1,5 @@
-﻿using SatisfactorySmartHub.Domain.Models;
+﻿using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
+using SatisfactorySmartHub.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,16 @@ namespace SatisfactorySmartHub.Presentation.Controls
             get { return (ICommand)GetValue(SelectRecipeProperty); }
             set { SetValue(SelectRecipeProperty, value); }
         }
+
+        public static DependencyProperty ProcessStepProperty
+            = DependencyProperty.Register("ProcessStep", typeof(IProcessStepDto), typeof(ProcessStepDetails));
+        
+        public IProcessStepDto ProcessStep
+        {
+            get { return (IProcessStepDto)GetValue(ProcessStepProperty); }
+            set { SetValue(ProcessStepProperty, value); }
+        }
+
 
     }
 }
