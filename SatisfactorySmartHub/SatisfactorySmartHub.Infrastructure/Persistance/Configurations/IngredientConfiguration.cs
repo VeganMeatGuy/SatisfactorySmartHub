@@ -13,6 +13,13 @@ internal class IngredientConfiguration : ItemWithAmountBaseConfiguration<Ingredi
 {
     public override void Configure(EntityTypeBuilder<Ingredient> builder)
     {
+        builder.HasKey(c => new { c.RecipeId, c.ItemId });
+
+        builder.HasOne(e => e.Recipe)
+            .WithMany(e => e.Ingredients)
+            .HasForeignKey(e => e.RecipeId)
+            .IsRequired(false);
+
         base.Configure(builder);
     }
 }

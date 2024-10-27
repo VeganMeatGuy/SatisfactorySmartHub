@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Domain.Entities.Base;
 
-public abstract class ItemWithAmountBase : IdentityEntityBase, IItemWithAmountBase
+public abstract class ItemWithAmountBase : EntityBase, IItemWithAmountBase
 {
     public Guid ItemId { get; init; }
     public decimal Amount { get; init; }

@@ -18,11 +18,10 @@ public sealed class MainProduct : ItemWithAmountBase
 
     //navigational properties
     public Recipe Recipe { get; private set; }
-    public static ErrorOr<MainProduct> Create(Guid id, Guid recipeId, Guid itemId, decimal amount)
+    public static ErrorOr<MainProduct> Create(Guid recipeId, Guid itemId, decimal amount)
     {
         var mainProduct = new MainProduct
         {
-            Id = id,
             RecipeId = recipeId,
             ItemId = itemId,
             Amount = amount

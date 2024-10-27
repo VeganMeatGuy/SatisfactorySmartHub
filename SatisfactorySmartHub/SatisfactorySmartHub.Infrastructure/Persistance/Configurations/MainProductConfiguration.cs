@@ -9,6 +9,13 @@ internal class MainProductConfiguration : ItemWithAmountBaseConfiguration<MainPr
 {
     public override void Configure(EntityTypeBuilder<MainProduct> builder)
     {
+        builder.HasKey(c => new { c.RecipeId, c.ItemId });
+
+        builder.HasOne(e => e.Recipe)
+            .WithOne(e => e.MainProduct)
+            .HasForeignKey<MainProduct>(e => e.RecipeId)
+            .IsRequired(false);
+        
         base.Configure(builder);
     }
 }

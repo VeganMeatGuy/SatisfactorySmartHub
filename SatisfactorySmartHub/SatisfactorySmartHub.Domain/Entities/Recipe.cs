@@ -19,7 +19,7 @@ public sealed class Recipe : IdentityEntityBase
 
     //navigational properties
     public IEnumerable<Ingredient> Ingredients { get; init; } = new List<Ingredient>();
-    public MainProduct MainProduct { get; init; }
+    public MainProduct? MainProduct { get; init; }
     public IEnumerable<ByProduct> ByProducts { get; init; } = new List<ByProduct>();
     public Machine Machine { get; init; }
 

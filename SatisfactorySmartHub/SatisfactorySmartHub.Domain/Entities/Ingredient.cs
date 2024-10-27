@@ -20,11 +20,10 @@ public sealed class Ingredient : ItemWithAmountBase
     //navigational properties
     public Recipe Recipe { get; private set; }
 
-    public static ErrorOr<Ingredient> Create(Guid id, Guid recipeId, Guid itemId, decimal amount)
+    public static ErrorOr<Ingredient> Create(Guid recipeId, Guid itemId, decimal amount)
     {
         var ingredient = new Ingredient
         {
-            Id = id,
             RecipeId = recipeId,
             ItemId = itemId,
             Amount = amount

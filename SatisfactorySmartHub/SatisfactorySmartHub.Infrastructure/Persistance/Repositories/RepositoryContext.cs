@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SatisfactorySmartHub.Infrastructure.Persistance.Data.StaticData;
 
 namespace SatisfactorySmartHub.Infrastructure.Persistance.Repositories;
 
@@ -18,30 +19,16 @@ public sealed partial class RepositoryContext(DbContextOptions<RepositoryContext
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(IInfrastructureAssemblyMarker).Assembly);
 
-        modelBuilder.Entity<Machine>().HasData(StaticData.Machines);
+        modelBuilder.Entity<Machine>().HasData(MachineData.Machines);
 
-        modelBuilder.Entity<Item>().HasData(StaticData.Items);
+        modelBuilder.Entity<Item>().HasData(ItemData.Items);
 
-        modelBuilder.Entity<Ingredient>().HasData(
-            Ingredient.Create(
-                       Guid.Parse("eb936b9c-dc1c-45cf-9b71-c9155b1dd790"),
-                       Guid.Parse("6b95911b-3711-470a-84ff-f843825eb3e6"),
-                       Guid.Parse("6c944ca5-c6ba-4df4-a08e-c06134ba1472"),
-                       1m).Value);
+        modelBuilder.Entity<Recipe>().HasData(RecipeData.Recipes);
 
-        modelBuilder.Entity<MainProduct>().HasData(
-           MainProduct.Create(
-                   Guid.Parse("5f075a56-f6a5-409f-bf92-0920edd02de1"),
-                   Guid.Parse("6b95911b-3711-470a-84ff-f843825eb3e6"),
-                   Guid.Parse("be5c74ec-52aa-400c-a1b4-3fd3ac9a5ee5"),
-                   1).Value);
+        modelBuilder.Entity<Ingredient>().HasData(IngredientData.Ingredients);
 
+        modelBuilder.Entity<MainProduct>().HasData(MainProductData.MainProducts);
 
-        modelBuilder.Entity<Recipe>().HasData(
-           Recipe.Create(
-               Guid.Parse("6b95911b-3711-470a-84ff-f843825eb3e6"),
-               "Iron Ingot",
-               Guid.Parse("629893a3-3ae2-408f-8af5-70bcea9c1d19")).Value);
     }
 
     public override int SaveChanges()

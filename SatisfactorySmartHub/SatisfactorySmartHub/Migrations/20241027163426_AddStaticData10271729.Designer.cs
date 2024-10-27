@@ -11,8 +11,8 @@ using SatisfactorySmartHub.Infrastructure.Persistance.Repositories;
 namespace SatisfactorySmartHub.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20241026141537_AddCompleteRecipeData")]
-    partial class AddCompleteRecipeData
+    [Migration("20241027163426_AddStaticData10271729")]
+    partial class AddStaticData10271729
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,24 +44,18 @@ namespace SatisfactorySmartHub.Migrations
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.ByProduct", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Amount")
+                    b.Property<Guid>("RecipeId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ItemId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("RecipeId")
+                    b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("RecipeId", "ItemId");
 
                     b.HasIndex("ItemId");
-
-                    b.HasIndex("RecipeId");
 
                     b.ToTable("ByProducts");
                 });
@@ -85,34 +79,33 @@ namespace SatisfactorySmartHub.Migrations
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.Ingredient", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Amount")
+                    b.Property<Guid>("RecipeId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ItemId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("RecipeId")
+                    b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("RecipeId", "ItemId");
 
                     b.HasIndex("ItemId");
-
-                    b.HasIndex("RecipeId");
 
                     b.ToTable("Ingredients");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("eb936b9c-dc1c-45cf-9b71-c9155b1dd790"),
-                            Amount = 1m,
+                            RecipeId = new Guid("6b95911b-3711-470a-84ff-f843825eb3e6"),
                             ItemId = new Guid("6c944ca5-c6ba-4df4-a08e-c06134ba1472"),
-                            RecipeId = new Guid("6b95911b-3711-470a-84ff-f843825eb3e6")
+                            Amount = 1m
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("34f401c1-1fbf-4d31-aff2-f04fa40f1831"),
+                            ItemId = new Guid("be5c74ec-52aa-400c-a1b4-3fd3ac9a5ee5"),
+                            Amount = 3m
                         });
                 });
 
@@ -174,6 +167,12 @@ namespace SatisfactorySmartHub.Migrations
                             Id = new Guid("629893a3-3ae2-408f-8af5-70bcea9c1d19"),
                             Name = "Smelter",
                             PowerConsumption = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("9a874da3-3ea4-427d-8552-fc26dccba215"),
+                            Name = "Constructor",
+                            PowerConsumption = 4
                         });
                 });
 
@@ -202,20 +201,16 @@ namespace SatisfactorySmartHub.Migrations
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.MainProduct", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Amount")
+                    b.Property<Guid>("RecipeId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ItemId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("RecipeId")
+                    b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("RecipeId", "ItemId");
 
                     b.HasIndex("ItemId");
 
@@ -227,10 +222,15 @@ namespace SatisfactorySmartHub.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5f075a56-f6a5-409f-bf92-0920edd02de1"),
-                            Amount = 1m,
+                            RecipeId = new Guid("6b95911b-3711-470a-84ff-f843825eb3e6"),
                             ItemId = new Guid("be5c74ec-52aa-400c-a1b4-3fd3ac9a5ee5"),
-                            RecipeId = new Guid("6b95911b-3711-470a-84ff-f843825eb3e6")
+                            Amount = 1m
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("34f401c1-1fbf-4d31-aff2-f04fa40f1831"),
+                            ItemId = new Guid("bb7bde8d-b9ce-4d68-a852-b16e621fa3a6"),
+                            Amount = 2m
                         });
                 });
 
@@ -258,20 +258,16 @@ namespace SatisfactorySmartHub.Migrations
 
             modelBuilder.Entity("SatisfactorySmartHub.Domain.Entities.ProcessStepTarget", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Amount")
+                    b.Property<Guid>("ProcessStepId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ItemId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("ProcessStepId")
+                    b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProcessStepId", "ItemId");
 
                     b.HasIndex("ItemId");
 
@@ -308,6 +304,12 @@ namespace SatisfactorySmartHub.Migrations
                             Id = new Guid("6b95911b-3711-470a-84ff-f843825eb3e6"),
                             MachineId = new Guid("629893a3-3ae2-408f-8af5-70bcea9c1d19"),
                             Name = "Iron Ingot"
+                        },
+                        new
+                        {
+                            Id = new Guid("34f401c1-1fbf-4d31-aff2-f04fa40f1831"),
+                            MachineId = new Guid("9a874da3-3ea4-427d-8552-fc26dccba215"),
+                            Name = "Iron Plate"
                         });
                 });
 
@@ -373,9 +375,7 @@ namespace SatisfactorySmartHub.Migrations
 
                     b.HasOne("SatisfactorySmartHub.Domain.Entities.Recipe", "Recipe")
                         .WithOne("MainProduct")
-                        .HasForeignKey("SatisfactorySmartHub.Domain.Entities.MainProduct", "RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SatisfactorySmartHub.Domain.Entities.MainProduct", "RecipeId");
 
                     b.Navigation("Item");
 
@@ -448,8 +448,7 @@ namespace SatisfactorySmartHub.Migrations
 
                     b.Navigation("Ingredients");
 
-                    b.Navigation("MainProduct")
-                        .IsRequired();
+                    b.Navigation("MainProduct");
                 });
 #pragma warning restore 612, 618
         }
