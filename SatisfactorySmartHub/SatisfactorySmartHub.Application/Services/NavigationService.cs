@@ -1,6 +1,5 @@
 ﻿using ErrorOr;
 using SatisfactorySmartHub.Application.DataTranferObjects.DialogResults;
-using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects.DialogResults;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
 using SatisfactorySmartHub.Domain.Common;
@@ -12,9 +11,9 @@ public sealed class NavigationService(Func<Type, ViewModelBase> viewModelFactory
     private ViewModelBase _currentAdminView = default!;
 
 
-    private ISelectRecipeDialogResult? _recipeSelectionDialogResult;
-    
-    
+    private SelectRecipeDialogResult? _recipeSelectionDialogResult;
+
+
     public ViewModelBase CurrentMainView
     {
         get => _currentMainView;
@@ -35,12 +34,12 @@ public sealed class NavigationService(Func<Type, ViewModelBase> viewModelFactory
     public void NavigateMainViewTo<T>() where T : ViewModelBase
         => CurrentMainView = viewModelFactory.Invoke(typeof(T));
 
-    public void SetSelectRecipeDialogResult(ISelectRecipeDialogResult result)
+    public void SetSelectRecipeDialogResult(SelectRecipeDialogResult result)
     {
         _recipeSelectionDialogResult = result;
     }
 
-    public ErrorOr<ISelectRecipeDialogResult> ShowSelectRecipeDialog()
+    public ErrorOr<SelectRecipeDialogResult> ShowSelectRecipeDialog()
     {
         _recipeSelectionDialogResult = null;
 
@@ -52,7 +51,7 @@ public sealed class NavigationService(Func<Type, ViewModelBase> viewModelFactory
 
         SelectRecipeDialogResult DialogResult = (SelectRecipeDialogResult)_recipeSelectionDialogResult;
 
-        SelectRecipeDialogResult returnValue = SelectRecipeDialogResult.Clone(DialogResult);
+        SelectRecipeDialogResult returnValue = DialogResult;
         _recipeSelectionDialogResult = null;
 
         return returnValue;

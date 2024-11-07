@@ -1,7 +1,6 @@
 ﻿using SatisfactorySmartHub.Application.Common;
 using SatisfactorySmartHub.Application.DataTranferObjects.DialogResults;
 using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
-using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects.DialogResults;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
 
@@ -34,8 +33,8 @@ public sealed class SelectRecipeDialogModel : ViewModelBase
 
 
 
-    public ISelectRecipeDialogResult GetDialogResult()
+    public SelectRecipeDialogResult GetDialogResult()
     {
-        return new SelectRecipeDialogResult() { RecipeId = SelectedRecipe.Id };
+        return new SelectRecipeDialogResult(SelectedRecipe.Id);
     }
 }

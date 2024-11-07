@@ -1,5 +1,5 @@
 ﻿using ErrorOr;
-using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects.DialogResults;
+using SatisfactorySmartHub.Application.DataTranferObjects.DialogResults;
 using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
 using System.ComponentModel;
 
@@ -31,6 +31,6 @@ public interface INavigationService : INotifyPropertyChanged
 
 
     event EventHandler ShowSelectRecipeDialogEvent;
-    void SetSelectRecipeDialogResult(ISelectRecipeDialogResult result);
-    ErrorOr<ISelectRecipeDialogResult> ShowSelectRecipeDialog();
+    void SetSelectRecipeDialogResult(SelectRecipeDialogResult result);
+    ErrorOr<SelectRecipeDialogResult> ShowSelectRecipeDialog();
 }
