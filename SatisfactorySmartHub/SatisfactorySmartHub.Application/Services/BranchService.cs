@@ -1,6 +1,5 @@
 ﻿using ErrorOr;
 using SatisfactorySmartHub.Application.DataTranferObjects;
-using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Domain.Entities;
@@ -14,7 +13,7 @@ namespace SatisfactorySmartHub.Application.Services;
 internal sealed class BranchService(
     IRepositoryService repositoryService) : IBranchService
 {
-    public ErrorOr<IBranchDto> AddBranch(string branchName)
+    public ErrorOr<BranchDto> AddBranch(string branchName)
     {
         ErrorOr<Branch> CreateBranchResult = Branch.Create(branchName);
 
@@ -39,7 +38,7 @@ internal sealed class BranchService(
         return BranchDto.CreateFromEntity(newBranch);
     }
 
-    public ErrorOr<IEnumerable<IBranchDto>> GetBranchesOfCorporation(Guid corporationId)
+    public ErrorOr<IEnumerable<BranchDto>> GetBranchesOfCorporation(Guid corporationId)
     {
         try
         {
@@ -59,7 +58,7 @@ internal sealed class BranchService(
         }
     }
 
-    public ErrorOr<Updated> UpdateBranch(IBranchDto branch)
+    public ErrorOr<Updated> UpdateBranch(BranchDto branch)
     {
         Branch? dbBranch = repositoryService.BranchRepository.GetById(branch.Id);
 

@@ -2,7 +2,6 @@
 using ErrorOr;
 using SatisfactorySmartHub.Application.Common;
 using SatisfactorySmartHub.Application.DataTranferObjects;
-using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
 
@@ -19,9 +18,9 @@ public sealed class CorporationViewModel : ViewModelBase
     private IRelayCommand? _addBranchCommand;
     private IRelayCommand? _showBranchDetailsCommand;
 
-    private List<IBranchDto> _branchesDisplayDataSource = [];
-    private ReadonlyObservableList<IBranchDto> _branches = new();
-    private IBranchDto? _selectedBranchModel;
+    private List<BranchDto> _branchesDisplayDataSource = [];
+    private ReadonlyObservableList<BranchDto> _branches = new();
+    private BranchDto? _selectedBranchModel;
 
     public CorporationViewModel(ICachingService cachingService, INavigationService navigationService, ICorporationService corporationService, IBranchService branchService)
     {
@@ -31,7 +30,7 @@ public sealed class CorporationViewModel : ViewModelBase
         _branchService = branchService;
 
         UpdateBranchesDataSource();
-        _branches = new ReadonlyObservableList<IBranchDto>(_branchesDisplayDataSource);
+        _branches = new ReadonlyObservableList<BranchDto>(_branchesDisplayDataSource);
 
     }
 
@@ -49,13 +48,13 @@ public sealed class CorporationViewModel : ViewModelBase
 
     public CorporationDto ActiveCorporation => _cachingService.ActiveCorporation;
 
-    public IBranchDto? SelectedBranch
+    public BranchDto? SelectedBranch
     {
         get => _selectedBranchModel;
         set => SetProperty(ref _selectedBranchModel, value);
     }
 
-    public ReadonlyObservableList<IBranchDto> Branches
+    public ReadonlyObservableList<BranchDto> Branches
     {
         get => _branches;
         set => SetProperty(ref _branches, value);
@@ -79,7 +78,7 @@ public sealed class CorporationViewModel : ViewModelBase
         if (corporation == null)
             return;
 
-        ErrorOr<IBranchDto> addBranchResult = _branchService.AddBranch("new Branch");
+        ErrorOr<BranchDto> addBranchResult = _branchService.AddBranch("new Branch");
 
         if (addBranchResult.IsError)
             return;

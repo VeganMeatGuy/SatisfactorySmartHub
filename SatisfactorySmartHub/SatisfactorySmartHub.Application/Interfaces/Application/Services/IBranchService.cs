@@ -1,6 +1,5 @@
 ﻿using ErrorOr;
 using SatisfactorySmartHub.Application.DataTranferObjects;
-using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 
@@ -9,9 +8,9 @@ namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 /// </summary>
 public interface IBranchService
 {
-    public ErrorOr<IBranchDto> AddBranch(string branchName);
+    public ErrorOr<BranchDto> AddBranch(string branchName);
 
-    public ErrorOr<Updated> UpdateBranch(IBranchDto branch);
+    public ErrorOr<Updated> UpdateBranch(BranchDto branch);
 
-    public ErrorOr<IEnumerable<IBranchDto>> GetBranchesOfCorporation(Guid corporationId);
+    public ErrorOr<IEnumerable<BranchDto>> GetBranchesOfCorporation(Guid corporationId);
 }

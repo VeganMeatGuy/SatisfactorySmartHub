@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using ErrorOr;
 using SatisfactorySmartHub.Application.Common;
+using SatisfactorySmartHub.Application.DataTranferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
-using SatisfactorySmartHub.Domain.Models;
 
 namespace SatisfactorySmartHub.Application.PresentationModels.ViewModels;
 
@@ -54,7 +54,7 @@ public sealed class BranchViewModel : ViewModelBase
         _processSteps = new ReadonlyObservableList<IProcessStepDto>(_processStepsDisplayDataSource);
     }
 
-    public IBranchDto ActiveBranch => _cachingService.ActiveBranch;
+    public BranchDto ActiveBranch => _cachingService.ActiveBranch;
     public IProcessStepDto SelectedProcessStep
     {
         get => _SelectedProcessStep;
@@ -85,7 +85,7 @@ public sealed class BranchViewModel : ViewModelBase
 
     private void AddProcessStep()
     {
-        IBranchDto branch = _cachingService.ActiveBranch;
+        BranchDto branch = _cachingService.ActiveBranch;
 
         if (branch == null)
             return;

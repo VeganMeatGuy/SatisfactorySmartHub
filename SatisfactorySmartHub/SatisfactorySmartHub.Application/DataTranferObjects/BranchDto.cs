@@ -8,15 +8,10 @@ using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Application.DataTranferObjects;
 
-internal sealed class BranchDto : IBranchDto
+public sealed record BranchDto(Guid Id, string Name, Guid? CorporationId)
 {
-    public Guid Id { get; init; }
-    public string Name { get; set; } = string.Empty;
-
-    public Guid? CorporationId { get; init; }
-
     internal static BranchDto CreateFromEntity(Branch branch)
     {
-        return new() { Id = branch.Id, Name = branch.Name, CorporationId = branch.CorporationId };
+        return new(branch.Id, branch.Name, branch.CorporationId);
     }
 }

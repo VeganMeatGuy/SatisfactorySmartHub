@@ -1,6 +1,5 @@
 ﻿using ErrorOr;
 using SatisfactorySmartHub.Application.DataTranferObjects;
-using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Domain.Entities;
@@ -69,7 +68,7 @@ internal sealed class CorporationService(
         return Result.Updated;
     }
 
-    public ErrorOr<Success> AddBranchToCorporation(IBranchDto branch, CorporationDto corporation)
+    public ErrorOr<Success> AddBranchToCorporation(BranchDto branch, CorporationDto corporation)
     {
         Corporation? dbCorporation = repositoryService.CorporationRepository.GetById(corporation.Id);
 
