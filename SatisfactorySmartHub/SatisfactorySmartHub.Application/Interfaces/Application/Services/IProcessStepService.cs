@@ -1,4 +1,5 @@
 ﻿using ErrorOr;
+using SatisfactorySmartHub.Application.DataTranferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
@@ -8,9 +9,9 @@ namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 /// </summary>
 public interface IProcessStepService
 {
-    public ErrorOr<IProcessStepDto> AddProcessStep(Guid branchId);
-    public ErrorOr<Updated> UpdateProcessStep(IProcessStepDto processStep);
-    public ErrorOr<Deleted> DeleteProcessStep(IProcessStepDto processStep);
-    public ErrorOr<IEnumerable<IProcessStepDto>> GetProcessStepsOfBranch(Guid branchId);
-    ErrorOr<Success> AddRecipeToProcessStep(IProcessStepDto processStep, Guid recipeId);
+    public ErrorOr<ProcessStepDto> AddProcessStep(Guid branchId);
+    public ErrorOr<Updated> UpdateProcessStep(ProcessStepDto processStep);
+    public ErrorOr<Deleted> DeleteProcessStep(ProcessStepDto processStep);
+    public ErrorOr<IEnumerable<ProcessStepDto>> GetProcessStepsOfBranch(Guid branchId);
+    ErrorOr<Success> AddRecipeToProcessStep(ProcessStepDto processStep, Guid recipeId);
 }
