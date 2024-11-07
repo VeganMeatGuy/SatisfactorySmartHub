@@ -1,5 +1,6 @@
 ﻿using ErrorOr;
 using SatisfactorySmartHub.Domain.Entities.Base;
+using static SatisfactorySmartHub.Domain.Errors.DomainErrors;
 
 namespace SatisfactorySmartHub.Domain.Entities;
 
@@ -28,6 +29,12 @@ public sealed class ProcessStep : IdentityEntityBase
             BranchId = branchId,
         };
         return processStep;
+    }
+
+    public ErrorOr<Success> ChangeRecipeId(Guid recipeId)
+    {
+        RecipeId = recipeId;
+        return Result.Success;
     }
 }
 

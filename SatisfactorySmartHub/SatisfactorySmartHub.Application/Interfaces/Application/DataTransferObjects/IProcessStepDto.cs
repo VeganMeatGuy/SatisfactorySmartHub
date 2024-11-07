@@ -10,4 +10,5 @@ public interface IProcessStepDto
 {
     Guid Id { get; }
     Guid BranchId { get; }
+    Guid? RecipeId { get; }
 }

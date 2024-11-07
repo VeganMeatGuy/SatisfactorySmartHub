@@ -12,4 +12,5 @@ public interface IProcessStepService
     public ErrorOr<Updated> UpdateProcessStep(IProcessStepDto processStep);
     public ErrorOr<Deleted> DeleteProcessStep(IProcessStepDto processStep);
     public ErrorOr<IEnumerable<IProcessStepDto>> GetProcessStepsOfBranch(Guid branchId);
+    ErrorOr<Success> AddRecipeToProcessStep(IProcessStepDto processStep, Guid recipeId);
 }

@@ -45,6 +45,9 @@ namespace SatisfactorySmartHub.Presentation.Controls
             set { SetValue(ProcessStepProperty, value); }
         }
 
+        public string RecipeButtonText => test1 == false ? "Rezept auswählen..." : "Rezept ändern...";
+
+        public bool test1 => ProcessStep.RecipeId == null ? false : true;
 
     }
 }

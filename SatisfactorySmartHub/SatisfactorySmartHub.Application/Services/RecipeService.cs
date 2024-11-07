@@ -3,7 +3,6 @@ using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObject
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Domain.Entities;
-using SatisfactorySmartHub.Domain.Models;
 
 namespace SatisfactorySmartHub.Application.Services;
 
@@ -16,11 +15,12 @@ internal sealed class RecipeService(IRepositoryService repositoryService) : IRec
     {
         try
         {
+            var RecipeRepoResult = repositoryService.RecipeRepository.GetAllEager();
             List<RecipeDto> result = new List<RecipeDto>();
-            var repoResult = repositoryService.RecipeRepository.GetAll();
-
-            foreach (Recipe recipe in repoResult)
-                result.Add(RecipeDto.CreateFromEntity(recipe));
+            foreach (Recipe recipe in RecipeRepoResult)
+            {
+               result.Add(RecipeDto.CreateFromEntity(recipe));
+            }
             return result;
         }
         catch

@@ -23,7 +23,7 @@ public sealed class BranchViewModel : ViewModelBase
     private IRelayCommand? _saveBranchCommand;
     private IRelayCommand? _addProcessStepCommand;
     private IRelayCommand? _removeProcessStepCommand;
-    private IRelayCommand? _selectProcessStepRecipeCommand;
+    private IRelayCommand<IProcessStepDto>? _selectProcessStepRecipeCommand;
 
 
     private IRelayCommand? _recipeSelectionConfirmedCommand;
@@ -65,7 +65,7 @@ public sealed class BranchViewModel : ViewModelBase
     public IRelayCommand SaveBranchCommand => _saveBranchCommand ?? new RelayCommand(new Action(SaveBranch));
     public IRelayCommand AddProcessStepCommand => _addProcessStepCommand ?? new RelayCommand(new Action(AddProcessStep));
     public IRelayCommand RemoveProcessStepCommand => _removeProcessStepCommand ?? new RelayCommand(new Action(RemoveProcessStep));
-    public IRelayCommand SelectProcessStepRecipeCommand => _selectProcessStepRecipeCommand ?? new RelayCommand(new Action(SelectProcessStepRecipe));
+    public IRelayCommand<IProcessStepDto> SelectProcessStepRecipeCommand => _selectProcessStepRecipeCommand ?? new RelayCommand<IProcessStepDto>(SelectProcessStepRecipe);
 
     private ErrorOr<Success> UpdateProcessStepDataSource()
     {
@@ -108,35 +108,21 @@ public sealed class BranchViewModel : ViewModelBase
         UpdateProcessStepDataSource();
     }
 
-    private void SelectProcessStepRecipe()
+    private void SelectProcessStepRecipe(IProcessStepDto? processStep)
     {
+
+        if (processStep == null)
+            return;
 
         var result = _navigationService.ShowSelectRecipeDialog();
 
+
+        var addRecipeToProcessStepResult = _processStepService.AddRecipeToProcessStep(processStep, result.Value.RecipeId);
+
+        if (addRecipeToProcessStepResult.IsError)
+            return;
+
+        UpdateProcessStepDataSource();
         return;
-
-        //öffne Dialog um Rezept auszuwählen
-        // --> navigation service show RecipeSelectionDialog
-
-
-
-        ///if(NavigationService.ShowRecipeSelectionDialog() == True)
-        ///{
-        ///
-        ///}
-
-        //var saveFileDialog = new SaveFileDialog()
-        //{
-        //    Filter = "json-Datei | *.json",
-        //        DefaultExt = "json",
-        //        FileName = dc.ExportName,
-        //    };
-
-        //if (saveFileDialog.ShowDialog() == true)
-        //{
-        //    filepath = saveFileDialog.FileName;
-        //}
-
-        throw new NotImplementedException();
     }
 }

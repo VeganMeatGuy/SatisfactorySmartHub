@@ -10,6 +10,7 @@ internal sealed class RepositoryService(IServiceProvider serviceProvider) : IRep
     private readonly Lazy<BranchRepository> _lazyBranchRepository = new(() => new(serviceProvider));
     private readonly Lazy<ProcessStepRepository> _lazyProcessStepRepository = new(() => new(serviceProvider));
     private readonly Lazy<RecipeRepository> _lazyRecipeRepository = new(() => new(serviceProvider));
+    private readonly Lazy<MachineRepository> _lazyRMachineRepository = new(() => new(serviceProvider));
 
     public ICorporationRepository CorporationRepository
         => _lazyCorporationRepository.Value;
@@ -21,4 +22,7 @@ internal sealed class RepositoryService(IServiceProvider serviceProvider) : IRep
         => _lazyProcessStepRepository.Value;
     public IRecipeRepository RecipeRepository
         => _lazyRecipeRepository.Value;
+
+    public IMachineRepository MachineRepository 
+        => _lazyRMachineRepository.Value;
 }

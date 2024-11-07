@@ -84,7 +84,7 @@
                                                     Width="150"
                                                     VerticalAlignment="Center"
                                                     Foreground="{StaticResource FontWhite}"
-                                                    Text="{Binding Item.Name}"
+                                                    Text="{Binding ItemName}"
                                                     TextAlignment="Left"
                                                     TextWrapping="WrapWithOverflow" />
                                             </StackPanel>
@@ -111,7 +111,7 @@
                                         Width="150"
                                         VerticalAlignment="Center"
                                         Foreground="{StaticResource FontWhite}"
-                                        Text="{Binding MainProduct.Item.Name}"
+                                        Text="{Binding MainProduct.ItemName}"
                                         TextWrapping="WrapWithOverflow" />
                                 </StackPanel>
                             </Border>
@@ -139,7 +139,7 @@
                                                     Width="150"
                                                     VerticalAlignment="Center"
                                                     Foreground="{StaticResource FontWhite}"
-                                                    Text="{Binding Item.Name}"
+                                                    Text="{Binding ItemName}"
                                                     TextWrapping="WrapWithOverflow" />
                                             </StackPanel>
                                         </DataTemplate>

@@ -4,6 +4,7 @@ using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObject
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Domain.Entities;
+using static SatisfactorySmartHub.Domain.Errors.DomainErrors;
 
 namespace SatisfactorySmartHub.Application.Services;
 
@@ -36,12 +37,10 @@ internal sealed class ProcessStepService(
 
         return ProcessStepDto.CreateFromEntity(newProcessStep);
     }
-
     public ErrorOr<Updated> UpdateProcessStep(IProcessStepDto processStep)
     {
         throw new NotImplementedException();
     }
-
     public ErrorOr<Deleted> DeleteProcessStep(IProcessStepDto processStep)
     {
         ProcessStep? dbProcessStep = repositoryService.ProcessStepRepository.GetById(processStep.Id);
@@ -52,8 +51,6 @@ internal sealed class ProcessStepService(
         repositoryService.ProcessStepRepository.Delete(dbProcessStep);
         return Result.Deleted;
     }
-
-
     public ErrorOr<IEnumerable<IProcessStepDto>> GetProcessStepsOfBranch(Guid branchId)
     {
         try
@@ -71,6 +68,25 @@ internal sealed class ProcessStepService(
             return new List<ProcessStepDto>();
         }
     }
+    public ErrorOr<Success> AddRecipeToProcessStep(IProcessStepDto processStep, Guid recipeId)
+    {
+        ProcessStep? dbProcessStep = repositoryService.ProcessStepRepository.GetById(processStep.Id);
+
+        if (dbProcessStep == null)
+            return Error.NotFound();
+
+        Recipe? dbRecipe = repositoryService.RecipeRepository.GetById(recipeId);
+
+        if (dbRecipe == null)
+            return Error.NotFound();
+
+        dbProcessStep.ChangeRecipeId(recipeId);
+
+        repositoryService.ProcessStepRepository.Update(dbProcessStep);
+
+        return Result.Success;
+    }
+
 
     #region old stuff
     /// <inheritdoc cref="IProcessStepService.GetNewProcessStep"/>

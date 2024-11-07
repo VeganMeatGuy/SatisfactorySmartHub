@@ -14,21 +14,24 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Styles/UiColors.xaml" />
                 <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Styles/ButtonStyle.xaml" />
+                <ResourceDictionary Source="/SatisfactorySmartHub.Presentation;component/Converters/Converters.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <Expander>
         <Expander.Header>
             <StackPanel Orientation="Horizontal">
-                <Label Content="{Binding ProcessStep.Recipe.Name, RelativeSource={RelativeSource AncestorType=local:ProcessStepDetails}}" Foreground="{StaticResource FontWhite}" />
+                <Label Content="{Binding ProcessStep.RecipeId, RelativeSource={RelativeSource AncestorType=local:ProcessStepDetails}}" Foreground="{StaticResource FontWhite}" />
                 <Button
                     Command="{Binding SelectRecipe, RelativeSource={RelativeSource AncestorType=local:ProcessStepDetails}}"
-                    Content="Rezept Auwählen..."
-                    Style="{StaticResource SmallButton}" />
+                    CommandParameter="{Binding}"
+                    Content="{Binding RecipeButtonText, RelativeSource={RelativeSource AncestorType=local:ProcessStepDetails}}"
+                    Style="{StaticResource SmallButton}"/>
             </StackPanel>
         </Expander.Header>
 
-        <Grid Visibility="Collapsed">
+        <Grid  
+            Visibility="{Binding test1, RelativeSource={RelativeSource AncestorType=local:ProcessStepDetails}, Converter={StaticResource BoolToVis}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />

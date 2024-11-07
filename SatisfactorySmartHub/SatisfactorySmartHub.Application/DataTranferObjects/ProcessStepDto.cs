@@ -7,13 +7,15 @@ internal sealed class ProcessStepDto : IProcessStepDto
 {
     public Guid Id { get; init; }
     public Guid BranchId { get; init; }
+    public Guid? RecipeId { get; init; }
 
     internal static ProcessStepDto CreateFromEntity(ProcessStep processStep)
     {
         return new()
         {
             Id = processStep.Id,
-            BranchId = processStep.BranchId
+            BranchId = processStep.BranchId,
+            RecipeId = processStep.RecipeId
         };
     }
 }

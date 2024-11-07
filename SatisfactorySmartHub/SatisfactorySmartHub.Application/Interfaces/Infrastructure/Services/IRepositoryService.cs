@@ -13,4 +13,5 @@ public interface IRepositoryService
     IBranchRepository BranchRepository { get; }
     IProcessStepRepository ProcessStepRepository { get; }
     IRecipeRepository RecipeRepository { get; }
+    IMachineRepository MachineRepository { get; }
 }
