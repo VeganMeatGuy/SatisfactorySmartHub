@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using ErrorOr;
 using SatisfactorySmartHub.Application.Common;
+using SatisfactorySmartHub.Application.DataTranferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
@@ -24,9 +25,9 @@ public sealed class HubViewModel : ViewModelBase
     private string _loadHint = string.Empty;
     private bool _overWriteSaveFile;
 
-    private List<ICorporationDto> _coporationsDisplayedDataSource = [];
-    private ReadonlyObservableList<ICorporationDto> _corporations = new();
-    private ICorporationDto? _selectedCorporation;
+    private List<CorporationDto> _coporationsDisplayedDataSource = [];
+    private ReadonlyObservableList<CorporationDto> _corporations = new();
+    private CorporationDto? _selectedCorporation;
 
     public HubViewModel(
         ICorporationService corporationService,
@@ -45,7 +46,7 @@ public sealed class HubViewModel : ViewModelBase
         OverWriteSaveFile = _userOptionsHelper.GetUserData().OverWriteSaveFile;
 
         UpdateCorporationsDataSource();
-        _corporations = new ReadonlyObservableList<ICorporationDto>(_coporationsDisplayedDataSource);
+        _corporations = new ReadonlyObservableList<CorporationDto>(_coporationsDisplayedDataSource);
     }
 
     public IRelayCommand CreateCorporationCommand => _createCorporationCommand ?? new RelayCommand(new Action(CreateCorporation));
@@ -76,13 +77,13 @@ public sealed class HubViewModel : ViewModelBase
         set => SetProperty(ref _overWriteSaveFile, value);
     }
 
-    public ReadonlyObservableList<ICorporationDto> Corporations
+    public ReadonlyObservableList<CorporationDto> Corporations
     {
         get => _corporations;
         set => SetProperty(ref _corporations, value);
     }
 
-    public ICorporationDto? SelectedCorporation
+    public CorporationDto? SelectedCorporation
     {
         get => _selectedCorporation;
         set => SetProperty(ref _selectedCorporation, value);
@@ -97,7 +98,7 @@ public sealed class HubViewModel : ViewModelBase
             return;
         }
 
-        ErrorOr<ICorporationDto> AddCorporationResult = _corporationService.AddCorporation(CorporationName);
+        ErrorOr<CorporationDto> AddCorporationResult = _corporationService.AddCorporation(CorporationName);
 
         if (AddCorporationResult.IsError)
         {

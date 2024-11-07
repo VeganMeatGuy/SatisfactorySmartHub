@@ -11,7 +11,7 @@ internal sealed class CorporationService(
     IRepositoryService repositoryService) : ICorporationService
 {
 
-    public IEnumerable<ICorporationDto> GetCorporations()
+    public IEnumerable<CorporationDto> GetCorporations()
     {
         try
         {
@@ -27,7 +27,7 @@ internal sealed class CorporationService(
             return new List<CorporationDto>();
         }
     }
-    public ErrorOr<ICorporationDto> AddCorporation(string corporationName)
+    public ErrorOr<CorporationDto> AddCorporation(string corporationName)
     {
         ErrorOr<Corporation> CreateCorporationResult = Corporation.Create(corporationName);
 
@@ -52,7 +52,7 @@ internal sealed class CorporationService(
         return CorporationDto.CreateFromEntity(newCorporation);
     }
 
-    public ErrorOr<Updated> UpdateCorporation(ICorporationDto corporation)
+    public ErrorOr<Updated> UpdateCorporation(CorporationDto corporation)
     {
         Corporation? dbCorporation = repositoryService.CorporationRepository.GetById(corporation.Id);
 
@@ -69,7 +69,7 @@ internal sealed class CorporationService(
         return Result.Updated;
     }
 
-    public ErrorOr<Success> AddBranchToCorporation(IBranchDto branch, ICorporationDto corporation)
+    public ErrorOr<Success> AddBranchToCorporation(IBranchDto branch, CorporationDto corporation)
     {
         Corporation? dbCorporation = repositoryService.CorporationRepository.GetById(corporation.Id);
 

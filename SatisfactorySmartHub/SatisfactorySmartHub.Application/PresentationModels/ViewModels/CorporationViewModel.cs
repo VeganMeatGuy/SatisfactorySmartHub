@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using ErrorOr;
 using SatisfactorySmartHub.Application.Common;
+using SatisfactorySmartHub.Application.DataTranferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
@@ -46,7 +47,7 @@ public sealed class CorporationViewModel : ViewModelBase
     public IRelayCommand AddBranchCommand => _addBranchCommand ??= new RelayCommand(new Action(AddBranch));
     public IRelayCommand ShowBranchDetailsCommand => _showBranchDetailsCommand ??= new RelayCommand(new Action(ShowBranchDetails));
 
-    public ICorporationDto ActiveCorporation => _cachingService.ActiveCorporation;
+    public CorporationDto ActiveCorporation => _cachingService.ActiveCorporation;
 
     public IBranchDto? SelectedBranch
     {
@@ -73,7 +74,7 @@ public sealed class CorporationViewModel : ViewModelBase
 
     private void AddBranch()
     {
-        ICorporationDto? corporation = _cachingService.ActiveCorporation;
+        CorporationDto? corporation = _cachingService.ActiveCorporation;
 
         if (corporation == null)
             return;

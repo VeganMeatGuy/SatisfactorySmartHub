@@ -1,4 +1,5 @@
 ﻿using ErrorOr;
+using SatisfactorySmartHub.Application.DataTranferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
@@ -8,9 +9,9 @@ namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 /// </summary>
 public interface ICorporationService
 {
-    IEnumerable<ICorporationDto> GetCorporations();
-    ErrorOr<ICorporationDto> AddCorporation(string corporationName);
-    ErrorOr<Updated> UpdateCorporation(ICorporationDto corporation);
+    IEnumerable<CorporationDto> GetCorporations();
+    ErrorOr<CorporationDto> AddCorporation(string corporationName);
+    ErrorOr<Updated> UpdateCorporation(CorporationDto corporation);
 
     /// <summary>
     /// Adds the given branch to the given corporation.
@@ -18,5 +19,5 @@ public interface ICorporationService
     /// <param name="branch">The branch which is added to the corporation.</param>
     /// <param name="corporation">The corporation model which the branch is added to.</param>
     /// <returns><see cref="BranchModel"/></returns>
-    ErrorOr<Success> AddBranchToCorporation(IBranchDto branch, ICorporationDto corporation);
+    ErrorOr<Success> AddBranchToCorporation(IBranchDto branch, CorporationDto corporation);
 }
