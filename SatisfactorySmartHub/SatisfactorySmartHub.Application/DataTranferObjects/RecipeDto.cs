@@ -1,25 +1,9 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
-using SatisfactorySmartHub.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SatisfactorySmartHub.Domain.Entities;
 
 namespace SatisfactorySmartHub.Application.DataTranferObjects;
 
-internal sealed class RecipeDto : IRecipeDto
+public sealed record RecipeDto(Guid Id, string Name, MachineDto Machine, IReadOnlyList<ItemWithAmountDto> Ingredients, ItemWithAmountDto MainProduct, IReadOnlyList<ItemWithAmountDto> ByProducts)
 {
-    public Guid Id { get; init; }
-    public string Name { get; init; } = string.Empty;
-    public MachineDto Machine { get; init; }
-
-    public IReadOnlyList<ItemWithAmountDto> Ingredients { get; init; } = new List<ItemWithAmountDto>();
-
-    public ItemWithAmountDto MainProduct { get; init; }
-
-    public IReadOnlyList<ItemWithAmountDto> ByProducts { get; init; } = new List<ItemWithAmountDto>();
-
     internal static RecipeDto CreateFromEntity(Recipe recipe)
     {
         List<ItemWithAmountDto> tempIngredients = new();
@@ -30,14 +14,13 @@ internal sealed class RecipeDto : IRecipeDto
         foreach (var byProduct in recipe.ByProducts)
             tempByproducts.Add(ItemWithAmountDto.CreateFromEntity(byProduct));
 
-        return new()
-        {
-            Id = recipe.Id,
-            Name = recipe.Name,
-            Machine = MachineDto.CreateFromEntity(recipe.Machine),
-            Ingredients = tempIngredients,
-            MainProduct = ItemWithAmountDto.CreateFromEntity(recipe.MainProduct),
-            ByProducts = tempByproducts
-        };
+        return new(
+            recipe.Id,
+            recipe.Name,
+            MachineDto.CreateFromEntity(recipe.Machine),
+            tempIngredients,
+            ItemWithAmountDto.CreateFromEntity(recipe.MainProduct),
+            tempByproducts
+        );
     }
 }

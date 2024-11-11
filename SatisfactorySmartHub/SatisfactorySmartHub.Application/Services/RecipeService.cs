@@ -1,5 +1,4 @@
 ﻿using SatisfactorySmartHub.Application.DataTranferObjects;
-using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Domain.Entities;
@@ -11,7 +10,7 @@ namespace SatisfactorySmartHub.Application.Services;
 /// </summary>
 internal sealed class RecipeService(IRepositoryService repositoryService) : IRecipeService
 {
-    public IEnumerable<IRecipeDto> GetRecipes()
+    public IEnumerable<RecipeDto> GetRecipes()
     {
         try
         {
@@ -19,7 +18,7 @@ internal sealed class RecipeService(IRepositoryService repositoryService) : IRec
             List<RecipeDto> result = new List<RecipeDto>();
             foreach (Recipe recipe in RecipeRepoResult)
             {
-               result.Add(RecipeDto.CreateFromEntity(recipe));
+                result.Add(RecipeDto.CreateFromEntity(recipe));
             }
             return result;
         }

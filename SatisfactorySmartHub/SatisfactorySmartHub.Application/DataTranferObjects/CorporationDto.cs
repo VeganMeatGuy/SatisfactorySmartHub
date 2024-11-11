@@ -1,5 +1,4 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
-using SatisfactorySmartHub.Domain.Entities;
+﻿using SatisfactorySmartHub.Domain.Entities;
 
 namespace SatisfactorySmartHub.Application.DataTranferObjects;
 

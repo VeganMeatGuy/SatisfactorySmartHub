@@ -2,7 +2,6 @@
 using ErrorOr;
 using SatisfactorySmartHub.Application.Common;
 using SatisfactorySmartHub.Application.DataTranferObjects;
-using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
 

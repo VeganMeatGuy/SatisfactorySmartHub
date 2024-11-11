@@ -1,4 +1,4 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
+﻿using SatisfactorySmartHub.Application.DataTranferObjects;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 
@@ -7,5 +7,5 @@ namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 /// </summary>
 public interface IRecipeService
 {
-    IEnumerable<IRecipeDto> GetRecipes();
+    IEnumerable<RecipeDto> GetRecipes();
 }

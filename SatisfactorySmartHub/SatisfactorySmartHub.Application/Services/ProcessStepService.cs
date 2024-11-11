@@ -1,10 +1,8 @@
 ﻿using ErrorOr;
 using SatisfactorySmartHub.Application.DataTranferObjects;
-using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Domain.Entities;
-using static SatisfactorySmartHub.Domain.Errors.DomainErrors;
 
 namespace SatisfactorySmartHub.Application.Services;
 

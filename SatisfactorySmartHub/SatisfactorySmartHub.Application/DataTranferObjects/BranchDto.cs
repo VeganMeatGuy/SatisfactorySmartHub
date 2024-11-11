@@ -1,10 +1,4 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
-using SatisfactorySmartHub.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SatisfactorySmartHub.Domain.Entities;
 
 namespace SatisfactorySmartHub.Application.DataTranferObjects;
 
