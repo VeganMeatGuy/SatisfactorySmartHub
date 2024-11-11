@@ -15,6 +15,9 @@ public sealed class Machine : IdentityEntityBase
     public int PowerConsumption { get; init; }
     public static ErrorOr<Machine> Create(Guid id, string name, int powerConsumption)
     {
+        if (id == Guid.Empty)
+            return DomainErrors.Machine.MachineIdCannotBeEmptyGuid;
+
         if (name == null)
             return DomainErrors.Machine.MachineNameCannotBeNull;
 

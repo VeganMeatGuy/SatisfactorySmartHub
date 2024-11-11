@@ -7,14 +7,14 @@ public sealed partial class MachineTests
 {
     [TestMethod]
     [TestCategory("Method")]
-    public void Create_ReturnsError_WhenParamIdHasValueZero()
+    public void Create_ReturnsError_WhenParamIdIsEmptyGuid()
     {
         //act
-        var result = Machine.Create(0, _validMachineName, _validMachinePowerConsumption);
+        var result = Machine.Create(Guid.Empty, _validMachineName, _validMachinePowerConsumption);
 
         //assert
         Assert.IsTrue(result.IsError);
-        Assert.AreEqual(result.FirstError, DomainErrors.Machine.MachineIdCannotBeZero);
+        Assert.AreEqual(result.FirstError, DomainErrors.Machine.MachineIdCannotBeEmptyGuid);
 
     }
     [TestMethod]
