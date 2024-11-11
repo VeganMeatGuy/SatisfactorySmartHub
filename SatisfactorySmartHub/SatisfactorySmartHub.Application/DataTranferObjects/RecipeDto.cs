@@ -12,7 +12,7 @@ internal sealed class RecipeDto : IRecipeDto
 {
     public Guid Id { get; init; }
     public string Name { get; init; } = string.Empty;
-    public IMachineDto Machine { get; init; }
+    public MachineDto Machine { get; init; }
 
     public IReadOnlyList<IItemWithAmountDto> Ingredients { get; init; } = new List<IItemWithAmountDto>();
 

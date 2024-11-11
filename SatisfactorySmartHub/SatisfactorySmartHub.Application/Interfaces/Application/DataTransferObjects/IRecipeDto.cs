@@ -6,7 +6,7 @@ public interface IRecipeDto
 {
     Guid Id { get; }
     string Name { get; }
-    IMachineDto Machine { get; }
+    MachineDto Machine { get; }
     IReadOnlyList<IItemWithAmountDto> Ingredients { get; }
     IItemWithAmountDto MainProduct { get; }
     IReadOnlyList<IItemWithAmountDto> ByProducts { get; }
