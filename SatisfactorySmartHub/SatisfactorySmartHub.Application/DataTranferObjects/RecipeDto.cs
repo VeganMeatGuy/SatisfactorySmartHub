@@ -14,19 +14,19 @@ internal sealed class RecipeDto : IRecipeDto
     public string Name { get; init; } = string.Empty;
     public MachineDto Machine { get; init; }
 
-    public IReadOnlyList<IItemWithAmountDto> Ingredients { get; init; } = new List<IItemWithAmountDto>();
+    public IReadOnlyList<ItemWithAmountDto> Ingredients { get; init; } = new List<ItemWithAmountDto>();
 
-    public IItemWithAmountDto MainProduct { get; init; }
+    public ItemWithAmountDto MainProduct { get; init; }
 
-    public IReadOnlyList<IItemWithAmountDto> ByProducts { get; init; } = new List<IItemWithAmountDto>();
+    public IReadOnlyList<ItemWithAmountDto> ByProducts { get; init; } = new List<ItemWithAmountDto>();
 
     internal static RecipeDto CreateFromEntity(Recipe recipe)
     {
-        List<IItemWithAmountDto> tempIngredients = new();
+        List<ItemWithAmountDto> tempIngredients = new();
         foreach (var ingredient in recipe.Ingredients)
             tempIngredients.Add(ItemWithAmountDto.CreateFromEntity(ingredient));
 
-        List<IItemWithAmountDto> tempByproducts = new();
+        List<ItemWithAmountDto> tempByproducts = new();
         foreach (var byProduct in recipe.ByProducts)
             tempByproducts.Add(ItemWithAmountDto.CreateFromEntity(byProduct));
 
