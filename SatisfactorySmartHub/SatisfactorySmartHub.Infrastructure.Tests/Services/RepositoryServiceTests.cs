@@ -1,16 +1,14 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
+﻿using Moq;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Infrastructure.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Infrastructure.Tests.Services;
 
 [TestClass]
 public sealed partial class RepositoryServiceTests
 {
+    private Mock<IServiceProvider> _serviceProviderMock = new ();
+
     [TestMethod]
     [TestCategory("Constructor")]
     public void RepositoryServiceTest()
@@ -28,6 +26,7 @@ public sealed partial class RepositoryServiceTests
     /// <returns>The new instance with mocked dependencies.</returns>
     private RepositoryService CreateMockedInstance()
     {
-        return new RepositoryService();
+        _serviceProviderMock = new();
+        return new RepositoryService(_serviceProviderMock.Object);
     }
 }

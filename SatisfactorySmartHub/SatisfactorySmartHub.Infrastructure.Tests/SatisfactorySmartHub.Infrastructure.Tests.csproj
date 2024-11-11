@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="Common\" />
+    <Folder Include="Persistance\Repositories\" />
   </ItemGroup>
 
 </Project>
