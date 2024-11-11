@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:v="clr-namespace:SatisfactorySmartHub.Presentation.Views"
-    xmlns:vm="clr-namespace:SatisfactorySmartHub.Application.ViewModels;assembly=SatisfactorySmartHub.Application">
+    xmlns:vm="clr-namespace:SatisfactorySmartHub.Application.PresentationModels.ViewModels;assembly=SatisfactorySmartHub.Application">
 
     <DataTemplate DataType="{x:Type TypeName=vm:HubViewModel}">
         <v:HubView />

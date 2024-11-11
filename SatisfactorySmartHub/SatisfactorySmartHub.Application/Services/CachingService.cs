@@ -1,14 +1,16 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Application.Services;
+﻿using SatisfactorySmartHub.Application.DataTranferObjects;
+using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Domain.Common;
-using SatisfactorySmartHub.Domain.Models;
 
 namespace SatisfactorySmartHub.Application.Services;
 internal class CachingService : ObservableObjectBase, ICachingService
 {
-    private CorporationModel? _activeCorporationModel;
+    private CorporationDto? _activeCorporationModel;
+    private BranchDto? _activeBranchModel;
     private bool _ActiveCorporationIsSet = false;
+    private bool _ActiveBranchIsSet = false;
 
-    public CorporationModel? ActiveCorporation
+    public CorporationDto? ActiveCorporation
     {
         get => _activeCorporationModel;
         private set => SetProperty(ref _activeCorporationModel, value);
@@ -20,7 +22,21 @@ internal class CachingService : ObservableObjectBase, ICachingService
         private set => SetProperty(ref _ActiveCorporationIsSet, value);
     }
 
-    public void SetActiveCorporation(CorporationModel? activeCorporation)
+    public BranchDto? ActiveBranch
+    {
+        get => _activeBranchModel;
+        private set => SetProperty(ref _activeBranchModel, value);
+    }
+
+    public void SetActiveBranch(BranchDto? activeBranch)
+    {
+        if (activeBranch == null)
+            return;
+        ActiveBranch = activeBranch;
+        _ActiveBranchIsSet = true;
+    }
+
+    public void SetActiveCorporation(CorporationDto? activeCorporation)
     {
         if (activeCorporation == null)
             return;

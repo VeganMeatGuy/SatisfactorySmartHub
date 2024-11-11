@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SatisfactorySmartHub.Presentation.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:SatisfactorySmartHub.Application.ViewModels;assembly=SatisfactorySmartHub.Application"
+    xmlns:vm="clr-namespace:SatisfactorySmartHub.Application.PresentationModels.ViewModels;assembly=SatisfactorySmartHub.Application"
     d:DataContext="{d:DesignInstance Type=vm:AdminViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -23,37 +23,19 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
-        <StackPanel Grid.Column="2" Orientation="Horizontal">
-            <Button
-                Width="90"
-                Command="{Binding SaveCommand}"
-                Content="speichern"
-                Style="{StaticResource StandardButton}" />
-            <Button
-                Width="90"
-                Click="ExportButton_Click"
-                Content="export"
-                IsEnabled="{Binding ExportPossible}"
-                Style="{StaticResource StandardButton}" />
-            <TextBlock Foreground="{StaticResource FontWhite}" Text="{Binding SaveHint}" />
-
-        </StackPanel>
-
         <StackPanel Grid.RowSpan="2" Margin="4,0,0,0">
             <RadioButton
                 Command="{Binding CorporationCommand}"
                 IsChecked="{Binding CorporationViewIsShown}"
                 Style="{StaticResource CorporationButton}" />
             <RadioButton
-               Command="{Binding BranchCommand}"
+                Command="{Binding BranchCommand}"
                 IsChecked="{Binding BranchViewIsShown}"
                 Style="{StaticResource BranchButton}" />
             <RadioButton

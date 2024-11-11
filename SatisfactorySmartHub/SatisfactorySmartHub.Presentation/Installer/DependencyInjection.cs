@@ -22,6 +22,7 @@ public static class DependencyInjection
     {
         _ = services.AddApp();
         _ = services.AddWindows();
+        _ = services.AddDialogs();
 
         return services;
     }
