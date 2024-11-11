@@ -9,7 +9,11 @@ internal sealed class RecipeConfiguration : IdentityEntityBaseConfiguration<Reci
     public override void Configure(EntityTypeBuilder<Recipe> builder)
     {
         builder.Property(p => p.Name)
-            .IsUnicode();
+            .IsUnicode()
+            .IsRequired();
+
+        builder.Property(p => p.ProductionTime)
+            .IsRequired();
 
         builder.HasOne(e =>e.Machine)
             .WithMany()

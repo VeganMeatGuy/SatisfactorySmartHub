@@ -2,7 +2,7 @@
 
 namespace SatisfactorySmartHub.Application.DataTranferObjects;
 
-public sealed record RecipeDto(Guid Id, string Name, MachineDto Machine, IReadOnlyList<ItemWithAmountDto> Ingredients, ItemWithAmountDto MainProduct, IReadOnlyList<ItemWithAmountDto> ByProducts)
+public sealed record RecipeDto(Guid Id, string Name, MachineDto Machine, decimal ProductionTime, IReadOnlyList<ItemWithAmountDto> Ingredients, ItemWithAmountDto MainProduct, IReadOnlyList<ItemWithAmountDto> ByProducts)
 {
     internal static RecipeDto CreateFromEntity(Recipe recipe)
     {
@@ -18,6 +18,7 @@ public sealed record RecipeDto(Guid Id, string Name, MachineDto Machine, IReadOn
             recipe.Id,
             recipe.Name,
             MachineDto.CreateFromEntity(recipe.Machine),
+            recipe.ProductionTime,
             tempIngredients,
             ItemWithAmountDto.CreateFromEntity(recipe.MainProduct),
             tempByproducts

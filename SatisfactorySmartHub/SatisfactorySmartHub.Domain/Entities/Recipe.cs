@@ -14,8 +14,8 @@ public sealed class Recipe : IdentityEntityBase
     private Recipe() { }
 
     public string Name { get; init; } = string.Empty;
-
     public Guid MachineId { get; init; }
+    public decimal ProductionTime { get; init; }
 
     //navigational properties
     public IEnumerable<Ingredient> Ingredients { get; init; } = new List<Ingredient>();
@@ -27,7 +27,8 @@ public sealed class Recipe : IdentityEntityBase
     public static ErrorOr<Recipe> Create(
         Guid id, 
         string name, 
-        Guid machineId)
+        Guid machineId,
+        decimal productionTime)
     {
         //ErrorOr<Success> ValidationResult = ValidateBrancheName(name);
 
@@ -39,6 +40,7 @@ public sealed class Recipe : IdentityEntityBase
             Id = id,
             Name = name,
             MachineId = machineId,
+            ProductionTime = productionTime
         };
         return recipe;
     }
