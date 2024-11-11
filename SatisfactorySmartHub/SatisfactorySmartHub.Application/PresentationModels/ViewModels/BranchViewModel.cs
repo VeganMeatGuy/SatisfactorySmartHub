@@ -23,14 +23,14 @@ public sealed class BranchViewModel : ViewModelBase
     private IRelayCommand? _saveBranchCommand;
     private IRelayCommand? _addProcessStepCommand;
     private IRelayCommand? _removeProcessStepCommand;
-    private IRelayCommand<IProcessStepDto>? _selectProcessStepRecipeCommand;
+    private IRelayCommand<ProcessStepDto>? _selectProcessStepRecipeCommand;
 
 
     private IRelayCommand? _recipeSelectionConfirmedCommand;
 
-    private List<IProcessStepDto> _processStepsDisplayDataSource = [];
-    private ReadonlyObservableList<IProcessStepDto> _processSteps = new();
-    private IProcessStepDto _SelectedProcessStep;
+    private List<ProcessStepDto> _processStepsDisplayDataSource = [];
+    private ReadonlyObservableList<ProcessStepDto> _processSteps = new();
+    private ProcessStepDto _SelectedProcessStep;
 
     public BranchViewModel(
         ICachingService cachingService,
@@ -51,21 +51,21 @@ public sealed class BranchViewModel : ViewModelBase
             return;
 
         UpdateProcessStepDataSource();
-        _processSteps = new ReadonlyObservableList<IProcessStepDto>(_processStepsDisplayDataSource);
+        _processSteps = new ReadonlyObservableList<ProcessStepDto>(_processStepsDisplayDataSource);
     }
 
     public BranchDto ActiveBranch => _cachingService.ActiveBranch;
-    public IProcessStepDto SelectedProcessStep
+    public ProcessStepDto SelectedProcessStep
     {
         get => _SelectedProcessStep;
         set => SetProperty(ref _SelectedProcessStep, value);
     }
-    public ReadonlyObservableList<IProcessStepDto> ProcessSteps => _processSteps;
+    public ReadonlyObservableList<ProcessStepDto> ProcessSteps => _processSteps;
 
     public IRelayCommand SaveBranchCommand => _saveBranchCommand ?? new RelayCommand(new Action(SaveBranch));
     public IRelayCommand AddProcessStepCommand => _addProcessStepCommand ?? new RelayCommand(new Action(AddProcessStep));
     public IRelayCommand RemoveProcessStepCommand => _removeProcessStepCommand ?? new RelayCommand(new Action(RemoveProcessStep));
-    public IRelayCommand<IProcessStepDto> SelectProcessStepRecipeCommand => _selectProcessStepRecipeCommand ?? new RelayCommand<IProcessStepDto>(SelectProcessStepRecipe);
+    public IRelayCommand<ProcessStepDto> SelectProcessStepRecipeCommand => _selectProcessStepRecipeCommand ?? new RelayCommand<ProcessStepDto>(SelectProcessStepRecipe);
 
     private ErrorOr<Success> UpdateProcessStepDataSource()
     {
@@ -90,7 +90,7 @@ public sealed class BranchViewModel : ViewModelBase
         if (branch == null)
             return;
 
-        ErrorOr<IProcessStepDto> addProcessStepResult = _processStepService.AddProcessStep(branch.Id);
+        ErrorOr<ProcessStepDto> addProcessStepResult = _processStepService.AddProcessStep(branch.Id);
 
         if (addProcessStepResult.IsError)
             return;
@@ -108,7 +108,7 @@ public sealed class BranchViewModel : ViewModelBase
         UpdateProcessStepDataSource();
     }
 
-    private void SelectProcessStepRecipe(IProcessStepDto? processStep)
+    private void SelectProcessStepRecipe(ProcessStepDto? processStep)
     {
 
         if (processStep == null)

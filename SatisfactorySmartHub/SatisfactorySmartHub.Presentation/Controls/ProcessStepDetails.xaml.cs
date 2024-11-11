@@ -1,19 +1,7 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Application.DataTransferObjects;
-using SatisfactorySmartHub.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SatisfactorySmartHub.Application.DataTranferObjects;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SatisfactorySmartHub.Presentation.Controls
 {
@@ -37,11 +25,11 @@ namespace SatisfactorySmartHub.Presentation.Controls
         }
 
         public static DependencyProperty ProcessStepProperty
-            = DependencyProperty.Register("ProcessStep", typeof(IProcessStepDto), typeof(ProcessStepDetails));
-        
-        public IProcessStepDto ProcessStep
+            = DependencyProperty.Register("ProcessStep", typeof(ProcessStepDto), typeof(ProcessStepDetails));
+
+        public ProcessStepDto ProcessStep
         {
-            get { return (IProcessStepDto)GetValue(ProcessStepProperty); }
+            get { return (ProcessStepDto)GetValue(ProcessStepProperty); }
             set { SetValue(ProcessStepProperty, value); }
         }
 

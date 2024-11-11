@@ -13,7 +13,7 @@ namespace SatisfactorySmartHub.Application.Services;
 internal sealed class ProcessStepService(
     IRepositoryService repositoryService) : IProcessStepService
 {
-    public ErrorOr<IProcessStepDto> AddProcessStep(Guid branchId)
+    public ErrorOr<ProcessStepDto> AddProcessStep(Guid branchId)
     {
         ErrorOr<ProcessStep> CreateProcessStepResult = ProcessStep.Create(branchId);
 
@@ -37,11 +37,11 @@ internal sealed class ProcessStepService(
 
         return ProcessStepDto.CreateFromEntity(newProcessStep);
     }
-    public ErrorOr<Updated> UpdateProcessStep(IProcessStepDto processStep)
+    public ErrorOr<Updated> UpdateProcessStep(ProcessStepDto processStep)
     {
         throw new NotImplementedException();
     }
-    public ErrorOr<Deleted> DeleteProcessStep(IProcessStepDto processStep)
+    public ErrorOr<Deleted> DeleteProcessStep(ProcessStepDto processStep)
     {
         ProcessStep? dbProcessStep = repositoryService.ProcessStepRepository.GetById(processStep.Id);
 
@@ -51,7 +51,7 @@ internal sealed class ProcessStepService(
         repositoryService.ProcessStepRepository.Delete(dbProcessStep);
         return Result.Deleted;
     }
-    public ErrorOr<IEnumerable<IProcessStepDto>> GetProcessStepsOfBranch(Guid branchId)
+    public ErrorOr<IEnumerable<ProcessStepDto>> GetProcessStepsOfBranch(Guid branchId)
     {
         try
         {
@@ -68,7 +68,7 @@ internal sealed class ProcessStepService(
             return new List<ProcessStepDto>();
         }
     }
-    public ErrorOr<Success> AddRecipeToProcessStep(IProcessStepDto processStep, Guid recipeId)
+    public ErrorOr<Success> AddRecipeToProcessStep(ProcessStepDto processStep, Guid recipeId)
     {
         ProcessStep? dbProcessStep = repositoryService.ProcessStepRepository.GetById(processStep.Id);
 
