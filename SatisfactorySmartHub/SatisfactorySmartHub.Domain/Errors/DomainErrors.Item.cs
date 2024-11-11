@@ -6,7 +6,7 @@ public static partial class DomainErrors
 {
     public static class Item
     {
-        public static readonly Error ItemIdCannotBeZero = Error.Validation();
+        public static readonly Error ItemIdCannotBeEmptyGuid = Error.Validation();
         public static readonly Error ItemNameCannotBeNull = Error.Validation();
         public static readonly Error ItemNameCannotBeEmpty = Error.Validation();
     }

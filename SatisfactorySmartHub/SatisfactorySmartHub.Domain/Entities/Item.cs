@@ -25,6 +25,9 @@ public sealed class Item : IdentityEntityBase
         if (name == string.Empty)
             return DomainErrors.Item.ItemNameCannotBeEmpty;
 
+        if (id == Guid.Empty)
+            return DomainErrors.Item.ItemIdCannotBeEmptyGuid;
+
         var item = new Item
         {
             Id = id,

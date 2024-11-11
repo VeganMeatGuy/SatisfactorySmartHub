@@ -1,6 +1,7 @@
 ﻿using Moq;
 using SatisfactorySmartHub.Application.Interfaces.Application.Services;
 using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
 using SatisfactorySmartHub.Application.Services;
 
 namespace SatisfactorySmartHub.Application.Tests.Services;
@@ -8,7 +9,7 @@ namespace SatisfactorySmartHub.Application.Tests.Services;
 [TestClass]
 public sealed partial class CorporationServiceTests
 {
-    private Mock<ICorporationFileService> _corporationFileServiceMock = new();
+    private Mock<IRepositoryService> _repositoryServiceMock = new();
 
     [TestMethod]
     [TestCategory("Constructor")]
@@ -30,7 +31,7 @@ public sealed partial class CorporationServiceTests
     /// <returns>The new instance with mocked dependencies.</returns>
     private CorporationService CreateMockedInstance()
     {
-        _corporationFileServiceMock = new();
-        return new CorporationService(_corporationFileServiceMock.Object);
+        _repositoryServiceMock = new();
+        return new CorporationService(_repositoryServiceMock.Object);
     }
 }

@@ -5,7 +5,7 @@ namespace SatisfactorySmartHub.Domain.Tests.Entities;
 [TestClass]
 public sealed partial class ItemTests
 {
-    private readonly static int _validItemId = 1;
+    private readonly static Guid _validItemId = Guid.Parse("c1d67190-3a66-4201-a8f8-cd56f6ab10a4");
     private readonly static string _validItemName = "ValidItemName";
 
     [TestMethod]

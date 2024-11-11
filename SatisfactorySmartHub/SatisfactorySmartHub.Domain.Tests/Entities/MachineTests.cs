@@ -5,7 +5,7 @@ namespace SatisfactorySmartHub.Domain.Tests.Entities;
 [TestClass]
 public sealed partial class MachineTests
 {
-    private readonly static int _validMachineId = 1;
+    private readonly static Guid _validMachineId = Guid.Parse("e378688b-8b73-4247-be55-ccb300783655");
     private readonly static string _validMachineName = "ValidMachineName";
     private readonly static int _validMachinePowerConsumption = 1;
 
