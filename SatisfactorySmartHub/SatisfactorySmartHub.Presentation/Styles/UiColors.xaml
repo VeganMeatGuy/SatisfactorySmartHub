@@ -11,6 +11,7 @@
 
 
     <SolidColorBrush x:Key="SatisOrange" Color="#e59344" />
+    <SolidColorBrush x:Key="DirtyOrange" Color="#ba7e46" />
     <SolidColorBrush x:Key="FontWhite" Color="#FFFFFF" />
 
 

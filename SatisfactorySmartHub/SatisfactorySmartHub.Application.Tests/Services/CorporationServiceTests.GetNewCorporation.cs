@@ -14,7 +14,7 @@ public sealed partial class CorporationServiceTests
         string corporationName = "unittest";
 
         // act
-        CorporationModel? result = service.GetNewCorporation(corporationName);
+        CorporationModel? result = service.CreateCorporation(corporationName);
 
         // assert
         Assert.IsNotNull(result);
@@ -31,7 +31,7 @@ public sealed partial class CorporationServiceTests
         string corporationName = null;
 
         // act
-        CorporationModel? result = service.GetNewCorporation(corporationName);
+        CorporationModel? result = service.CreateCorporation(corporationName);
     }
 
     [TestMethod]
@@ -44,6 +44,6 @@ public sealed partial class CorporationServiceTests
         string corporationName = string.Empty;
 
         // act
-        CorporationModel? result = service.GetNewCorporation(corporationName);
+        CorporationModel? result = service.CreateCorporation(corporationName);
     }
 }

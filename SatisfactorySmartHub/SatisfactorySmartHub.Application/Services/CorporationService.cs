@@ -1,69 +1,87 @@
-﻿using SatisfactorySmartHub.Application.Interfaces.Application.Services;
-using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Persistence;
-using SatisfactorySmartHub.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ErrorOr;
+using SatisfactorySmartHub.Application.DataTranferObjects;
+using SatisfactorySmartHub.Application.Interfaces.Application.Services;
+using SatisfactorySmartHub.Application.Interfaces.Infrastructure.Services;
+using SatisfactorySmartHub.Domain.Entities;
 
 namespace SatisfactorySmartHub.Application.Services;
 
-internal sealed class CorporationService(ICorporationFileService corporationFileService) : ICorporationService
+internal sealed class CorporationService(
+    IRepositoryService repositoryService) : ICorporationService
 {
-    public bool ExportCorporation(CorporationModel corporation, string filePath)
-    {
-        if (corporation is null)
-            throw new ArgumentNullException(nameof(corporation));
 
+    public IEnumerable<CorporationDto> GetCorporations()
+    {
         try
         {
-            return corporationFileService.ExportCorporation(corporation, filePath);
+            List<CorporationDto> result = new List<CorporationDto>();
+            var repoResult = repositoryService.CorporationRepository.GetAll();
+
+            foreach (Corporation corporation in repoResult)
+                result.Add(CorporationDto.CreateFromEntity(corporation));
+            return result;
         }
-        catch (Exception)
+        catch
         {
-            return false;
+            return new List<CorporationDto>();
         }
     }
-
-    public CorporationModel GetCorporationFromFile(string filePath)
+    public ErrorOr<CorporationDto> AddCorporation(string corporationName)
     {
-        if (filePath is null)
-            throw new ArgumentNullException(nameof(filePath));
+        ErrorOr<Corporation> CreateCorporationResult = Corporation.Create(corporationName);
 
-        if (filePath == string.Empty)
-            throw new ArgumentException(nameof(filePath));
-
-        return corporationFileService.GetCorporation(filePath);
-    }
-
-    public CorporationModel GetNewCorporation(string corporationName)
-    {
-        if (corporationName is null)
-            throw new ArgumentNullException(nameof(corporationName));
-
-        if (corporationName == string.Empty)
-            throw new ArgumentException(nameof(corporationName));
-
-        return new CorporationModel() { Name = corporationName };
-    }
-
-    public ICollection<string> GetSaveFiles() => corporationFileService.GetSaveFiles();
-
-    public bool SaveCorporation(CorporationModel corporation, bool overrideFile)
-    {
-        if (corporation is null)
-            throw new ArgumentNullException(nameof(corporation));
-
-        try
+        if (CreateCorporationResult.IsError)
         {
-            return corporationFileService.SaveCorporation(corporation, overrideFile);
+            //do something to error handling
+            // something like: return ApplicationErrors.CorporationService.CorporationWasNotInDb;
+            return Error.Unexpected();
         }
-        catch (Exception)
+
+        Corporation newCorporation = CreateCorporationResult.Value;
+
+        Corporation? dbCorporation = repositoryService.CorporationRepository.GetById(newCorporation.Id);
+
+        if (dbCorporation != null)
         {
-            return false;
+            return Error.Failure();
         }
+
+        repositoryService.CorporationRepository.Create(newCorporation);
+
+        return CorporationDto.CreateFromEntity(newCorporation);
     }
 
+    public ErrorOr<Updated> UpdateCorporation(CorporationDto corporation)
+    {
+        Corporation? dbCorporation = repositoryService.CorporationRepository.GetById(corporation.Id);
+
+        if (dbCorporation == null)
+            return Error.Conflict();
+
+        if (dbCorporation.Name.Equals(corporation.Name))
+            return Error.Conflict();
+
+        dbCorporation.ChangeName(corporation.Name);
+
+        repositoryService.CorporationRepository.Update(dbCorporation);
+
+        return Result.Updated;
+    }
+
+    public ErrorOr<Success> AddBranchToCorporation(BranchDto branch, CorporationDto corporation)
+    {
+        Corporation? dbCorporation = repositoryService.CorporationRepository.GetById(corporation.Id);
+
+        if (dbCorporation == null)
+            return Error.NotFound();
+
+        Branch? dbBranch = repositoryService.BranchRepository.GetById(branch.Id);
+
+
+        dbBranch.ChangeCorporationId(dbCorporation.Id);
+
+        repositoryService.BranchRepository.Update(dbBranch);
+
+        return Result.Success;
+    }
 }

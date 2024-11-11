@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SatisfactorySmartHub.Extensions;
+using SatisfactorySmartHub.Infrastructure.Persistance.Repositories;
 using SatisfactorySmartHub.Presentation;
 using System;
 
@@ -19,6 +21,13 @@ internal sealed class Program
         IHost host = CreateApplicationHost();
         s_serviceProvider = host.Services;
 
+        // sql lite db for application
+
+        using (var scope = s_serviceProvider.CreateScope())
+        {
+            RepositoryContext context = scope.ServiceProvider.GetRequiredService<RepositoryContext>();
+            context.Database.Migrate();
+        }
 
         //AppDomain.CurrentDomain.UnhandledException += (s, e) => OnUnhandledException(e);
 

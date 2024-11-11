@@ -42,7 +42,7 @@
         </Border>
 
         <Border Grid.Row="1" Background="{StaticResource grey2}" />
-        <ContentControl Grid.Row="2" Content="{Binding NavigationHelper.CurrentView}" />
+        <ContentControl Grid.Row="2" Content="{Binding NavigationService.CurrentMainView}" />
 
     </Grid>
 

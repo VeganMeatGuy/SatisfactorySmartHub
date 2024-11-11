@@ -1,17 +1,36 @@
-﻿using SatisfactorySmartHub.Application.ViewModels.Base;
+﻿using ErrorOr;
+using SatisfactorySmartHub.Application.DataTranferObjects.DialogResults;
+using SatisfactorySmartHub.Application.PresentationModels.ViewModels.Base;
+using System.ComponentModel;
 
 namespace SatisfactorySmartHub.Application.Interfaces.Application.Services;
 
-public interface INavigationService
+public interface INavigationService : INotifyPropertyChanged
 {
     /// <summary>
     /// The current view model.
     /// </summary>
-    ViewModelBase CurrentView { get; }
+    ViewModelBase CurrentMainView { get; }
 
     /// <summary>
     /// Navigates to the provided view model.
     /// </summary>
     /// <typeparam name="T">The view model to navigate to.</typeparam>
-    void NavigateMainWindowTo<T>() where T : ViewModelBase;
+    void NavigateMainViewTo<T>() where T : ViewModelBase;
+
+    /// <summary>
+    /// The current view model.
+    /// </summary>
+    ViewModelBase CurrentAdminView { get; }
+
+    /// <summary>
+    /// Navigates to the provided view model.
+    /// </summary>
+    /// <typeparam name="T">The view model to navigate to.</typeparam>
+    void NavigateAdminViewTo<T>() where T : ViewModelBase;
+
+
+    event EventHandler ShowSelectRecipeDialogEvent;
+    void SetSelectRecipeDialogResult(SelectRecipeDialogResult result);
+    ErrorOr<SelectRecipeDialogResult> ShowSelectRecipeDialog();
 }

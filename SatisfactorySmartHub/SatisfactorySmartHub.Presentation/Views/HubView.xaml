@@ -2,10 +2,11 @@
     x:Class="SatisfactorySmartHub.Presentation.Views.HubView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SatisfactorySmartHub.Presentation.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:SatisfactorySmartHub.Application.ViewModels;assembly=SatisfactorySmartHub.Application"
+    xmlns:vm="clr-namespace:SatisfactorySmartHub.Application.PresentationModels.ViewModels;assembly=SatisfactorySmartHub.Application"
     d:DataContext="{d:DesignInstance Type=vm:HubViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -60,7 +61,7 @@
                     Command="{Binding CreateCorporationCommand}"
                     Content="neu"
                     Style="{StaticResource StandardButton}" />
-                
+
                 <StackPanel
                     Grid.Row="0"
                     Grid.Column="1"
@@ -80,20 +81,12 @@
                         Foreground="{StaticResource FontWhite}"
                         Text="{Binding CreateHint}" />
                 </StackPanel>
-
                 <Button
                     Grid.Row="1"
                     Grid.Column="0"
-                    Click="LoadButton_Click"
-                    Content="import"
-                    Style="{StaticResource StandardButton}" />
-
-                <Button
-                    Grid.Row="2"
-                    Grid.Column="0"
+                    VerticalAlignment="Top"
                     Command="{Binding LoadCorporationCommand}"
                     Content="laden"
-                    VerticalAlignment="Top"
                     Style="{StaticResource StandardButton}" />
 
                 <TextBlock
@@ -114,15 +107,23 @@
                             Name="SaveFilesListView"
                             Height="150"
                             HorizontalAlignment="Left"
-                            ItemsSource="{Binding SaveFiles}"
-                            SelectedItem="{Binding SelectedSaveFile}">
+                            ItemsSource="{Binding Corporations}"
+                            SelectedItem="{Binding SelectedCorporation}">
                             <ListView.View>
                                 <GridView>
                                     <GridView.Columns>
-                                        <GridViewColumn DisplayMemberBinding="{Binding}" Header="Datei-Name" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
                                     </GridView.Columns>
                                 </GridView>
                             </ListView.View>
+
+                            <behaviors:Interaction.Triggers>
+                                <behaviors:EventTrigger EventName="MouseDoubleClick" SourceObject="{Binding ElementName=BranchListView}">
+                                    <behaviors:InvokeCommandAction Command="{Binding LoadCorporationCommand}" />
+                                </behaviors:EventTrigger>
+                            </behaviors:Interaction.Triggers>
+                            
                         </ListView>
                     </StackPanel>
                 </Expander>
@@ -146,32 +147,6 @@
                 Content="Überschreiben bei Speichern"
                 Foreground="{StaticResource FontWhite}"
                 IsChecked="{Binding OverWriteSaveFile}" />
-        </Border>
-        <Border Grid.Row="4" Background="{StaticResource grey3}">
-            <TextBlock
-                Margin="17,3,0,3"
-                FontSize="14"
-                Foreground="{StaticResource FontWhite}"
-                Text="Rezepte" />
-        </Border>
-        <Border Grid.Row="5" Background="{StaticResource backgroundBlack}">
-            <ListBox
-                HorizontalAlignment="Left"
-                Background="Transparent"
-                BorderThickness="0">
-                <ListBoxItem>
-                    <CheckBox Content="Rezept 1" Foreground="{StaticResource FontWhite}" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <CheckBox Content="Rezept 2" Foreground="{StaticResource FontWhite}" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <CheckBox Content="Rezept 3" Foreground="{StaticResource FontWhite}" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <CheckBox Content="Rezept 4" Foreground="{StaticResource FontWhite}" />
-                </ListBoxItem>
-            </ListBox>
         </Border>
     </Grid>
 </UserControl>
