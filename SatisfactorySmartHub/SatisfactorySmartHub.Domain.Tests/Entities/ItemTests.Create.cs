@@ -14,7 +14,7 @@ public sealed partial class ItemTests
 
         //assert
         Assert.IsTrue(result.IsError);
-        Assert.AreEqual(result.FirstError, DomainErrors.Item.ItemIdCannotBeEmptyGuid);
+        Assert.AreEqual(result.FirstError, DomainErrors.ItemErrors.IdCanNotBeEmptyGuid);
 
     }
     [TestMethod]
@@ -26,7 +26,7 @@ public sealed partial class ItemTests
 
         //assert
         Assert.IsTrue(result.IsError);
-        Assert.AreEqual(result.FirstError, DomainErrors.Item.ItemNameCannotBeNull);
+        Assert.AreEqual(result.FirstError, DomainErrors.ItemErrors.NameCanNotBeNull);
     }
 
     [TestMethod]
@@ -38,12 +38,12 @@ public sealed partial class ItemTests
 
         //assert
         Assert.IsTrue(result.IsError);
-        Assert.AreEqual(result.FirstError, DomainErrors.Item.ItemNameCannotBeEmpty);
+        Assert.AreEqual(result.FirstError, DomainErrors.ItemErrors.NameCanNotBeEmpty);
     }
 
     [TestMethod]
     [TestCategory("Method")]
-    public void Create_ReturnsItem_WhenParamsAreValid()
+    public void Create_ReturnsCorrespondingItem_WhenParamsAreValid()
     {
         //act
         var result = Item.Create(_validItemId, _validItemName);
@@ -51,6 +51,8 @@ public sealed partial class ItemTests
         //assert
         Assert.IsFalse(result.IsError);
         Assert.IsNotNull(result.Value);
+        Assert.AreEqual(_validItemName, result.Value.Name);
+        Assert.AreEqual(_validItemId, result.Value.Id);
         Assert.IsInstanceOfType(result.Value, typeof(Item));
     }
 }

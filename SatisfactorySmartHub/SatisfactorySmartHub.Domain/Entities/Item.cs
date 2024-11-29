@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ErrorOr;
+﻿using ErrorOr;
 using SatisfactorySmartHub.Domain.Entities.Base;
 using SatisfactorySmartHub.Domain.Errors;
-using SatisfactorySmartHub.Domain.Interfaces.Entities;
 
 namespace SatisfactorySmartHub.Domain.Entities;
 
@@ -20,13 +14,13 @@ public sealed class Item : IdentityEntityBase
     public static ErrorOr<Item> Create(Guid id, string name)
     {
         if (name == null)
-            return DomainErrors.Item.ItemNameCannotBeNull;
+            return DomainErrors.ItemErrors.NameCanNotBeNull;
 
         if (name == string.Empty)
-            return DomainErrors.Item.ItemNameCannotBeEmpty;
+            return DomainErrors.ItemErrors.NameCanNotBeEmpty;
 
         if (id == Guid.Empty)
-            return DomainErrors.Item.ItemIdCannotBeEmptyGuid;
+            return DomainErrors.ItemErrors.IdCanNotBeEmptyGuid;
 
         var item = new Item
         {
