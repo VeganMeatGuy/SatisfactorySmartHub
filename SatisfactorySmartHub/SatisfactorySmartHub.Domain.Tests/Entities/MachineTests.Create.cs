@@ -14,7 +14,7 @@ public sealed partial class MachineTests
 
         //assert
         Assert.IsTrue(result.IsError);
-        Assert.AreEqual(result.FirstError, DomainErrors.Machine.MachineIdCannotBeEmptyGuid);
+        Assert.AreEqual(result.FirstError, DomainErrors.MachineErrors.IdCanNotBeEmptyGuid);
 
     }
     [TestMethod]
@@ -26,7 +26,7 @@ public sealed partial class MachineTests
 
         //assert
         Assert.IsTrue(result.IsError);
-        Assert.AreEqual(result.FirstError, DomainErrors.Machine.MachineNameCannotBeNull);
+        Assert.AreEqual(result.FirstError, DomainErrors.MachineErrors.NameCanNotBeNull);
     }
 
     [TestMethod]
@@ -38,7 +38,19 @@ public sealed partial class MachineTests
 
         //assert
         Assert.IsTrue(result.IsError);
-        Assert.AreEqual(result.FirstError, DomainErrors.Machine.MachineNameCannotBeEmpty);
+        Assert.AreEqual(result.FirstError, DomainErrors.MachineErrors.NameCanNotBeEmpty);
+    }
+
+    [TestMethod]
+    [TestCategory("Method")]
+    public void Create_ReturnsError_WhenParamPowerConsumptionIsSmalerThenZero()
+    {
+        //act
+        var result = Machine.Create(_validMachineId, _validMachineName, -1);
+
+        //assert
+        Assert.IsTrue(result.IsError);
+        Assert.AreEqual(result.FirstError, DomainErrors.MachineErrors.PowerConsumptionCanNotBeNageative);
     }
 
     [TestMethod]
@@ -51,6 +63,9 @@ public sealed partial class MachineTests
         //assert
         Assert.IsFalse(result.IsError);
         Assert.IsNotNull(result.Value);
+        Assert.AreEqual(_validMachineId, result.Value.Id);
+        Assert.AreEqual(_validMachineName, result.Value.Name);
+        Assert.AreEqual(_validMachinePowerConsumption, result.Value.PowerConsumption);
         Assert.IsInstanceOfType(result.Value, typeof(Machine));
     }
 }

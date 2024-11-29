@@ -1,11 +1,6 @@
 ﻿using ErrorOr;
 using SatisfactorySmartHub.Domain.Entities.Base;
 using SatisfactorySmartHub.Domain.Errors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SatisfactorySmartHub.Domain.Entities;
 
@@ -16,13 +11,16 @@ public sealed class Machine : IdentityEntityBase
     public static ErrorOr<Machine> Create(Guid id, string name, int powerConsumption)
     {
         if (id == Guid.Empty)
-            return DomainErrors.Machine.MachineIdCannotBeEmptyGuid;
+            return DomainErrors.MachineErrors.IdCanNotBeEmptyGuid;
 
         if (name == null)
-            return DomainErrors.Machine.MachineNameCannotBeNull;
+            return DomainErrors.MachineErrors.NameCanNotBeNull;
 
         if (name == string.Empty)
-            return DomainErrors.Machine.MachineNameCannotBeEmpty;
+            return DomainErrors.MachineErrors.NameCanNotBeEmpty;
+
+        if (powerConsumption < 0)
+            return DomainErrors.MachineErrors.PowerConsumptionCanNotBeNageative;
 
         var machine = new Machine
         {
