@@ -42,10 +42,10 @@ public sealed class Corporation : IdentityEntityBase
     private static ErrorOr<Success> ValidateCorporationName(string name)
     {
         if (name == null)
-            return DomainErrors.Corporation.CorporationNameCannotBeNull;
+            return DomainErrors.CorporationErrors.NameCannotBeNull;
 
         if (name == string.Empty)
-            return DomainErrors.Corporation.CorporationNameCannotBeEmpty;
+            return DomainErrors.CorporationErrors.NameCannotBeEmpty;
 
         return Result.Success;
     }

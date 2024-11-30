@@ -14,7 +14,7 @@ public sealed partial class CorporationTests
 
         //assert
         Assert.IsTrue(result.IsError);
-        Assert.AreEqual(result.FirstError, DomainErrors.Corporation.CorporationNameCannotBeNull);
+        Assert.AreEqual(result.FirstError, DomainErrors.CorporationErrors.NameCannotBeNull);
     }
 
     [TestMethod]
@@ -26,7 +26,7 @@ public sealed partial class CorporationTests
 
         //assert
         Assert.IsTrue(result.IsError);
-        Assert.AreEqual(result.FirstError, DomainErrors.Corporation.CorporationNameCannotBeEmpty);
+        Assert.AreEqual(result.FirstError, DomainErrors.CorporationErrors.NameCannotBeEmpty);
     }
 
     [TestMethod]
@@ -40,6 +40,7 @@ public sealed partial class CorporationTests
         Assert.IsFalse(result.IsError);
         Assert.IsNotNull(result.Value);
         Assert.AreNotEqual(Guid.Empty, result.Value.Id);
+        Assert.AreEqual(_validCoporationName, result.Value.Name);
         Assert.IsInstanceOfType(result.Value, typeof(Corporation));
     }
 }
